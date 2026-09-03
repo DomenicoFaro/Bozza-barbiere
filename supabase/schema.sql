@@ -78,3 +78,4 @@ create trigger on_profiles_updated
 -- Va rieseguito (o eseguito la prima volta dopo la registrazione) perché
 -- funziona solo se esiste già un utente registrato con questa email.
 update public.profiles set is_admin = true where email = 'domenicof778@gmail.com';
+update public.profiles set is_admin = true where email = 'paolo09.mila@gmail.com';
