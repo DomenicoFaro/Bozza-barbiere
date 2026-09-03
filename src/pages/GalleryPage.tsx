@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { PageView, GalleryItem } from '../types';
 import { StorageService } from '../services/storage';
-import { 
+import { useAuth } from '../contexts/AuthContext';
+import {
   Image as ImageIcon, 
   X, 
   ZoomIn, 
@@ -21,6 +22,7 @@ interface GalleryPageProps {
 }
 
 export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
+  const { isAdmin } = useAuth();
   const [items, setItems] = useState<GalleryItem[]>(() => StorageService.getGalleryItems());
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [lightboxItem, setLightboxItem] = useState<GalleryItem | null>(null);
@@ -124,31 +126,33 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 self-start md:self-auto shrink-0">
-          {items.length > 0 && (
-            <button
-              onClick={handleClearAll}
-              className="inline-flex items-center px-3.5 py-2.5 bg-white hover:bg-red-50 text-red-600 border border-red-300 text-[10px] font-bold uppercase tracking-wider transition-all"
-              title="Elimina tutti gli elementi"
-            >
-              <Trash2 className="w-3.5 h-3.5 mr-1.5" />
-              <span>Svuota Galleria</span>
-            </button>
-          )}
+        {isAdmin && (
+          <div className="flex flex-wrap items-center gap-2 self-start md:self-auto shrink-0">
+            {items.length > 0 && (
+              <button
+                onClick={handleClearAll}
+                className="inline-flex items-center px-3.5 py-2.5 bg-white hover:bg-red-50 text-red-600 border border-red-300 text-[10px] font-bold uppercase tracking-wider transition-all"
+                title="Elimina tutti gli elementi"
+              >
+                <Trash2 className="w-3.5 h-3.5 mr-1.5" />
+                <span>Svuota Galleria</span>
+              </button>
+            )}
 
-          <button
-            onClick={() => {
-              setMediaType('photo');
-              setIsVideoFile(false);
-              setNewMediaPreview('');
-              setShowAddModal(true);
-            }}
-            className="inline-flex items-center px-4 py-2.5 bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all shadow-sm"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            <span>Aggiungi Foto o Video</span>
-          </button>
-        </div>
+            <button
+              onClick={() => {
+                setMediaType('photo');
+                setIsVideoFile(false);
+                setNewMediaPreview('');
+                setShowAddModal(true);
+              }}
+              className="inline-flex items-center px-4 py-2.5 bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all shadow-sm"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              <span>Aggiungi Foto o Video</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Filter Tabs */}
@@ -211,14 +215,16 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                       <span>Video</span>
                     </span>
                   )}
-                  {/* Delete Button */}
-                  <button
-                    onClick={(e) => handleDeleteItem(e, item.id)}
-                    className="p-1.5 bg-black/80 hover:bg-red-600 text-white rounded-none border border-white/20 transition-colors shadow-sm"
-                    title="Elimina dalla galleria"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
+                  {/* Delete Button (solo admin) */}
+                  {isAdmin && (
+                    <button
+                      onClick={(e) => handleDeleteItem(e, item.id)}
+                      className="p-1.5 bg-black/80 hover:bg-red-600 text-white rounded-none border border-white/20 transition-colors shadow-sm"
+                      title="Elimina dalla galleria"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -250,21 +256,25 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
               Tutte le foto e i video precedenti sono stati rimossi
             </h3>
             <p className="text-xs text-[#1A1A1A]/70 leading-relaxed">
-              La galleria è ora completamente pulita e pronta ad accogliere i tuoi scatti autentici o i tuoi video reel. Premi il pulsante qui sotto per caricarli in qualsiasi momento.
+              {isAdmin
+                ? 'La galleria è ora completamente pulita e pronta ad accogliere i tuoi scatti autentici o i tuoi video reel. Premi il pulsante qui sotto per caricarli in qualsiasi momento.'
+                : 'La galleria sarà presto aggiornata con nuovi scatti.'}
             </p>
           </div>
-          <button
-            onClick={() => {
-              setMediaType('photo');
-              setIsVideoFile(false);
-              setNewMediaPreview('');
-              setShowAddModal(true);
-            }}
-            className="inline-flex items-center px-6 py-3 bg-[#1A1A1A] text-white text-[11px] font-bold uppercase tracking-wider hover:bg-black transition-all shadow-md"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            <span>Aggiungi Foto o Video</span>
-          </button>
+          {isAdmin && (
+            <button
+              onClick={() => {
+                setMediaType('photo');
+                setIsVideoFile(false);
+                setNewMediaPreview('');
+                setShowAddModal(true);
+              }}
+              className="inline-flex items-center px-6 py-3 bg-[#1A1A1A] text-white text-[11px] font-bold uppercase tracking-wider hover:bg-black transition-all shadow-md"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              <span>Aggiungi Foto o Video</span>
+            </button>
+          )}
         </div>
       )}
 
@@ -280,13 +290,15 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           >
             {/* Action buttons on top right */}
             <div className="absolute top-4 right-4 z-20 flex items-center space-x-2">
-              <button
-                onClick={(e) => handleDeleteItem(e, lightboxItem.id)}
-                className="p-2 bg-red-600/90 text-white hover:bg-red-700 border border-white/30 transition-colors"
-                title="Elimina questo elemento"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
+              {isAdmin && (
+                <button
+                  onClick={(e) => handleDeleteItem(e, lightboxItem.id)}
+                  className="p-2 bg-red-600/90 text-white hover:bg-red-700 border border-white/30 transition-colors"
+                  title="Elimina questo elemento"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              )}
               <button
                 onClick={() => setLightboxItem(null)}
                 className="p-2 bg-black/80 text-white hover:bg-white hover:text-black border border-white/30 transition-colors"

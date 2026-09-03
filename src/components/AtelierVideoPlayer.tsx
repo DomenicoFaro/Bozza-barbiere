@@ -15,6 +15,7 @@ import {
 import { PageView } from '../types';
 import { MediaStorageService } from '../services/mediaStorage';
 import { DRLogo } from './DRLogo';
+import { useAuth } from '../contexts/AuthContext';
 
 interface AtelierVideoPlayerProps {
   onNavigate?: (page: PageView, extraParams?: { serviceId?: string; operatorId?: string }) => void;
@@ -29,15 +30,13 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
   className = '',
   showDetails = true
 }) => {
+  const { isAdmin } = useAuth();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const [hasCustomVideo, setHasCustomVideo] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(0);
-  const [duration, setDuration] = useState<number>(0);
-  const [currentTime, setCurrentTime] = useState<number>(0);
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
   // Load custom video from IndexedDB if previously uploaded by user
@@ -92,28 +91,6 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
     }
   };
 
-  const handleTimeUpdate = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    setCurrentTime(video.currentTime);
-    if (video.duration) {
-      setProgress((video.currentTime / video.duration) * 100);
-      setDuration(video.duration);
-    }
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const newTime = (clickX / rect.width) * video.duration;
-    video.currentTime = newTime;
-    setCurrentTime(newTime);
-  };
-
   const handleFullscreen = () => {
     const video = videoRef.current;
     if (!video) return;
@@ -153,9 +130,6 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
     setVideoSrc(null);
     setHasCustomVideo(false);
     setIsPlaying(false);
-    setProgress(0);
-    setCurrentTime(0);
-    setDuration(0);
   };
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -183,13 +157,6 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
     setIsDragging(false);
   };
 
-  const formatTime = (secs: number) => {
-    if (isNaN(secs) || secs < 0) return '0:00';
-    const m = Math.floor(secs / 60);
-    const s = Math.floor(secs % 60);
-    return `${m}:${s < 10 ? '0' : ''}${s}`;
-  };
-
   return (
     <div className={`relative bg-[#1A1A1A] border border-[#1A1A1A] overflow-hidden text-white flex flex-col ${className}`}>
       {/* Hidden file input for video selection */}
@@ -209,13 +176,13 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
         onClick={() => {
           if (videoSrc) {
             togglePlay();
-          } else {
+          } else if (isAdmin) {
             fileInputRef.current?.click();
           }
         }}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
+        onDrop={isAdmin ? handleDrop : undefined}
+        onDragOver={isAdmin ? handleDragOver : undefined}
+        onDragLeave={isAdmin ? handleDragLeave : undefined}
       >
         {videoSrc ? (
           <>
@@ -226,8 +193,6 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
               playsInline
               autoPlay
               muted
-              onTimeUpdate={handleTimeUpdate}
-              onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
               className="w-full h-full object-cover"
             />
 
@@ -237,16 +202,18 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
                 <div className="bg-black/75 backdrop-blur-md px-2.5 py-1 border border-white/20 text-[10px] font-mono text-white/90">
                   @darioriolo_barber
                 </div>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleRemoveVideo();
-                  }}
-                  className="p-1.5 bg-black/75 hover:bg-red-600 text-white backdrop-blur-md border border-white/20 transition-colors"
-                  title="Rimuovi il video caricato"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                </button>
+                {isAdmin && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveVideo();
+                    }}
+                    className="p-1.5 bg-black/75 hover:bg-red-600 text-white backdrop-blur-md border border-white/20 transition-colors"
+                    title="Rimuovi il video caricato"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -262,22 +229,11 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
             {/* Bottom Gradient for controls */}
             <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-10" />
 
-            {/* Video Controls Scrubber */}
-            <div 
+            {/* Video Controls (senza barra/contatore dei secondi) */}
+            <div
               className="absolute inset-x-0 bottom-0 z-30 p-4"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Progress bar */}
-              <div 
-                className="w-full h-1.5 bg-white/30 hover:h-2 transition-all cursor-pointer mb-3 rounded-none overflow-hidden relative"
-                onClick={handleSeek}
-              >
-                <div 
-                  className="h-full bg-white relative transition-all"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center space-x-3">
                   <button
@@ -287,10 +243,6 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
                   >
                     {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
                   </button>
-
-                  <span className="text-[10px] font-mono text-white/70">
-                    {formatTime(currentTime)} / {formatTime(duration)}
-                  </span>
                 </div>
 
                 <div className="flex items-center space-x-2">
@@ -320,8 +272,8 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
               </div>
             </div>
           </>
-        ) : (
-          /* When user hasn't uploaded video yet: Clean, authentic upload prompt WITHOUT AI face */
+        ) : isAdmin ? (
+          /* Solo per l'admin: prompt di caricamento del video */
           <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-[#181818] to-black border-2 border-dashed border-white/20 hover:border-white/50 transition-colors">
             <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4 text-white border border-white/20">
               <Film className="w-8 h-8" />
@@ -352,6 +304,19 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
 
             <p className="text-[10px] text-white/40 mt-4">
               Verrà salvato istantaneamente nel tuo browser con audio e qualità originale.
+            </p>
+          </div>
+        ) : (
+          /* Visitatore non admin: nessun video ancora caricato, nessun invito a caricarlo */
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-[#181818] to-black">
+            <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-4 text-white border border-white/20">
+              <Film className="w-8 h-8" />
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/60">
+              Dario Riolo · Atelier Catania
+            </span>
+            <p className="text-xs text-white/60 max-w-xs mt-2">
+              Video in arrivo a breve.
             </p>
           </div>
         )}
@@ -398,16 +363,18 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
               </button>
             )}
 
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="py-3 px-3 bg-transparent hover:bg-white/10 text-white/80 hover:text-white border border-white/20 text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-1.5"
-              title="Carica o sostituisci il file video"
-            >
-              <Upload className="w-3.5 h-3.5" />
-              <span>{hasCustomVideo ? 'Sostituisci video' : 'Carica video (.mp4)'}</span>
-            </button>
+            {isAdmin && (
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="py-3 px-3 bg-transparent hover:bg-white/10 text-white/80 hover:text-white border border-white/20 text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-1.5"
+                title="Carica o sostituisci il file video"
+              >
+                <Upload className="w-3.5 h-3.5" />
+                <span>{hasCustomVideo ? 'Sostituisci video' : 'Carica video (.mp4)'}</span>
+              </button>
+            )}
 
-            {hasCustomVideo && (
+            {isAdmin && hasCustomVideo && (
               <button
                 onClick={handleRemoveVideo}
                 className="py-3 px-3 bg-transparent hover:bg-red-950/40 text-white/80 hover:text-red-300 border border-white/20 hover:border-red-500/40 text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-1.5"
