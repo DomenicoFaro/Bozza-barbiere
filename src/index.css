@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #FDFCFB;
+    color: #1A1A1A;
+  }
+
+  h1, h2, h3, .font-serif, .font-display {
+    font-family: 'Playfair Display', Georgia, Cambria, serif;
+  }
+}
+
+/* Editorial Minimalist scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDFCFB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A1A1A26;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1A1A1A55;
+}
+

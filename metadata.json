@@ -1,0 +1,8 @@
+{
+  "name": "Remix Dario Riolo Barber Shop",
+  "description": "Sito ufficiale e sistema di prenotazione online per Dario Riolo Barber Shop a Catania.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
