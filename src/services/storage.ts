@@ -8,6 +8,7 @@ import {
   INITIAL_APPOINTMENTS,
   GALLERY_ITEMS,
   BUSINESS_INFO,
+  getFormattedDate,
 } from '../data/initialData';
 
 const STORAGE_KEYS = {
@@ -169,6 +170,18 @@ export const StorageService = {
       return { success: false, error: 'Servizio non trovato.' };
     }
 
+    // Blocca prenotazioni con orario già trascorso (es. slot rimasto selezionato mentre l'ora passava)
+    const isToday = data.date === getFormattedDate(0);
+    if (isToday) {
+      const now = new Date();
+      const nowMin = now.getHours() * 60 + now.getMinutes();
+      if (timeToMinutes(data.startTime) <= nowMin) {
+        return { success: false, error: 'Questo orario è già trascorso. Seleziona un orario futuro.' };
+      }
+    } else if (data.date < getFormattedDate(0)) {
+      return { success: false, error: 'Non è possibile prenotare in una data passata.' };
+    }
+
     // Se l'operatore scelto è "any" (primo disponibile), assegniamo il primo operatore libero
     let effectiveOperatorId = data.operatorId;
     if (effectiveOperatorId === 'any') {
@@ -302,9 +315,24 @@ export const StorageService = {
     const slots: TimeSlot[] = [];
     const availableOps = serviceId ? this.getOperatorsForService(serviceId) : this.getOperators();
 
+    // Se la data selezionata è oggi, blocca gli slot con orario già trascorso
+    const isToday = dateStr === getFormattedDate(0);
+    const now = new Date();
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+
     for (let currentMin = openMin; currentMin < closeMin; currentMin += 30) {
       const timeStr = minutesToTime(currentMin);
       const slotEndMin = currentMin + duration;
+
+      // Orario già passato (solo per la data odierna)
+      if (isToday && currentMin <= nowMin) {
+        slots.push({
+          time: timeStr,
+          available: false,
+          reason: 'Orario già trascorso',
+        });
+        continue;
+      }
 
       // Se la durata del servizio sfora l'orario di chiusura, lo slot non è disponibile
       if (slotEndMin > closeMin) {
