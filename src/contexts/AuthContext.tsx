@@ -8,12 +8,14 @@ export interface Profile {
   last_name: string | null;
   phone: string | null;
   email: string | null;
+  is_admin: boolean;
 }
 
 interface AuthContextValue {
   session: Session | null;
   user: User | null;
   profile: Profile | null;
+  isAdmin: boolean;
   loading: boolean;
   signUp: (params: {
     email: string;
@@ -36,7 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const loadProfile = async (userId: string) => {
     const { data } = await supabase
       .from('profiles')
-      .select('id, first_name, last_name, phone, email')
+      .select('id, first_name, last_name, phone, email, is_admin')
       .eq('id', userId)
       .maybeSingle();
     setProfile(data);
@@ -97,7 +99,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ session, user: session?.user ?? null, profile, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        user: session?.user ?? null,
+        profile,
+        isAdmin: profile?.is_admin === true,
+        loading,
+        signUp,
+        signIn,
+        signOut,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

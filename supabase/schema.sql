@@ -9,9 +9,13 @@ create table if not exists public.profiles (
   last_name text,
   phone text,
   email text,
+  is_admin boolean not null default false,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Aggiunge la colonna is_admin se la tabella esiste già senza di essa
+alter table public.profiles add column if not exists is_admin boolean not null default false;
 
 alter table public.profiles enable row level security;
 
@@ -69,3 +73,8 @@ drop trigger if exists on_profiles_updated on public.profiles;
 create trigger on_profiles_updated
   before update on public.profiles
   for each row execute procedure public.handle_updated_at();
+
+-- Promuove ad amministratore l'account con questa email.
+-- Va rieseguito (o eseguito la prima volta dopo la registrazione) perché
+-- funziona solo se esiste già un utente registrato con questa email.
+update public.profiles set is_admin = true where email = 'domenicof778@gmail.com';

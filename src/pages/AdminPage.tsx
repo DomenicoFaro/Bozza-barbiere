@@ -2,23 +2,25 @@ import React, { useState } from 'react';
 import { PageView, Appointment, Service, Operator, BusinessHours, Closure } from '../types';
 import { StorageService, getFormattedDate, timeToMinutes, minutesToTime } from '../services/storage';
 import { DRLogo } from '../components/DRLogo';
-import { 
-  ShieldCheck, 
-  Calendar, 
-  Clock, 
-  User, 
-  Scissors, 
-  Plus, 
-  Edit3, 
-  Trash2, 
-  CheckCircle2, 
-  XCircle, 
-  Lock, 
-  LogOut, 
-  Filter, 
-  Ban, 
-  Check, 
-  Sparkles,
+import { useAuth } from '../contexts/AuthContext';
+import { AuthModal } from '../components/AuthModal';
+import {
+  ShieldCheck,
+  Calendar,
+  Clock,
+  User,
+  Scissors,
+  Plus,
+  Edit3,
+  Trash2,
+  CheckCircle2,
+  XCircle,
+  Lock,
+  LogOut,
+  Filter,
+  Ban,
+  Check,
+  ShieldAlert,
   Phone,
   RefreshCw,
   Sliders,
@@ -30,12 +32,9 @@ interface AdminPageProps {
 }
 
 export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
-  // Auth state
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return localStorage.getItem('dr_admin_logged') === 'true';
-  });
-  const [adminPassword, setAdminPassword] = useState('');
-  const [authError, setAuthError] = useState(false);
+  // Auth state (vero account Supabase con permesso is_admin)
+  const { user, isAdmin, loading: authLoading, signOut } = useAuth();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Tab State: 'agenda' | 'appointments' | 'services' | 'operators' | 'hours'
   const [activeTab, setActiveTab] = useState<'agenda' | 'appointments' | 'services' | 'operators' | 'hours'>('agenda');
@@ -78,26 +77,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   const businessHours = StorageService.getBusinessHours();
   const closures = StorageService.getClosures();
 
-  // Login handler
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (adminPassword === 'admin' || adminPassword === '1234' || adminPassword.toLowerCase() === 'dario') {
-      setIsAuthenticated(true);
-      localStorage.setItem('dr_admin_logged', 'true');
-      setAuthError(false);
-    } else {
-      setAuthError(true);
-    }
-  };
-
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('dr_admin_logged');
-  };
-
-  const handleFastDemoLogin = () => {
-    setIsAuthenticated(true);
-    localStorage.setItem('dr_admin_logged', 'true');
+    signOut();
   };
 
   // Add Manual Appointment
@@ -169,9 +150,20 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   }
 
   // =========================================================================
-  // LOGIN SCREEN
+  // LOADING SCREEN
   // =========================================================================
-  if (!isAuthenticated) {
+  if (authLoading) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-20 text-center">
+        <RefreshCw className="w-6 h-6 mx-auto animate-spin text-[#1A1A1A]/50" />
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // LOGIN SCREEN (nessun utente Supabase collegato)
+  // =========================================================================
+  if (!user) {
     return (
       <div className="max-w-md mx-auto px-4 py-20">
         <div className="bg-white rounded-none p-8 border border-[#1A1A1A] shadow-none space-y-6 text-center">
@@ -184,53 +176,51 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               Pannello Gestione Titolare
             </h1>
             <p className="text-xs text-[#767676]">
-              Accedi con le credenziali del barber shop per gestire agenda, servizi, orari e appuntamenti.
+              Accedi con il tuo account per gestire agenda, servizi, orari e appuntamenti. Solo gli account abilitati come amministratore possono entrare.
             </p>
           </div>
 
-          {authError && (
-            <div className="p-3 rounded-none bg-rose-50 border border-rose-200 text-xs text-rose-700">
-              Password non corretta. Prova "dario" oppure usa l'accesso demo rapido qui sotto.
-            </div>
-          )}
+          <button
+            onClick={() => setShowAuthModal(true)}
+            className="w-full py-3 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+          >
+            <Lock className="w-4 h-4 text-white" />
+            <span>Accedi al Pannello</span>
+          </button>
+        </div>
 
-          <form onSubmit={handleLogin} className="space-y-4 text-left">
-            <div>
-              <label className="block text-[10px] uppercase font-bold tracking-wider text-[#1A1A1A] mb-1">
-                Password di Amministrazione
-              </label>
-              <div className="relative">
-                <Lock className="w-4 h-4 text-[#767676] absolute left-3.5 top-3.5" />
-                <input
-                  type="password"
-                  required
-                  value={adminPassword}
-                  onChange={(e) => setAdminPassword(e.target.value)}
-                  placeholder="Inserisci password..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-none border border-[#1A1A1A] text-xs focus:outline-none focus:ring-1 focus:ring-[#1A1A1A] bg-[#FDFCFB]"
-                />
-              </div>
-            </div>
+        {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+      </div>
+    );
+  }
 
-            <button
-              type="submit"
-              className="w-full py-3 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
-            >
-              <ShieldCheck className="w-4 h-4 text-white" />
-              <span>Accedi al Pannello</span>
-            </button>
-          </form>
-
-          {/* Quick Demo Access for AI Studio reviewer */}
-          <div className="pt-4 border-t border-[#1A1A1A]/20">
-            <button
-              onClick={handleFastDemoLogin}
-              className="w-full py-2.5 rounded-none bg-[#FDFCFB] hover:bg-[#EFEDE9] text-[#1A1A1A] text-xs font-bold uppercase tracking-wider border border-[#1A1A1A] transition-all flex items-center justify-center space-x-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#1A1A1A]" />
-              <span>Accesso Rapido Demo (Dario Riolo)</span>
-            </button>
+  // =========================================================================
+  // ACCESSO NEGATO (utente loggato ma senza permesso is_admin)
+  // =========================================================================
+  if (!isAdmin) {
+    return (
+      <div className="max-w-md mx-auto px-4 py-20">
+        <div className="bg-white rounded-none p-8 border border-[#1A1A1A] shadow-none space-y-6 text-center">
+          <ShieldAlert className="w-10 h-10 mx-auto text-rose-600" />
+          <div className="space-y-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-rose-700 block">
+              Accesso Negato
+            </span>
+            <h1 className="text-2xl font-serif italic font-light text-[#1A1A1A]">
+              Questo account non è amministratore
+            </h1>
+            <p className="text-xs text-[#767676]">
+              L'account {user.email} non ha i permessi per accedere al pannello di gestione. Contatta il titolare per essere abilitato.
+            </p>
           </div>
+
+          <button
+            onClick={handleLogout}
+            className="w-full py-3 rounded-none border border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#EFEDE9] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Esci e prova con un altro account</span>
+          </button>
         </div>
       </div>
     );
