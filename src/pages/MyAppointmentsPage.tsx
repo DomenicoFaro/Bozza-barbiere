@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageView, Appointment } from '../types';
 import { StorageService } from '../services/storage';
 import { BUSINESS_INFO } from '../data/initialData';
-import { 
-  BookmarkCheck, 
-  Search, 
-  Calendar, 
-  Clock, 
-  User, 
-  Scissors, 
-  XCircle, 
-  CheckCircle2, 
-  AlertCircle, 
-  Download, 
-  Phone, 
+import { useAuth } from '../contexts/AuthContext';
+import { AuthModal } from '../components/AuthModal';
+import {
+  BookmarkCheck,
+  Search,
+  Calendar,
+  Clock,
+  User,
+  Scissors,
+  XCircle,
+  CheckCircle2,
+  AlertCircle,
+  Download,
+  Phone,
   MessageSquare,
-  HelpCircle
+  HelpCircle,
+  LogIn
 } from 'lucide-react';
 
 interface MyAppointmentsPageProps {
@@ -23,10 +26,21 @@ interface MyAppointmentsPageProps {
 }
 
 export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNavigate }) => {
+  const { user, profile } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
   const [results, setResults] = useState<Appointment[]>([]);
-  
+  const [showManualSearch, setShowManualSearch] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  // Se il cliente è loggato, trova subito i suoi appuntamenti tramite il telefono del profilo
+  useEffect(() => {
+    if (user && profile?.phone) {
+      setResults(StorageService.getAppointmentsByPhone(profile.phone));
+      setHasSearched(true);
+    }
+  }, [user, profile]);
+
   // Cancellation Modal State
   const [cancellingAppointment, setCancellingAppointment] = useState<Appointment | null>(null);
   const [cancelSuccessMsg, setCancelSuccessMsg] = useState<string | null>(null);
@@ -92,7 +106,9 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
           I Miei Appuntamenti
         </h1>
         <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">
-          Inserisci il tuo numero di telefono o il codice prenotazione (es. <strong>DR-7319</strong>) ricevuto durante la conferma per visualizzare o gestire i tuoi appuntamenti.
+          {user
+            ? 'Ecco gli appuntamenti collegati al tuo account.'
+            : 'Accedi al tuo account per trovarli subito, oppure inserisci il numero di telefono o il codice prenotazione (es. DR-7319) ricevuto durante la conferma.'}
         </p>
       </div>
 
@@ -111,38 +127,79 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
         </div>
       )}
 
-      {/* Search Box */}
-      <div className="bg-white rounded-none p-6 sm:p-8 border border-[#1A1A1A]">
-        <form onSubmit={handleSearch} className="space-y-4">
-          <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A]">
-            Cerca tramite Telefono o Codice Prenotazione
-          </label>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <div className="relative flex-1">
-              <Search className="w-4 h-4 text-[#1A1A1A]/50 absolute left-3.5 top-3.5" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Es. +39 340 1234567 oppure DR-7319"
-                className="w-full pl-10 pr-4 py-3 rounded-none border border-[#1A1A1A] text-xs focus:outline-none focus:ring-1 focus:ring-[#1A1A1A] bg-[#FDFCFB]"
-              />
-            </div>
+      {/* Se loggato: nessun box di ricerca, gli appuntamenti sono già mostrati sotto */}
+      {!user && !showManualSearch && (
+        <div className="bg-white rounded-none p-6 sm:p-8 border border-[#1A1A1A] text-center space-y-4">
+          <LogIn className="w-8 h-8 mx-auto opacity-60" />
+          <h3 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
+            Accedi per vedere subito i tuoi appuntamenti
+          </h3>
+          <p className="text-xs text-[#1A1A1A]/70 max-w-md mx-auto">
+            Se hai un account, effettua il login: troveremo automaticamente le tue prenotazioni collegate al tuo numero di telefono.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-1">
             <button
-              type="submit"
+              onClick={() => setShowAuthModal(true)}
               className="px-6 py-3 rounded-none border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
             >
+              <LogIn className="w-4 h-4" />
+              <span>Accedi al mio account</span>
+            </button>
+            <button
+              onClick={() => setShowManualSearch(true)}
+              className="px-6 py-3 rounded-none border border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#EFEDE9] text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+            >
               <Search className="w-4 h-4" />
-              <span>Cerca Prenotazioni</span>
+              <span>Cerca con telefono o codice</span>
             </button>
           </div>
+        </div>
+      )}
 
-          <div className="flex items-center space-x-2 text-[11px] text-[#1A1A1A]/60">
-            <HelpCircle className="w-3.5 h-3.5 opacity-70" />
-            <span>Suggerimento: se hai appena prenotato, cerca inserendo il numero di cellulare fornito.</span>
-          </div>
-        </form>
-      </div>
+      {!user && showManualSearch && (
+        <div className="bg-white rounded-none p-6 sm:p-8 border border-[#1A1A1A]">
+          <form onSubmit={handleSearch} className="space-y-4">
+            <div className="flex items-center justify-between">
+              <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A]">
+                Cerca tramite Telefono o Codice Prenotazione
+              </label>
+              <button
+                type="button"
+                onClick={() => setShowManualSearch(false)}
+                className="text-[10px] uppercase tracking-wider font-bold text-[#1A1A1A]/60 hover:text-[#1A1A1A] underline"
+              >
+                Accedi invece
+              </button>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 text-[#1A1A1A]/50 absolute left-3.5 top-3.5" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Es. +39 340 1234567 oppure DR-7319"
+                  className="w-full pl-10 pr-4 py-3 rounded-none border border-[#1A1A1A] text-xs focus:outline-none focus:ring-1 focus:ring-[#1A1A1A] bg-[#FDFCFB]"
+                />
+              </div>
+              <button
+                type="submit"
+                className="px-6 py-3 rounded-none border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+              >
+                <Search className="w-4 h-4" />
+                <span>Cerca Prenotazioni</span>
+              </button>
+            </div>
+
+            <div className="flex items-center space-x-2 text-[11px] text-[#1A1A1A]/60">
+              <HelpCircle className="w-3.5 h-3.5 opacity-70" />
+              <span>Suggerimento: se hai appena prenotato, cerca inserendo il numero di cellulare fornito.</span>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
 
       {/* Search Results */}
       {hasSearched && (

@@ -8,17 +8,15 @@ import { AtelierVideoPlayer } from '../components/AtelierVideoPlayer';
 import { 
   Scissors, 
   Calendar, 
-  Clock, 
-  MapPin, 
-  Phone, 
-  Sparkles, 
+  Clock,
+  MapPin,
+  Sparkles,
   CheckCircle2, 
   ArrowRight, 
   ShieldCheck, 
   Star,
   Users,
   Compass,
-  Play,
   Image as ImageIcon
 } from 'lucide-react';
 
@@ -65,12 +63,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <Clock className="w-3.5 h-3.5 opacity-60" />
                   <span className="font-bold text-[11px] uppercase tracking-wider text-[#1A1A1A]">{shopStatus.text}</span>
                 </div>
-                <div className="flex items-center space-x-2 px-3 py-1.5 bg-white border border-[#1A1A1A]">
-                  <Phone className="w-3.5 h-3.5 opacity-60" />
-                  <a href={`tel:${BUSINESS_INFO.phoneRaw}`} className="font-semibold text-[11px] tracking-wider text-[#1A1A1A] hover:underline">
-                    {BUSINESS_INFO.phone}
-                  </a>
-                </div>
               </div>
 
               {/* CTA Buttons */}
@@ -111,17 +103,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             {/* Right Column: Interactive Video & Fast Booking Box */}
             <div className="lg:col-span-5 space-y-6">
               <div className="border border-[#1A1A1A] bg-[#1A1A1A] overflow-hidden shadow-lg">
-                <div className="flex items-center justify-between px-4 py-2.5 bg-white border-b border-[#1A1A1A]">
-                  <div className="flex items-center space-x-2">
-                    <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-[#1A1A1A]">
-                      Atelier Live Reel · Dario Riolo
-                    </span>
-                  </div>
-                  <span className="text-[9px] uppercase tracking-widest text-[#1A1A1A]/60 font-mono">
-                    Video Silenzioso
-                  </span>
-                </div>
                 <AtelierVideoPlayer onNavigate={onNavigate} showDetails={false} className="border-0" />
               </div>
 
@@ -358,9 +339,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Atelier Brand Identity & Video Presentation */}
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Card 1: Official Atelier Logo & Identity */}
-              <div className="border border-[#1A1A1A] bg-white p-6 flex flex-col justify-between space-y-6">
+            <div className="lg:col-span-7">
+              {/* Official Atelier Logo & Identity */}
+              <div className="border border-[#1A1A1A] bg-white p-6 flex flex-col justify-between space-y-6 max-w-md">
                 <div className="space-y-4">
                   <div className="inline-flex items-center space-x-2 px-2.5 py-1 bg-[#1A1A1A] text-white text-[9px] font-bold uppercase tracking-widest">
                     <span>Identità Ufficiale</span>
@@ -385,44 +366,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     className="text-[10px] uppercase font-bold tracking-wider text-[#1A1A1A] hover:underline flex items-center space-x-1"
                   >
                     <span>Apri Galleria</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Card 2: Silent Atelier Reel Showcase */}
-              <div className="border border-[#1A1A1A] bg-[#1A1A1A] text-white p-6 flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center space-x-2 px-2.5 py-1 bg-white/10 text-white text-[9px] font-bold uppercase tracking-widest border border-white/20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                    <span>Reel Live Senza Audio</span>
-                  </div>
-
-                  <div>
-                    <h3 className="font-serif italic text-2xl font-light text-white">
-                      Il Gesto e la Tecnica
-                    </h3>
-                    <p className="text-xs text-white/70 mt-2 leading-relaxed">
-                      Guarda Dario Riolo all'opera mentre rifinisce taglio e sfumatura nel salone di Catania. Riproduzione silenziosa per la massima concentrazione sul gesto.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/5 border border-white/10 p-3 space-y-1 text-xs">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-white/90">
-                      Format Atelier Reel
-                    </div>
-                    <div className="text-white/60 text-[11px]">
-                      Audio disattivato · Movimento puro a forbice e lama
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-white/20">
-                  <button
-                    onClick={() => onNavigate('gallery')}
-                    className="w-full py-3 bg-white text-[#1A1A1A] hover:bg-neutral-200 text-[11px] font-bold uppercase tracking-wider transition-colors flex items-center justify-center space-x-2"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                    <span>Esplora Galleria Video</span>
                   </button>
                 </div>
               </div>

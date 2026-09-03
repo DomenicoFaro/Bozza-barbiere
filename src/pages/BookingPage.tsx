@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PageView, Service, Operator, Appointment, TimeSlot } from '../types';
 import { StorageService, getFormattedDate, minutesToTime, timeToMinutes } from '../services/storage';
 import { BUSINESS_INFO } from '../data/initialData';
+import { useAuth } from '../contexts/AuthContext';
 import { 
   Scissors, 
   User, 
@@ -25,9 +26,53 @@ interface BookingPageProps {
   onNavigate: (page: PageView) => void;
 }
 
+// Avvolge il contenuto di ogni passo con una dissolvenza fluida in entrata/uscita
+const StepTransition: React.FC<{ dimmed: boolean; className?: string; children: React.ReactNode }> = ({
+  dimmed,
+  className = '',
+  children,
+}) => {
+  const [entered, setEntered] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setEntered(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  const stateClasses = dimmed
+    ? 'opacity-50 scale-[0.98] pointer-events-none'
+    : entered
+    ? 'opacity-100 translate-y-0 scale-100'
+    : 'opacity-0 translate-y-3 scale-[0.99]';
+
+  return (
+    <div className={`transition-all duration-300 ease-out ${stateClasses} ${className}`}>
+      {children}
+    </div>
+  );
+};
+
 export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, initialOperatorId, onNavigate }) => {
   // Wizard Steps: 1 (Service), 2 (Operator), 3 (Date & Time), 4 (Customer Form), 5 (Success)
   const [currentStep, setCurrentStep] = useState<number>(initialServiceId && initialOperatorId ? 3 : initialServiceId ? 2 : 1);
+
+  // Avanzamento automatico dei passi dopo una selezione, con una breve animazione
+  const [isAdvancing, setIsAdvancing] = useState(false);
+  const advanceTimeoutRef = React.useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (advanceTimeoutRef.current) window.clearTimeout(advanceTimeoutRef.current);
+    };
+  }, []);
+
+  const advanceToStep = (step: number, delay = 500) => {
+    setIsAdvancing(true);
+    advanceTimeoutRef.current = window.setTimeout(() => {
+      setCurrentStep(step);
+      setIsAdvancing(false);
+    }, delay);
+  };
 
   // Form State
   const [selectedServiceId, setSelectedServiceId] = useState<string>(initialServiceId || '');
@@ -36,11 +81,21 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
   const [selectedSlotTime, setSelectedSlotTime] = useState<string>('');
 
   // Customer info
+  const { profile } = useAuth();
   const [customerFirstName, setCustomerFirstName] = useState('');
   const [customerLastName, setCustomerLastName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('+39 ');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerNotes, setCustomerNotes] = useState('');
+
+  // Precompila i dati cliente dal profilo se l'utente è loggato
+  useEffect(() => {
+    if (!profile) return;
+    if (profile.first_name) setCustomerFirstName(profile.first_name);
+    if (profile.last_name) setCustomerLastName(profile.last_name);
+    if (profile.phone) setCustomerPhone(profile.phone);
+    if (profile.email) setCustomerEmail(profile.email);
+  }, [profile]);
 
   // Status & Confirmation
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -224,6 +279,13 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               );
             })}
           </div>
+
+          {isAdvancing && (
+            <div className="flex items-center justify-center space-x-2 text-[11px] font-bold uppercase tracking-widest text-[#1A1A1A]/70 animate-pulse">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>Selezionato, passo successivo...</span>
+            </div>
+          )}
         </div>
       )}
 
@@ -231,14 +293,14 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* STEP 1: SCEGLI IL SERVIZIO */}
       {/* ========================================================================= */}
       {currentStep === 1 && (
-        <div className="space-y-6">
+        <StepTransition dimmed={isAdvancing} className="space-y-6">
           <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
             <div>
               <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
                 Passo 1: Seleziona il Servizio
               </h2>
               <p className="text-xs text-[#1A1A1A]/70 mt-1">
-                Tutti i prezzi includono lavaggio specifico e styling finale con prodotti professionali.
+                Tutti i prezzi includono lavaggio specifico e styling finale con prodotti professionali. Seleziona una card per continuare automaticamente.
               </p>
             </div>
           </div>
@@ -249,7 +311,14 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               return (
                 <div
                   key={service.id}
-                  onClick={() => setSelectedServiceId(service.id)}
+                  onClick={() => {
+                    setSelectedServiceId(service.id);
+                    const ops = StorageService.getOperatorsForService(service.id);
+                    if (selectedOperatorId !== 'any' && !ops.some(o => o.id === selectedOperatorId)) {
+                      setSelectedOperatorId('any');
+                    }
+                    advanceToStep(2);
+                  }}
                   className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
                       ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
@@ -291,31 +360,14 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               );
             })}
           </div>
-
-          <div className="flex justify-end pt-4">
-            <button
-              disabled={!selectedServiceId}
-              onClick={() => {
-                const ops = StorageService.getOperatorsForService(selectedServiceId);
-                if (selectedOperatorId !== 'any' && !ops.some(o => o.id === selectedOperatorId)) {
-                  setSelectedOperatorId('any');
-                }
-                setCurrentStep(2);
-              }}
-              className="px-6 py-3 border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow transition-all flex items-center space-x-2 disabled:opacity-40 rounded-none"
-            >
-              <span>Continua alla scelta del Barbiere</span>
-              <ArrowRight className="w-3.5 h-3.5 opacity-70" />
-            </button>
-          </div>
-        </div>
+        </StepTransition>
       )}
 
       {/* ========================================================================= */}
       {/* STEP 2: SCEGLI L'OPERATORE */}
       {/* ========================================================================= */}
       {currentStep === 2 && (
-        <div className="space-y-6">
+        <StepTransition dimmed={isAdvancing} className="space-y-6">
           <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
             <div>
               <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
@@ -337,7 +389,10 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Opzione 1: Qualsiasi Operatore / Il Primo Disponibile */}
             <div
-              onClick={() => setSelectedOperatorId('any')}
+              onClick={() => {
+                setSelectedOperatorId('any');
+                advanceToStep(3);
+              }}
               className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                 selectedOperatorId === 'any'
                   ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
@@ -384,7 +439,10 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               return (
                 <div
                   key={operator.id}
-                  onClick={() => setSelectedOperatorId(operator.id)}
+                  onClick={() => {
+                    setSelectedOperatorId(operator.id);
+                    advanceToStep(3);
+                  }}
                   className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
                       ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
@@ -428,7 +486,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
             })}
           </div>
 
-          <div className="flex justify-between items-center pt-4">
+          <div className="flex justify-start items-center pt-4">
             <button
               onClick={() => setCurrentStep(1)}
               className="px-5 py-2.5 border border-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider text-[#1A1A1A] hover:bg-white flex items-center space-x-1.5 rounded-none"
@@ -436,22 +494,15 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro</span>
             </button>
-            <button
-              onClick={() => setCurrentStep(3)}
-              className="px-6 py-3 border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow transition-all flex items-center space-x-2 rounded-none"
-            >
-              <span>Continua alla scelta di Data & Orario</span>
-              <ArrowRight className="w-3.5 h-3.5 opacity-70" />
-            </button>
           </div>
-        </div>
+        </StepTransition>
       )}
 
       {/* ========================================================================= */}
       {/* STEP 3: SCEGLI GIORNO E ORARIO */}
       {/* ========================================================================= */}
       {currentStep === 3 && (
-        <div className="space-y-8">
+        <StepTransition dimmed={isAdvancing} className="space-y-8">
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-[#1A1A1A] pb-3">
             <div>
               <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
@@ -557,7 +608,10 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       key={slot.time}
                       type="button"
                       disabled={!slot.available}
-                      onClick={() => setSelectedSlotTime(slot.time)}
+                      onClick={() => {
+                        setSelectedSlotTime(slot.time);
+                        advanceToStep(4);
+                      }}
                       className={`py-3 px-2 rounded-none text-center font-mono text-xs font-bold transition-all relative border ${
                         isSelected
                           ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
@@ -591,7 +645,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
             )}
           </div>
 
-          <div className="flex justify-between items-center pt-4">
+          <div className="flex justify-start items-center pt-4">
             <button
               onClick={() => setCurrentStep(2)}
               className="px-5 py-2.5 border border-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider text-[#1A1A1A] hover:bg-white flex items-center space-x-1.5 rounded-none"
@@ -599,16 +653,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro</span>
             </button>
-            <button
-              disabled={!selectedSlotTime}
-              onClick={() => setCurrentStep(4)}
-              className="px-6 py-3 border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow transition-all flex items-center space-x-2 disabled:opacity-40 rounded-none"
-            >
-              <span>Continua con i tuoi dati</span>
-              <ArrowRight className="w-3.5 h-3.5 opacity-70" />
-            </button>
           </div>
-        </div>
+        </StepTransition>
       )}
 
       {/* ========================================================================= */}

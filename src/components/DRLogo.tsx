@@ -60,37 +60,34 @@ export const DRLogo: React.FC<DRLogoProps> = ({
   // If mode is "full", display the complete Dario Riolo Barber Shop logo badge
   if (mode === 'full') {
     return (
-      <div 
-        className={`relative inline-flex items-center overflow-hidden bg-black border border-[#1A1A1A] select-none transition-all shadow-sm ${heightClasses[size]} ${className}`}
+      <div
+        className={`relative inline-flex items-center overflow-hidden select-none transition-all ${heightClasses[size]} ${className}`}
         title="Dario Riolo Barber Shop Catania"
       >
-        <img 
-          src={logoSrc} 
-          alt="Dario Riolo Barber Shop Logo" 
+        <img
+          src={logoSrc}
+          alt="Dario Riolo Barber Shop Logo"
           className="h-full w-auto object-contain block max-w-[280px]"
           onError={(e) => {
             // Fallback to SVG if image fails to load
             e.currentTarget.style.display = 'none';
           }}
         />
-        {/* Subtle inner ambient ring */}
-        <div className="absolute inset-0 border border-white/10 pointer-events-none" />
       </div>
     );
   }
 
   // If mode is "icon", display the stylized DR emblem
   return (
-    <div 
-      className={`relative inline-flex items-center justify-center overflow-hidden bg-black border border-[#1A1A1A] text-white select-none transition-all shadow-sm ${iconSizes[size]} ${className}`}
+    <div
+      className={`relative inline-flex items-center justify-center overflow-hidden select-none transition-all ${iconSizes[size]} ${className}`}
       title="Dario Riolo Barber Shop"
     >
-      <img 
-        src={logoSrc} 
-        alt="DR Logo" 
+      <img
+        src={logoSrc}
+        alt="DR Logo"
         className="w-full h-full object-cover scale-150 object-center"
       />
-      <div className="absolute inset-0 border border-white/10 pointer-events-none" />
     </div>
   );
 };

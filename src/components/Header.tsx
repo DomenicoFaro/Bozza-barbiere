@@ -3,18 +3,22 @@ import { PageView } from '../types';
 import { DRLogo } from './DRLogo';
 import { BUSINESS_INFO } from '../data/initialData';
 import { StorageService } from '../services/storage';
-import { 
-  Calendar, 
-  Scissors, 
-  Image as ImageIcon, 
-  Clock, 
-  Phone, 
-  MapPin, 
-  ShieldCheck, 
-  Menu, 
-  X, 
+import { useAuth } from '../contexts/AuthContext';
+import { AuthModal } from './AuthModal';
+import {
+  Calendar,
+  Scissors,
+  Image as ImageIcon,
+  Clock,
+  Phone,
+  MapPin,
+  ShieldCheck,
+  Menu,
+  X,
   BookmarkCheck,
-  ChevronRight
+  ChevronRight,
+  User,
+  LogOut
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -25,6 +29,8 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [shopStatus, setShopStatus] = useState({ isOpen: false, text: '' });
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const { user, profile, signOut } = useAuth();
 
   useEffect(() => {
     setShopStatus(StorageService.getShopCurrentStatus());
@@ -64,13 +70,34 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
         </div>
 
         <div className="flex items-center space-x-5">
-          <a
-            href={`tel:${BUSINESS_INFO.phoneRaw}`}
-            className="flex items-center space-x-1.5 text-white/90 hover:text-white transition-colors tracking-[0.15em]"
-          >
-            <Phone className="w-3 h-3 text-white/70" />
-            <span className="font-medium">{BUSINESS_INFO.phone}</span>
-          </a>
+          {user ? (
+            <div className="flex items-center space-x-3">
+              <span className="text-white/90 tracking-[0.15em] flex items-center space-x-1.5">
+                <User className="w-3 h-3 text-white/70" />
+                <span>Ciao, {profile?.first_name || 'Cliente'}</span>
+              </span>
+              <button
+                onClick={() => signOut()}
+                className="flex items-center space-x-1 text-white/70 hover:text-white transition-colors"
+                title="Esci dal tuo account"
+              >
+                <LogOut className="w-3 h-3" />
+                <span>Esci</span>
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowAuthModal(true)}
+              className="relative flex items-center space-x-1.5 px-2.5 py-0.5 bg-white text-[#1A1A1A] hover:bg-neutral-200 font-bold text-[9px] uppercase tracking-widest transition-colors"
+            >
+              <span className="absolute -top-1 -right-1 w-2 h-2">
+                <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping" />
+                <span className="absolute inset-0 rounded-full bg-emerald-500" />
+              </span>
+              <User className="w-3 h-3" />
+              <span>Accedi</span>
+            </button>
+          )}
           <span className="opacity-30">/</span>
           <button
             onClick={() => onNavigate('admin')}
@@ -86,6 +113,8 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           </button>
         </div>
       </div>
+
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -195,7 +224,39 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             );
           })}
 
-          <div className="pt-2 border-t border-[#1A1A1A]/20">
+          <div className="pt-2 border-t border-[#1A1A1A]/20 space-y-2">
+            {user ? (
+              <button
+                onClick={() => {
+                  signOut();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-between px-4 py-2.5 text-xs text-[#1A1A1A] border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white font-semibold uppercase tracking-wider transition-colors"
+              >
+                <span className="flex items-center space-x-2">
+                  <LogOut className="w-4 h-4" />
+                  <span>Esci ({profile?.first_name || 'Cliente'})</span>
+                </span>
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setShowAuthModal(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="relative w-full flex items-center justify-between px-4 py-2.5 text-xs bg-[#1A1A1A] text-white font-bold uppercase tracking-wider transition-colors shadow-sm"
+              >
+                <span className="flex items-center space-x-2">
+                  <User className="w-4 h-4" />
+                  <span>Accedi o Registrati</span>
+                </span>
+                <span className="relative w-2 h-2">
+                  <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping" />
+                  <span className="absolute inset-0 rounded-full bg-emerald-500" />
+                </span>
+              </button>
+            )}
+
             <button
               onClick={() => {
                 onNavigate('admin');

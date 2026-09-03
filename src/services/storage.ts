@@ -448,7 +448,7 @@ export const StorageService = {
 
   // GALLERY ITEMS
   getGalleryItems(): GalleryItem[] {
-    return getStored<GalleryItem[]>(STORAGE_KEYS.GALLERY, []);
+    return getStored<GalleryItem[]>(STORAGE_KEYS.GALLERY, GALLERY_ITEMS);
   },
   saveGalleryItems(items: GalleryItem[]): void {
     setStored(STORAGE_KEYS.GALLERY, items);

@@ -9,7 +9,8 @@ import {
   Calendar,
   CheckCircle2,
   Film,
-  AlertCircle
+  AlertCircle,
+  Trash2
 } from 'lucide-react';
 import { PageView } from '../types';
 import { MediaStorageService } from '../services/mediaStorage';
@@ -143,6 +144,20 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
     }
   };
 
+  const handleRemoveVideo = async () => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+    }
+    await MediaStorageService.removeMedia(STORAGE_VIDEO_KEY);
+    setVideoSrc(null);
+    setHasCustomVideo(false);
+    setIsPlaying(false);
+    setProgress(0);
+    setCurrentTime(0);
+    setDuration(0);
+  };
+
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -217,14 +232,21 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
             />
 
             {/* Top Overlay Badges */}
-            <div className="absolute top-3 inset-x-3 flex items-center justify-between z-20 pointer-events-none">
-              <div className="inline-flex items-center space-x-2 bg-black/75 backdrop-blur-md px-2.5 py-1 border border-white/20 text-[10px] uppercase font-bold tracking-widest text-white">
-                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span>DR Live Atelier</span>
-              </div>
-
-              <div className="bg-black/75 backdrop-blur-md px-2.5 py-1 border border-white/20 text-[10px] font-mono text-white/90">
-                @darioriolo_barber
+            <div className="absolute top-3 inset-x-3 flex items-center justify-end z-20 pointer-events-none">
+              <div className="flex items-center space-x-1.5 pointer-events-auto">
+                <div className="bg-black/75 backdrop-blur-md px-2.5 py-1 border border-white/20 text-[10px] font-mono text-white/90">
+                  @darioriolo_barber
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemoveVideo();
+                  }}
+                  className="p-1.5 bg-black/75 hover:bg-red-600 text-white backdrop-blur-md border border-white/20 transition-colors"
+                  title="Rimuovi il video caricato"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
 
@@ -384,6 +406,17 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
               <Upload className="w-3.5 h-3.5" />
               <span>{hasCustomVideo ? 'Sostituisci video' : 'Carica video (.mp4)'}</span>
             </button>
+
+            {hasCustomVideo && (
+              <button
+                onClick={handleRemoveVideo}
+                className="py-3 px-3 bg-transparent hover:bg-red-950/40 text-white/80 hover:text-red-300 border border-white/20 hover:border-red-500/40 text-[10px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-1.5"
+                title="Rimuovi il video caricato"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Rimuovi video</span>
+              </button>
+            )}
           </div>
         </div>
       )}

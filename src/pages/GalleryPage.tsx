@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { PageView, GalleryItem } from '../types';
 import { StorageService } from '../services/storage';
-import { MediaStorageService } from '../services/mediaStorage';
 import { 
   Image as ImageIcon, 
   X, 
@@ -26,15 +25,6 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [lightboxItem, setLightboxItem] = useState<GalleryItem | null>(null);
 
-  // Clear previous stored media on initial load
-  useEffect(() => {
-    // Purge previous uploads from storage
-    MediaStorageService.removeMedia('dr_user_uploaded_video');
-    MediaStorageService.removeMedia('dr_cut_photo');
-    StorageService.clearGallery();
-    setItems([]);
-  }, []);
-
   // Add custom photo or video modal state
   const [showAddModal, setShowAddModal] = useState(false);
   const [mediaType, setMediaType] = useState<'photo' | 'video'>('photo');
@@ -50,8 +40,6 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
     { id: 'tagli', label: 'Tagli & Sfumature' },
     { id: 'video', label: 'Video & Reel Live' },
     { id: 'salone', label: 'Salone & Arredi' },
-    { id: 'barba', label: 'Barba & Panno Caldo' },
-    { id: 'dettagli', label: 'Strumenti & Dettagli' },
   ];
 
   const filteredItems = activeCategory === 'all'
@@ -243,22 +231,11 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                 </div>
               )}
 
-              {/* Bottom Overlay Info */}
-              <div className="relative z-10 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 text-white flex flex-col justify-end transition-all">
-                {item.tag && (
-                  <span className="text-[10px] font-mono text-white/80 block mb-1">
-                    {item.tag}
-                  </span>
-                )}
-                <div className="flex items-center justify-between">
-                  <h3 className="font-serif italic text-xl font-light text-white leading-snug">
-                    {item.title}
-                  </h3>
-                  <ZoomIn className="w-4 h-4 text-white/70 group-hover:text-white shrink-0 ml-2" />
+              {/* Zoom indicator on hover */}
+              <div className="absolute bottom-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 rounded-full bg-black/70 text-white flex items-center justify-center">
+                  <ZoomIn className="w-4 h-4" />
                 </div>
-                <p className="text-xs text-white/80 line-clamp-2 mt-1.5 leading-relaxed">
-                  {item.description}
-                </p>
               </div>
             </div>
           ))}
@@ -478,9 +455,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                     className="w-full p-2.5 border border-[#1A1A1A] bg-white text-[#1A1A1A] focus:outline-none"
                   >
                     <option value="tagli">Tagli & Sfumature</option>
-                    <option value="barba">Barba & Panno Caldo</option>
                     <option value="salone">Salone & Arredi</option>
-                    <option value="dettagli">Strumenti & Dettagli</option>
                   </select>
                 </div>
               )}

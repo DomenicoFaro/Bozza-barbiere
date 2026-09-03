@@ -244,4 +244,11 @@ export const INITIAL_APPOINTMENTS: Appointment[] = [
   },
 ];
 
-export const GALLERY_ITEMS: GalleryItem[] = [];
+export const GALLERY_ITEMS: GalleryItem[] = [
+  { id: 'gal-1', title: '', category: 'tagli', image: '/assets/gallery/foto-1.png', description: '', tag: '@darioriolo_barber', featured: true },
+  { id: 'gal-2', title: '', category: 'tagli', image: '/assets/gallery/foto-2.png', description: '', tag: '@darioriolo_barber', featured: true },
+  { id: 'gal-3', title: '', category: 'tagli', image: '/assets/gallery/foto-3.png', description: '', tag: '@darioriolo_barber', featured: true },
+  { id: 'gal-4', title: '', category: 'tagli', image: '/assets/gallery/foto-4.png', description: '', tag: '@darioriolo_barber', featured: true },
+  { id: 'gal-5', title: '', category: 'tagli', image: '/assets/gallery/foto-5.png', description: '', tag: '@darioriolo_barber', featured: true },
+  { id: 'gal-6', title: '', category: 'tagli', image: '/assets/gallery/foto-6.png', description: '', tag: '@darioriolo_barber', featured: true },
+];
