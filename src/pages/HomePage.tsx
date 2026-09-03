@@ -4,8 +4,7 @@ import { DRLogo } from '../components/DRLogo';
 import { BUSINESS_INFO, GALLERY_ITEMS } from '../data/initialData';
 import { StorageService } from '../services/storage';
 import { MediaStorageService } from '../services/mediaStorage';
-import { AtelierVideoPlayer } from '../components/AtelierVideoPlayer';
-import { 
+import {
   Scissors, 
   Calendar, 
   Clock,
@@ -100,12 +99,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Right Column: Interactive Video & Fast Booking Box */}
+            {/* Right Column: Fast Booking Box */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="border border-[#1A1A1A] bg-[#1A1A1A] overflow-hidden shadow-lg">
-                <AtelierVideoPlayer onNavigate={onNavigate} showDetails={false} className="border-0" />
-              </div>
-
               {/* Fast Booking Preview Card */}
               <div className="bg-white border border-[#1A1A1A] p-6 space-y-4">
                 <div className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
@@ -153,81 +148,67 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* DEDICATED VIDEO REEL SHOWCASE: DARIO RIOLO ALL'OPERA */}
+      {/* CRAFT SHOWCASE: DARIO RIOLO ALL'OPERA */}
       <section className="bg-[#111111] text-white py-16 -mx-4 px-4 sm:px-6 lg:px-8 border-y border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left / Craft Details */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 border border-white/20 bg-white/5 text-[10px] uppercase tracking-[0.2em] font-bold text-white">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                <span>Video Reel Live · Via Giacomo Leopardi 138</span>
-              </div>
+        <div className="max-w-3xl mx-auto space-y-6">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 border border-white/20 bg-white/5 text-[10px] uppercase tracking-[0.2em] font-bold text-white">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span>Precisione & Tecnica · Via Giacomo Leopardi 138</span>
+          </div>
 
-              <div className="space-y-2">
-                <span className="text-xs uppercase font-mono tracking-widest text-white/50 block">
-                  @darioriolo_barber
-                </span>
-                <h2 className="text-3xl sm:text-5xl font-serif italic font-light leading-tight text-white">
-                  Guarda Dario Riolo all'opera.
-                </h2>
-              </div>
+          <div className="space-y-2">
+            <span className="text-xs uppercase font-mono tracking-widest text-white/50 block">
+              @darioriolo_barber
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-serif italic font-light leading-tight text-white">
+              Il metodo di Dario Riolo.
+            </h2>
+          </div>
 
-              <p className="text-sm text-white/70 leading-relaxed max-w-xl">
-                Nessun filtro o artificio: il video mostra la reale precisione a forbice su pettine, le sfumature millimetriche a lama e la modellatura della texture realizzate ogni giorno nel nostro salone a Catania.
-              </p>
+          <p className="text-sm text-white/70 leading-relaxed max-w-xl">
+            Nessun filtro o artificio: solo la reale precisione a forbice su pettine, le sfumature millimetriche a lama e la modellatura della texture realizzate ogni giorno nel nostro salone a Catania.
+          </p>
 
-              {/* 3 Step Craft Details */}
-              <div className="space-y-4 pt-3 border-t border-white/10">
-                <div className="flex items-start space-x-4">
-                  <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">01.</span>
-                  <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Consulenza Morfologica & Studio del Profilo</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Analizziamo proporzioni, attaccature e direzioni naturali di crescita per esaltare i tuoi lineamenti.</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">02.</span>
-                  <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Sfumatura Taper Fade & Rifinitura a Lama</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Passaggi graduali senza scalini, basette pulite e contorni a rasoio a mano libera con lama sterile.</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">03.</span>
-                  <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Texture Disconnessa & Styling Opaco</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Lavoro di forbice per donare movimento, volume leggero e definizione flessibile per l'intera giornata.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-dario' })}
-                  className="px-7 py-3.5 bg-white hover:bg-neutral-200 text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
-                >
-                  <Scissors className="w-4 h-4" />
-                  <span>Prenota questo taglio con Dario</span>
-                </button>
-                <button
-                  onClick={() => onNavigate('gallery')}
-                  className="px-6 py-3.5 bg-transparent hover:bg-white/10 text-white text-[11px] font-bold uppercase tracking-wider border border-white/30 transition-all flex items-center justify-center space-x-2"
-                >
-                  <span>Guarda la galleria fotografica</span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-70" />
-                </button>
+          {/* 3 Step Craft Details */}
+          <div className="space-y-4 pt-3 border-t border-white/10">
+            <div className="flex items-start space-x-4">
+              <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">01.</span>
+              <div>
+                <h4 className="text-xs font-bold tracking-wider text-white uppercase">Consulenza Morfologica & Studio del Profilo</h4>
+                <p className="text-xs text-white/60 mt-0.5">Analizziamo proporzioni, attaccature e direzioni naturali di crescita per esaltare i tuoi lineamenti.</p>
               </div>
             </div>
-
-            {/* Right / Video Player Frame */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm">
-                <AtelierVideoPlayer onNavigate={onNavigate} showDetails={true} />
+            <div className="flex items-start space-x-4">
+              <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">02.</span>
+              <div>
+                <h4 className="text-xs font-bold tracking-wider text-white uppercase">Sfumatura Taper Fade & Rifinitura a Lama</h4>
+                <p className="text-xs text-white/60 mt-0.5">Passaggi graduali senza scalini, basette pulite e contorni a rasoio a mano libera con lama sterile.</p>
               </div>
             </div>
+            <div className="flex items-start space-x-4">
+              <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">03.</span>
+              <div>
+                <h4 className="text-xs font-bold tracking-wider text-white uppercase">Texture Disconnessa & Styling Opaco</h4>
+                <p className="text-xs text-white/60 mt-0.5">Lavoro di forbice per donare movimento, volume leggero e definizione flessibile per l'intera giornata.</p>
+              </div>
+            </div>
+          </div>
 
+          <div className="pt-4 flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-dario' })}
+              className="px-7 py-3.5 bg-white hover:bg-neutral-200 text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+            >
+              <Scissors className="w-4 h-4" />
+              <span>Prenota questo taglio con Dario</span>
+            </button>
+            <button
+              onClick={() => onNavigate('gallery')}
+              className="px-6 py-3.5 bg-transparent hover:bg-white/10 text-white text-[11px] font-bold uppercase tracking-wider border border-white/30 transition-all flex items-center justify-center space-x-2"
+            >
+              <span>Guarda la galleria fotografica</span>
+              <ArrowRight className="w-3.5 h-3.5 opacity-70" />
+            </button>
           </div>
         </div>
       </section>
