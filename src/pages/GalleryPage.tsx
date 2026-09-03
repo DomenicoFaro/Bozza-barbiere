@@ -86,7 +86,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
       title: newTitle.trim(),
       category: isVideoFile ? 'video' : newCategory,
       description: newDescription.trim() || 'Creazione esclusiva realizzata presso Dario Riolo Barber Shop Catania.',
-      image: isVideoFile ? '/assets/dario_riolo_logo.jpg' : newMediaPreview,
+      image: isVideoFile ? '/assets/dario_riolo_logo.png' : newMediaPreview,
       tag: '@darioriolo_barber',
       featured: true,
       isVideo: isVideoFile,

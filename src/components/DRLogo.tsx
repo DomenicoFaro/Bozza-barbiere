@@ -36,7 +36,7 @@ export const DRLogo: React.FC<DRLogoProps> = ({
     return () => { active = false; };
   }, []);
 
-  const logoSrc = customLogoUrl || '/assets/dario_riolo_logo.jpg';
+  const logoSrc = customLogoUrl || '/assets/dario_riolo_logo.png';
 
   // Sizing definitions
   const heightClasses = {
