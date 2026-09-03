@@ -270,23 +270,22 @@ export const StorageService = {
 
     const bookingCode = `DR-${Math.floor(1000 + Math.random() * 9000)}`;
 
-    const { data: inserted, error } = await supabase
-      .from('appointments')
-      .insert({
-        booking_code: bookingCode,
-        service_id: data.serviceId,
-        operator_id: effectiveOperatorId,
-        customer_name: data.customerName.trim(),
-        customer_phone: data.customerPhone.trim(),
-        customer_email: data.customerEmail?.trim() || null,
-        notes: data.notes?.trim() || null,
-        appointment_date: data.date,
-        start_time: data.startTime,
-        end_time: endTime,
-        status: 'confirmed',
-      })
-      .select()
-      .single();
+    // Passa dalla funzione RPC (non da un insert diretto sulla tabella): un
+    // cliente guest non ha permesso di select sulla tabella, quindi un
+    // insert diretto con .select() fallirebbe nel rileggere la riga appena
+    // creata. La funzione bypassa questo limite restituendo la riga.
+    const { data: inserted, error } = await supabase.rpc('create_appointment_row', {
+      p_booking_code: bookingCode,
+      p_service_id: data.serviceId,
+      p_operator_id: effectiveOperatorId,
+      p_customer_name: data.customerName.trim(),
+      p_customer_phone: data.customerPhone.trim(),
+      p_customer_email: data.customerEmail?.trim() || null,
+      p_notes: data.notes?.trim() || null,
+      p_appointment_date: data.date,
+      p_start_time: data.startTime,
+      p_end_time: endTime,
+    });
 
     if (error || !inserted) {
       console.error('Errore nella creazione dell\'appuntamento:', error);

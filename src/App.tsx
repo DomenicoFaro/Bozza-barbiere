@@ -16,7 +16,11 @@ import { ContactsPage } from './pages/ContactsPage';
 import { AdminPage } from './pages/AdminPage';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageView>('home');
+  // Il pannello admin non ha un pulsante pubblico in navigazione: si
+  // raggiunge solo tramite questo link diretto (es. salvato nei preferiti).
+  const [currentPage, setCurrentPage] = useState<PageView>(() =>
+    window.location.hash === '#admin' ? 'admin' : 'home'
+  );
   const [selectedServiceId, setSelectedServiceId] = useState<string | undefined>(undefined);
   const [selectedOperatorId, setSelectedOperatorId] = useState<string | undefined>(undefined);
 
@@ -38,6 +42,12 @@ export default function App() {
       setSelectedOperatorId(undefined);
     }
     setCurrentPage(page);
+
+    if (page === 'admin') {
+      window.location.hash = 'admin';
+    } else if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
   };
 
   return (

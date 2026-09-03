@@ -3,6 +3,7 @@ import { PageView } from '../types';
 import { DRLogo } from './DRLogo';
 import { BUSINESS_INFO } from '../data/initialData';
 import { StorageService } from '../services/storage';
+import { useAuth } from '../contexts/AuthContext';
 import { MapPin, Phone, Clock, ExternalLink, Calendar, Scissors, ShieldCheck, Heart } from 'lucide-react';
 
 interface FooterProps {
@@ -11,6 +12,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const businessHours = StorageService.getBusinessHours();
+  const { isAdmin } = useAuth();
 
   return (
     <footer className="bg-[#1A1A1A] text-white border-t border-[#1A1A1A]">
@@ -33,13 +35,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <Calendar className="w-3.5 h-3.5 mr-1.5" />
                 Prenota online
               </button>
-              <button
-                onClick={() => onNavigate('admin')}
-                className="inline-flex items-center px-3 py-2 bg-transparent text-white/70 hover:text-white text-[10px] font-semibold uppercase tracking-widest border border-white/20 hover:border-white transition-all rounded-none"
-              >
-                <ShieldCheck className="w-3 h-3 mr-1" />
-                Admin
-              </button>
+              {isAdmin && (
+                <button
+                  onClick={() => onNavigate('admin')}
+                  className="inline-flex items-center px-3 py-2 bg-transparent text-white/70 hover:text-white text-[10px] font-semibold uppercase tracking-widest border border-white/20 hover:border-white transition-all rounded-none"
+                >
+                  <ShieldCheck className="w-3 h-3 mr-1" />
+                  Admin
+                </button>
+              )}
             </div>
           </div>
 

@@ -24,11 +24,11 @@ create table if not exists public.appointments (
 
 alter table public.appointments enable row level security;
 
--- Chiunque puo' creare un appuntamento (prenotazione pubblica, senza login,
--- come funzionava finora)
+-- Nessun insert/select diretto per il pubblico: la creazione passa dalla
+-- funzione RPC create_appointment_row piu' sotto, che restituisce la riga
+-- creata bypassando la policy di select (altrimenti un cliente guest non
+-- riuscirebbe a "rileggere" la prenotazione appena fatta per confermarla).
 drop policy if exists "Appointments: public insert" on public.appointments;
-create policy "Appointments: public insert" on public.appointments
-  for insert with check (true);
 
 -- Solo gli amministratori possono leggere la tabella intera (il pannello
 -- admin). I clienti guest trovano i propri appuntamenti tramite le funzioni
@@ -90,6 +90,43 @@ as $$
         ilike '%' || regexp_replace(p_phone, '[\s\-\(\)]', '', 'g') || '%';
 $$;
 grant execute on function public.lookup_appointments_by_phone(text) to anon, authenticated;
+
+-- Crea un appuntamento e restituisce la riga creata (bypassa la select RLS
+-- cosi' anche un cliente guest, non amministratore, riceve la conferma con
+-- id e dati completi appena prenota).
+create or replace function public.create_appointment_row(
+  p_booking_code text,
+  p_service_id text,
+  p_operator_id text,
+  p_customer_name text,
+  p_customer_phone text,
+  p_customer_email text,
+  p_notes text,
+  p_appointment_date text,
+  p_start_time text,
+  p_end_time text
+)
+returns public.appointments
+language plpgsql security definer set search_path = public
+as $$
+declare
+  new_row public.appointments;
+begin
+  insert into public.appointments (
+    booking_code, service_id, operator_id, customer_name, customer_phone,
+    customer_email, notes, appointment_date, start_time, end_time, status
+  ) values (
+    p_booking_code, p_service_id, p_operator_id, p_customer_name, p_customer_phone,
+    p_customer_email, p_notes, p_appointment_date, p_start_time, p_end_time, 'confirmed'
+  )
+  returning * into new_row;
+
+  return new_row;
+end;
+$$;
+grant execute on function public.create_appointment_row(
+  text, text, text, text, text, text, text, text, text, text
+) to anon, authenticated;
 
 -- Cancellazione guest: puo' cancellare solo se conosce anche il telefono
 -- associato all'appuntamento (evita che chiunque conosca solo l'id possa

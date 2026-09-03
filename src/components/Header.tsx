@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [shopStatus, setShopStatus] = useState({ isOpen: false, text: '' });
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, isAdmin, signOut } = useAuth();
 
   useEffect(() => {
     setShopStatus(StorageService.getShopCurrentStatus());
@@ -98,19 +98,23 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <span>Accedi</span>
             </button>
           )}
-          <span className="opacity-30">/</span>
-          <button
-            onClick={() => onNavigate('admin')}
-            className={`flex items-center space-x-1 px-2 py-0.5 border text-[9px] uppercase tracking-widest transition-colors ${
-              currentPage === 'admin'
-                ? 'bg-white text-[#1A1A1A] border-white font-bold'
-                : 'text-white/70 border-white/30 hover:border-white hover:text-white'
-            }`}
-            title="Area Riservata Titolare"
-          >
-            <ShieldCheck className="w-3 h-3" />
-            <span>Admin</span>
-          </button>
+          {isAdmin && (
+            <>
+              <span className="opacity-30">/</span>
+              <button
+                onClick={() => onNavigate('admin')}
+                className={`flex items-center space-x-1 px-2 py-0.5 border text-[9px] uppercase tracking-widest transition-colors ${
+                  currentPage === 'admin'
+                    ? 'bg-white text-[#1A1A1A] border-white font-bold'
+                    : 'text-white/70 border-white/30 hover:border-white hover:text-white'
+                }`}
+                title="Area Riservata Titolare"
+              >
+                <ShieldCheck className="w-3 h-3" />
+                <span>Admin</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -257,19 +261,21 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               </button>
             )}
 
-            <button
-              onClick={() => {
-                onNavigate('admin');
-                setIsMobileMenuOpen(false);
-              }}
-              className="w-full flex items-center justify-between px-4 py-2.5 text-xs text-[#1A1A1A] border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white font-semibold uppercase tracking-wider transition-colors"
-            >
-              <span className="flex items-center space-x-2">
-                <ShieldCheck className="w-4 h-4" />
-                <span>Pannello Amministrazione</span>
-              </span>
-              <span className="text-[10px] bg-[#1A1A1A] text-white px-2 py-0.5">Titolare</span>
-            </button>
+            {isAdmin && (
+              <button
+                onClick={() => {
+                  onNavigate('admin');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-between px-4 py-2.5 text-xs text-[#1A1A1A] border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white font-semibold uppercase tracking-wider transition-colors"
+              >
+                <span className="flex items-center space-x-2">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Pannello Amministrazione</span>
+                </span>
+                <span className="text-[10px] bg-[#1A1A1A] text-white px-2 py-0.5">Titolare</span>
+              </button>
+            )}
           </div>
         </div>
       )}
