@@ -36,7 +36,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
   // Se il cliente è loggato, trova subito i suoi appuntamenti tramite il telefono del profilo
   useEffect(() => {
     if (user && profile?.phone) {
-      setResults(StorageService.getAppointmentsByPhone(profile.phone));
+      StorageService.getAppointmentsByPhone(profile.phone).then(setResults);
       setHasSearched(true);
     }
   }, [user, profile]);
@@ -50,7 +50,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
   const [rescheduleNotes, setRescheduleNotes] = useState('');
   const [rescheduleSuccessMsg, setRescheduleSuccessMsg] = useState<string | null>(null);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const query = searchQuery.trim();
     if (!query) return;
@@ -61,23 +61,28 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
 
     // Se è un codice prenotazione (es. "DR-1234")
     if (query.toUpperCase().startsWith('DR-') || query.length === 4) {
-      const byCode = StorageService.getAppointmentByCode(query);
+      const byCode = await StorageService.getAppointmentByCode(query);
       setResults(byCode ? [byCode] : []);
     } else {
       // Ricerca per numero di telefono
-      const byPhone = StorageService.getAppointmentsByPhone(query);
+      const byPhone = await StorageService.getAppointmentsByPhone(query);
       setResults(byPhone);
     }
   };
 
-  const handleConfirmCancellation = () => {
+  const handleConfirmCancellation = async () => {
     if (!cancellingAppointment) return;
 
-    StorageService.updateAppointmentStatus(cancellingAppointment.id, 'cancelled');
+    const ok = await StorageService.cancelAppointmentAsGuest(cancellingAppointment.id, cancellingAppointment.customer_phone);
+    if (!ok) {
+      setCancellingAppointment(null);
+      return;
+    }
+
     setCancelSuccessMsg(`L'appuntamento ${cancellingAppointment.booking_code} è stato cancellato. Lo slot orario è stato liberato con successo.`);
-    
+
     // Aggiorna lista locale
-    setResults(prev => prev.map(a => 
+    setResults(prev => prev.map(a =>
       a.id === cancellingAppointment.id ? { ...a, status: 'cancelled' } : a
     ));
     setCancellingAppointment(null);

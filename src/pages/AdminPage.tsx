@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageView, Appointment, Service, Operator, BusinessHours, Closure } from '../types';
 import { StorageService, getFormattedDate, timeToMinutes, minutesToTime } from '../services/storage';
 import { DRLogo } from '../components/DRLogo';
@@ -73,16 +73,34 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   // Fetch live storage data
   const services = StorageService.getServices();
   const operators = StorageService.getOperators();
-  const allAppointments = StorageService.getAppointments();
   const businessHours = StorageService.getBusinessHours();
   const closures = StorageService.getClosures();
+
+  // Appuntamenti: caricati da Supabase (condivisi tra tutti i dispositivi)
+  const [allAppointments, setAllAppointments] = useState<Appointment[]>([]);
+  const [appointmentsLoading, setAppointmentsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user || !isAdmin) return;
+    let active = true;
+    setAppointmentsLoading(true);
+    StorageService.getAppointments().then(data => {
+      if (active) {
+        setAllAppointments(data);
+        setAppointmentsLoading(false);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, [user, isAdmin, tick]);
 
   const handleLogout = () => {
     signOut();
   };
 
   // Add Manual Appointment
-  const handleCreateManualBooking = (e: React.FormEvent) => {
+  const handleCreateManualBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     setManualError(null);
 
@@ -91,7 +109,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       return;
     }
 
-    const result = StorageService.createAppointment({
+    const result = await StorageService.createAppointment({
       serviceId: manualServiceId,
       operatorId: manualOperatorId,
       date: manualDate,
@@ -470,8 +488,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                 <div className="mt-1 pt-1 border-t border-[#1A1A1A]/20 flex justify-end space-x-1 opacity-90">
                                   {apt.status !== 'completed' && (
                                     <button
-                                      onClick={() => {
-                                        StorageService.updateAppointmentStatus(apt.id, 'completed');
+                                      onClick={async () => {
+                                        await StorageService.adminUpdateAppointmentStatus(apt.id, 'completed');
                                         triggerRefresh();
                                       }}
                                       className="px-1.5 py-0.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-[9px] font-bold uppercase tracking-wider"
@@ -481,9 +499,9 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                     </button>
                                   )}
                                   <button
-                                    onClick={() => {
+                                    onClick={async () => {
                                       if (confirm(`Cancellare appuntamento per ${apt.customer_name}?`)) {
-                                        StorageService.updateAppointmentStatus(apt.id, 'cancelled');
+                                        await StorageService.adminUpdateAppointmentStatus(apt.id, 'cancelled');
                                         triggerRefresh();
                                       }
                                     }}
@@ -621,8 +639,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                           <td className="p-3.5 text-right space-x-2">
                             {apt.status === 'confirmed' && (
                               <button
-                                onClick={() => {
-                                  StorageService.updateAppointmentStatus(apt.id, 'completed');
+                                onClick={async () => {
+                                  await StorageService.adminUpdateAppointmentStatus(apt.id, 'completed');
                                   triggerRefresh();
                                 }}
                                 className="px-2.5 py-1 rounded-none bg-[#1A1A1A] text-white font-bold uppercase tracking-wider text-[9px]"
@@ -632,8 +650,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                             )}
                             {apt.status !== 'cancelled' && (
                               <button
-                                onClick={() => {
-                                  StorageService.updateAppointmentStatus(apt.id, 'cancelled');
+                                onClick={async () => {
+                                  await StorageService.adminUpdateAppointmentStatus(apt.id, 'cancelled');
                                   triggerRefresh();
                                 }}
                                 className="px-2.5 py-1 rounded-none bg-rose-50 text-rose-700 font-bold uppercase tracking-wider text-[9px] border border-rose-200"

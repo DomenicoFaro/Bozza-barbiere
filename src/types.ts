@@ -65,7 +65,6 @@ export interface TimeSlot {
   time: string; // "08:30"
   available: boolean;
   reason?: string;
-  existingAppointment?: Appointment;
 }
 
 export interface GalleryItem {

@@ -5,11 +5,11 @@ import {
   INITIAL_OPERATOR_SERVICES,
   INITIAL_BUSINESS_HOURS,
   INITIAL_CLOSURES,
-  INITIAL_APPOINTMENTS,
   GALLERY_ITEMS,
   BUSINESS_INFO,
   getFormattedDate,
 } from '../data/initialData';
+import { supabase } from './supabaseClient';
 
 const STORAGE_KEYS = {
   SERVICES: 'dr_barber_services',
@@ -17,10 +17,10 @@ const STORAGE_KEYS = {
   OPERATOR_SERVICES: 'dr_barber_operator_services',
   BUSINESS_HOURS: 'dr_barber_business_hours',
   CLOSURES: 'dr_barber_closures',
-  APPOINTMENTS: 'dr_barber_appointments',
-  ADMIN_AUTH: 'dr_barber_admin_auth',
   GALLERY: 'dr_barber_gallery_clean_v1',
 };
+
+type BusySlot = { operator_id: string; start_time: string; end_time: string };
 
 // Helper per leggere e scrivere su localStorage in modo sicuro
 function getStored<T>(key: string, fallback: T): T {
@@ -135,27 +135,83 @@ export const StorageService = {
     this.saveClosures(closures);
   },
 
-  // APPOINTMENTS
-  getAppointments(): Appointment[] {
-    return getStored<Appointment[]>(STORAGE_KEYS.APPOINTMENTS, INITIAL_APPOINTMENTS);
+  // APPOINTMENTS (condivisi tra tutti i dispositivi tramite Supabase)
+
+  // Elenco completo: richiede permesso is_admin lato RLS (usato dal pannello admin)
+  async getAppointments(): Promise<Appointment[]> {
+    const { data, error } = await supabase
+      .from('appointments')
+      .select('*')
+      .order('appointment_date', { ascending: true })
+      .order('start_time', { ascending: true });
+    if (error) {
+      console.error('Errore nel caricamento degli appuntamenti:', error);
+      return [];
+    }
+    return (data as Appointment[]) || [];
   },
-  saveAppointments(appointments: Appointment[]): void {
-    setStored(STORAGE_KEYS.APPOINTMENTS, appointments);
+
+  // Ricerca guest tramite funzione RPC (non espone l'intera tabella)
+  async getAppointmentByCode(code: string): Promise<Appointment | undefined> {
+    const { data, error } = await supabase.rpc('lookup_appointment_by_code', { p_code: code.trim() });
+    if (error) {
+      console.error('Errore nella ricerca per codice:', error);
+      return undefined;
+    }
+    return (data as Appointment[] | null)?.[0];
   },
-  getAppointmentByCode(code: string): Appointment | undefined {
-    const clean = code.trim().toUpperCase();
-    return this.getAppointments().find(a => a.booking_code.toUpperCase() === clean);
+  async getAppointmentsByPhone(phone: string): Promise<Appointment[]> {
+    const { data, error } = await supabase.rpc('lookup_appointments_by_phone', { p_phone: phone.trim() });
+    if (error) {
+      console.error('Errore nella ricerca per telefono:', error);
+      return [];
+    }
+    return (data as Appointment[]) || [];
   },
-  getAppointmentsByPhone(phone: string): Appointment[] {
-    const clean = phone.replace(/[\s\-\(\)]/g, '');
-    return this.getAppointments().filter(a => {
-      const aPhone = a.customer_phone.replace(/[\s\-\(\)]/g, '');
-      return aPhone.includes(clean) || clean.includes(aPhone);
+
+  // Solo gli orari occupati (nessun dato cliente) per calcolare la disponibilità
+  async getBusySlots(date: string, operatorId?: string): Promise<BusySlot[]> {
+    const { data, error } = await supabase.rpc('get_busy_slots', {
+      p_date: date,
+      p_operator_id: operatorId && operatorId !== 'any' ? operatorId : null,
+    });
+    if (error) {
+      console.error('Errore nel calcolo degli slot occupati:', error);
+      return [];
+    }
+    return (data as BusySlot[]) || [];
+  },
+
+  // Collisione oraria calcolata su un elenco di slot occupati già recuperato
+  isBusyGivenSlots(busySlots: BusySlot[], operatorId: string, startTime: string, durationMinutes: number): boolean {
+    const newStart = timeToMinutes(startTime);
+    const newEnd = newStart + durationMinutes;
+    return busySlots.some(b => {
+      if (b.operator_id !== operatorId) return false;
+      const bStart = timeToMinutes(b.start_time);
+      const bEnd = timeToMinutes(b.end_time);
+      return newStart < bEnd && newEnd > bStart;
     });
   },
 
+  // Controlla le chiusure straordinarie dell'operatore o del negozio (dato locale)
+  isClosureBlocking(operatorId: string, date: string, startTime: string, durationMinutes: number): boolean {
+    const newStart = timeToMinutes(startTime);
+    const newEnd = newStart + durationMinutes;
+    const closures = this.getClosures().filter(c =>
+      c.date === date && (c.operator_id === null || c.operator_id === operatorId)
+    );
+    for (const c of closures) {
+      if (!c.start_time || !c.end_time) return true; // Chiusura tutto il giorno
+      const cStart = timeToMinutes(c.start_time);
+      const cEnd = timeToMinutes(c.end_time);
+      if (newStart < cEnd && newEnd > cStart) return true;
+    }
+    return false;
+  },
+
   // Crea un nuovo appuntamento con prevenzione doppia prenotazione
-  createAppointment(data: {
+  async createAppointment(data: {
     serviceId: string;
     operatorId: string;
     date: string;
@@ -164,7 +220,7 @@ export const StorageService = {
     customerPhone: string;
     customerEmail?: string;
     notes?: string;
-  }): { success: boolean; appointment?: Appointment; error?: string } {
+  }): Promise<{ success: boolean; appointment?: Appointment; error?: string }> {
     const service = this.getServiceById(data.serviceId);
     if (!service) {
       return { success: false, error: 'Servizio non trovato.' };
@@ -182,12 +238,15 @@ export const StorageService = {
       return { success: false, error: 'Non è possibile prenotare in una data passata.' };
     }
 
+    const busySlots = await this.getBusySlots(data.date);
+
     // Se l'operatore scelto è "any" (primo disponibile), assegniamo il primo operatore libero
     let effectiveOperatorId = data.operatorId;
     if (effectiveOperatorId === 'any') {
       const availableOps = this.getOperatorsForService(data.serviceId);
-      const freeOp = availableOps.find(op => 
-        !this.isOperatorBusy(op.id, data.date, data.startTime, service.duration_minutes)
+      const freeOp = availableOps.find(op =>
+        !this.isBusyGivenSlots(busySlots, op.id, data.startTime, service.duration_minutes) &&
+        !this.isClosureBlocking(op.id, data.date, data.startTime, service.duration_minutes)
       );
       if (!freeOp) {
         return { success: false, error: 'Nessun barbiere disponibile in questo orario.' };
@@ -199,7 +258,10 @@ export const StorageService = {
     const endTime = addMinutesToTime(data.startTime, service.duration_minutes);
 
     // Verifica collisioni orario
-    if (this.isOperatorBusy(effectiveOperatorId, data.date, data.startTime, service.duration_minutes)) {
+    if (
+      this.isBusyGivenSlots(busySlots, effectiveOperatorId, data.startTime, service.duration_minutes) ||
+      this.isClosureBlocking(effectiveOperatorId, data.date, data.startTime, service.duration_minutes)
+    ) {
       return {
         success: false,
         error: 'Questo slot orario è già stato occupato. Seleziona un orario differente.',
@@ -208,91 +270,57 @@ export const StorageService = {
 
     const bookingCode = `DR-${Math.floor(1000 + Math.random() * 9000)}`;
 
-    const newAppointment: Appointment = {
-      id: `apt-${Date.now()}`,
-      booking_code: bookingCode,
-      service_id: data.serviceId,
-      operator_id: effectiveOperatorId,
-      customer_name: data.customerName.trim(),
-      customer_phone: data.customerPhone.trim(),
-      customer_email: data.customerEmail?.trim(),
-      notes: data.notes?.trim(),
-      appointment_date: data.date,
-      start_time: data.startTime,
-      end_time: endTime,
-      status: 'confirmed',
-      created_at: new Date().toISOString(),
-    };
+    const { data: inserted, error } = await supabase
+      .from('appointments')
+      .insert({
+        booking_code: bookingCode,
+        service_id: data.serviceId,
+        operator_id: effectiveOperatorId,
+        customer_name: data.customerName.trim(),
+        customer_phone: data.customerPhone.trim(),
+        customer_email: data.customerEmail?.trim() || null,
+        notes: data.notes?.trim() || null,
+        appointment_date: data.date,
+        start_time: data.startTime,
+        end_time: endTime,
+        status: 'confirmed',
+      })
+      .select()
+      .single();
 
-    const appointments = [...this.getAppointments(), newAppointment];
-    this.saveAppointments(appointments);
-
-    return { success: true, appointment: newAppointment };
-  },
-
-  // Aggiorna lo stato di un appuntamento (es. 'cancelled')
-  updateAppointmentStatus(id: string, status: Appointment['status']): void {
-    const appointments = this.getAppointments().map(apt => 
-      apt.id === id ? { ...apt, status } : apt
-    );
-    this.saveAppointments(appointments);
-  },
-
-  // Modifica appuntamento esistente
-  updateAppointment(appointment: Appointment): void {
-    const appointments = this.getAppointments().map(apt => 
-      apt.id === appointment.id ? appointment : apt
-    );
-    this.saveAppointments(appointments);
-  },
-
-  // Controlla se un operatore è occupato
-  isOperatorBusy(operatorId: string, date: string, startTime: string, durationMinutes: number, excludeAppointmentId?: string): boolean {
-    const newStart = timeToMinutes(startTime);
-    const newEnd = newStart + durationMinutes;
-
-    const appointments = this.getAppointments().filter(a => 
-      a.operator_id === operatorId && 
-      a.appointment_date === date && 
-      a.status !== 'cancelled' &&
-      a.id !== excludeAppointmentId
-    );
-
-    for (const apt of appointments) {
-      const aptStart = timeToMinutes(apt.start_time);
-      const aptEnd = timeToMinutes(apt.end_time);
-
-      // Collisione intervalli [newStart, newEnd) e [aptStart, aptEnd)
-      if (newStart < aptEnd && newEnd > aptStart) {
-        return true;
-      }
+    if (error || !inserted) {
+      console.error('Errore nella creazione dell\'appuntamento:', error);
+      return { success: false, error: 'Errore di connessione al server. Riprova.' };
     }
 
-    // Controlla anche le chiusure straordinarie dell'operatore o del negozio
-    const closures = this.getClosures().filter(c => 
-      c.date === date && (c.operator_id === null || c.operator_id === operatorId)
-    );
+    return { success: true, appointment: inserted as Appointment };
+  },
 
-    for (const c of closures) {
-      if (!c.start_time || !c.end_time) {
-        // Chiusura tutto il giorno
-        return true;
-      }
-      const cStart = timeToMinutes(c.start_time);
-      const cEnd = timeToMinutes(c.end_time);
-      if (newStart < cEnd && newEnd > cStart) {
-        return true;
-      }
+  // Admin: aggiorna direttamente lo stato di un appuntamento (richiede permesso is_admin lato RLS)
+  async adminUpdateAppointmentStatus(id: string, status: Appointment['status']): Promise<boolean> {
+    const { error } = await supabase.from('appointments').update({ status }).eq('id', id);
+    if (error) {
+      console.error('Errore nell\'aggiornamento dello stato:', error);
+      return false;
     }
+    return true;
+  },
 
-    return false;
+  // Cliente guest: cancella un proprio appuntamento (verifica anche il telefono lato server)
+  async cancelAppointmentAsGuest(id: string, phone: string): Promise<boolean> {
+    const { error } = await supabase.rpc('cancel_appointment', { p_id: id, p_phone: phone });
+    if (error) {
+      console.error('Errore nella cancellazione:', error);
+      return false;
+    }
+    return true;
   },
 
   // Genera tutti gli slot orari da 30 min per una data specifica e calcola la disponibilità
-  generateDaySlots(dateStr: string, serviceId?: string, operatorId?: string): TimeSlot[] {
+  async generateDaySlots(dateStr: string, serviceId?: string, operatorId?: string): Promise<TimeSlot[]> {
     const date = new Date(dateStr + 'T00:00:00');
     const dayOfWeek = date.getDay(); // 0 = dom, 1 = lun, ...
-    
+
     const businessHours = this.getBusinessHours().find(h => h.day_of_week === dayOfWeek);
 
     // Se il giorno è chiuso
@@ -314,6 +342,7 @@ export const StorageService = {
 
     const slots: TimeSlot[] = [];
     const availableOps = serviceId ? this.getOperatorsForService(serviceId) : this.getOperators();
+    const busySlots = await this.getBusySlots(dateStr, operatorId);
 
     // Se la data selezionata è oggi, blocca gli slot con orario già trascorso
     const isToday = dateStr === getFormattedDate(0);
@@ -345,26 +374,19 @@ export const StorageService = {
       }
 
       let isAvailable = false;
-      let existingAppointment: Appointment | undefined;
 
       if (operatorId && operatorId !== 'any') {
         // Operatore specifico selezionato
-        const busy = this.isOperatorBusy(operatorId, dateStr, timeStr, duration);
+        const busy =
+          this.isBusyGivenSlots(busySlots, operatorId, timeStr, duration) ||
+          this.isClosureBlocking(operatorId, dateStr, timeStr, duration);
         isAvailable = !busy;
-        if (busy) {
-          existingAppointment = this.getAppointments().find(a => 
-            a.operator_id === operatorId && 
-            a.appointment_date === dateStr && 
-            a.status !== 'cancelled' &&
-            timeToMinutes(a.start_time) <= currentMin &&
-            timeToMinutes(a.end_time) > currentMin
-          );
-        }
       } else {
         // Qualsiasi operatore / primo disponibile
         // Se c'è almeno un operatore abilitato al servizio libero per tutta la durata, lo slot è verde
-        const freeOp = availableOps.find(op => 
-          !this.isOperatorBusy(op.id, dateStr, timeStr, duration)
+        const freeOp = availableOps.find(op =>
+          !this.isBusyGivenSlots(busySlots, op.id, timeStr, duration) &&
+          !this.isClosureBlocking(op.id, dateStr, timeStr, duration)
         );
         isAvailable = !!freeOp;
       }
@@ -373,7 +395,6 @@ export const StorageService = {
         time: timeStr,
         available: isAvailable,
         reason: isAvailable ? undefined : 'Slot occupato',
-        existingAppointment,
       });
     }
 
@@ -505,7 +526,6 @@ export const StorageService = {
     localStorage.removeItem(STORAGE_KEYS.OPERATOR_SERVICES);
     localStorage.removeItem(STORAGE_KEYS.BUSINESS_HOURS);
     localStorage.removeItem(STORAGE_KEYS.CLOSURES);
-    localStorage.removeItem(STORAGE_KEYS.APPOINTMENTS);
     localStorage.removeItem(STORAGE_KEYS.GALLERY);
   },
 };

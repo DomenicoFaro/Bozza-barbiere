@@ -150,10 +150,27 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
     ? null
     : StorageService.getOperatorById(selectedOperatorId);
 
-  // Computed slots for Step 3
-  const slots: TimeSlot[] = selectedDate && selectedServiceId
-    ? StorageService.generateDaySlots(selectedDate, selectedServiceId, selectedOperatorId)
-    : [];
+  // Computed slots for Step 3 (caricati da Supabase, disponibilità condivisa tra tutti i dispositivi)
+  const [slots, setSlots] = useState<TimeSlot[]>([]);
+  const [slotsLoading, setSlotsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!selectedDate || !selectedServiceId) {
+      setSlots([]);
+      return;
+    }
+    let active = true;
+    setSlotsLoading(true);
+    StorageService.generateDaySlots(selectedDate, selectedServiceId, selectedOperatorId).then(result => {
+      if (active) {
+        setSlots(result);
+        setSlotsLoading(false);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, [selectedDate, selectedServiceId, selectedOperatorId]);
 
   // Date picker: Generate next 14 selectable days with their business status
   const nextDays = Array.from({ length: 14 }, (_, i) => {
@@ -180,7 +197,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
   });
 
   // Handle final appointment submission
-  const handleConfirmBooking = (e: React.FormEvent) => {
+  const handleConfirmBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
 
@@ -192,27 +209,25 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      const result = StorageService.createAppointment({
-        serviceId: selectedServiceId,
-        operatorId: selectedOperatorId,
-        date: selectedDate,
-        startTime: selectedSlotTime,
-        customerName: fullName,
-        customerPhone: customerPhone.trim(),
-        customerEmail: customerEmail.trim() || undefined,
-        notes: customerNotes.trim() || undefined,
-      });
+    const result = await StorageService.createAppointment({
+      serviceId: selectedServiceId,
+      operatorId: selectedOperatorId,
+      date: selectedDate,
+      startTime: selectedSlotTime,
+      customerName: fullName,
+      customerPhone: customerPhone.trim(),
+      customerEmail: customerEmail.trim() || undefined,
+      notes: customerNotes.trim() || undefined,
+    });
 
-      setIsSubmitting(false);
+    setIsSubmitting(false);
 
-      if (result.success && result.appointment) {
-        setConfirmedAppointment(result.appointment);
-        setCurrentStep(5); // Success step
-      } else {
-        setErrorMsg(result.error || 'Si è verificato un errore durante la prenotazione. Riprova.');
-      }
-    }, 500);
+    if (result.success && result.appointment) {
+      setConfirmedAppointment(result.appointment);
+      setCurrentStep(5); // Success step
+    } else {
+      setErrorMsg(result.error || 'Si è verificato un errore durante la prenotazione. Riprova.');
+    }
   };
 
   const stepsHeader = [
@@ -589,7 +604,11 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               </div>
             </div>
 
-            {slots.length === 0 ? (
+            {slotsLoading ? (
+              <div className="p-8 text-center text-[#1A1A1A]/60 text-xs uppercase tracking-wider font-bold">
+                Verifica disponibilità in corso...
+              </div>
+            ) : slots.length === 0 ? (
               <div className="p-8 text-center text-[#1A1A1A]/70 space-y-2">
                 <AlertCircle className="w-8 h-8 opacity-60 mx-auto" />
                 <p className="text-sm font-semibold text-[#1A1A1A]">

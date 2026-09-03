@@ -195,55 +195,6 @@ export function getFormattedDate(daysOffset: number = 0): string {
   return `${year}-${month}-${day}`;
 }
 
-// Appuntamenti di prova iniziali per dimostrare il funzionamento del calendario e dei filtri slot
-export const INITIAL_APPOINTMENTS: Appointment[] = [
-  {
-    id: 'apt-001',
-    booking_code: 'DR-7319',
-    service_id: 'srv-taglio-uomo',
-    operator_id: 'op-dario',
-    customer_name: 'Alessandro Rossi',
-    customer_phone: '+39 340 1234567',
-    customer_email: 'a.rossi@example.com',
-    notes: 'Sfumatura bassa e rifinitura basette',
-    appointment_date: getFormattedDate(0),
-    start_time: '09:30',
-    end_time: '10:00',
-    status: 'confirmed',
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: 'apt-002',
-    booking_code: 'DR-8421',
-    service_id: 'srv-rasatura-panno-caldo',
-    operator_id: 'op-marco',
-    customer_name: 'Giuseppe Bellini',
-    customer_phone: '+39 349 9876543',
-    customer_email: 'giuseppe.b@example.com',
-    notes: 'Pelle sensibile',
-    appointment_date: getFormattedDate(0),
-    start_time: '11:00',
-    end_time: '11:30',
-    status: 'confirmed',
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: 'apt-003',
-    booking_code: 'DR-9104',
-    service_id: 'srv-colorazione',
-    operator_id: 'op-luca',
-    customer_name: 'Salvatore Russo',
-    customer_phone: '+39 328 5551234',
-    customer_email: 's.russo@example.com',
-    notes: 'Tonalizzazione grigio naturale',
-    appointment_date: getFormattedDate(1),
-    start_time: '15:00',
-    end_time: '16:00',
-    status: 'confirmed',
-    created_at: new Date().toISOString(),
-  },
-];
-
 export const GALLERY_ITEMS: GalleryItem[] = [
   { id: 'gal-1', title: '', category: 'tagli', image: '/assets/gallery/foto-1.png', description: '', tag: '@darioriolo_barber', featured: true },
   { id: 'gal-2', title: '', category: 'tagli', image: '/assets/gallery/foto-2.png', description: '', tag: '@darioriolo_barber', featured: true },
