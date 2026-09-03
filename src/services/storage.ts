@@ -1,4 +1,4 @@
-import { Service, Operator, OperatorService, BusinessHours, Closure, Appointment, TimeSlot } from '../types';
+import { Service, Operator, OperatorService, BusinessHours, Closure, Appointment, TimeSlot, GalleryItem } from '../types';
 import {
   INITIAL_SERVICES,
   INITIAL_OPERATORS,
@@ -6,6 +6,7 @@ import {
   INITIAL_BUSINESS_HOURS,
   INITIAL_CLOSURES,
   INITIAL_APPOINTMENTS,
+  GALLERY_ITEMS,
   BUSINESS_INFO,
 } from '../data/initialData';
 
@@ -17,6 +18,7 @@ const STORAGE_KEYS = {
   CLOSURES: 'dr_barber_closures',
   APPOINTMENTS: 'dr_barber_appointments',
   ADMIN_AUTH: 'dr_barber_admin_auth',
+  GALLERY: 'dr_barber_gallery_clean_v1',
 };
 
 // Helper per leggere e scrivere su localStorage in modo sicuro
@@ -444,6 +446,30 @@ export const StorageService = {
     }
   },
 
+  // GALLERY ITEMS
+  getGalleryItems(): GalleryItem[] {
+    return getStored<GalleryItem[]>(STORAGE_KEYS.GALLERY, []);
+  },
+  saveGalleryItems(items: GalleryItem[]): void {
+    setStored(STORAGE_KEYS.GALLERY, items);
+  },
+  clearGallery(): void {
+    setStored(STORAGE_KEYS.GALLERY, []);
+  },
+  addGalleryItem(item: Omit<GalleryItem, 'id'>): GalleryItem {
+    const newItem: GalleryItem = {
+      ...item,
+      id: `gal-${Date.now()}`,
+    };
+    const items = [newItem, ...this.getGalleryItems()];
+    this.saveGalleryItems(items);
+    return newItem;
+  },
+  deleteGalleryItem(id: string): void {
+    const items = this.getGalleryItems().filter(i => i.id !== id);
+    this.saveGalleryItems(items);
+  },
+
   // Reimposta i dati a quelli predefiniti (utile per test/demo)
   resetToDefaults(): void {
     localStorage.removeItem(STORAGE_KEYS.SERVICES);
@@ -452,6 +478,7 @@ export const StorageService = {
     localStorage.removeItem(STORAGE_KEYS.BUSINESS_HOURS);
     localStorage.removeItem(STORAGE_KEYS.CLOSURES);
     localStorage.removeItem(STORAGE_KEYS.APPOINTMENTS);
+    localStorage.removeItem(STORAGE_KEYS.GALLERY);
   },
 };
 

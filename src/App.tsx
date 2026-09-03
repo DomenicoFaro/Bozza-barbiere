@@ -18,17 +18,24 @@ import { AdminPage } from './pages/AdminPage';
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageView>('home');
   const [selectedServiceId, setSelectedServiceId] = useState<string | undefined>(undefined);
+  const [selectedOperatorId, setSelectedOperatorId] = useState<string | undefined>(undefined);
 
   // Scroll to top when page changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
-  const handleNavigate = (page: PageView, extraParams?: { serviceId?: string }) => {
+  const handleNavigate = (page: PageView, extraParams?: { serviceId?: string; operatorId?: string }) => {
     if (extraParams?.serviceId) {
       setSelectedServiceId(extraParams.serviceId);
     } else if (page !== 'booking') {
       setSelectedServiceId(undefined);
+    }
+
+    if (extraParams?.operatorId) {
+      setSelectedOperatorId(extraParams.operatorId);
+    } else if (page !== 'booking') {
+      setSelectedOperatorId(undefined);
     }
     setCurrentPage(page);
   };
@@ -42,7 +49,11 @@ export default function App() {
           <HomePage onNavigate={handleNavigate} />
         )}
         {currentPage === 'booking' && (
-          <BookingPage initialServiceId={selectedServiceId} onNavigate={handleNavigate} />
+          <BookingPage 
+            initialServiceId={selectedServiceId} 
+            initialOperatorId={selectedOperatorId} 
+            onNavigate={handleNavigate} 
+          />
         )}
         {currentPage === 'services' && (
           <ServicesPage onNavigate={handleNavigate} />

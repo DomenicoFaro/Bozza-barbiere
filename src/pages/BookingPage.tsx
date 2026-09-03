@@ -21,16 +21,17 @@ import {
 
 interface BookingPageProps {
   initialServiceId?: string;
+  initialOperatorId?: string;
   onNavigate: (page: PageView) => void;
 }
 
-export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, onNavigate }) => {
+export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, initialOperatorId, onNavigate }) => {
   // Wizard Steps: 1 (Service), 2 (Operator), 3 (Date & Time), 4 (Customer Form), 5 (Success)
-  const [currentStep, setCurrentStep] = useState<number>(initialServiceId ? 2 : 1);
+  const [currentStep, setCurrentStep] = useState<number>(initialServiceId && initialOperatorId ? 3 : initialServiceId ? 2 : 1);
 
   // Form State
   const [selectedServiceId, setSelectedServiceId] = useState<string>(initialServiceId || '');
-  const [selectedOperatorId, setSelectedOperatorId] = useState<string>('any'); // 'any' or operator.id
+  const [selectedOperatorId, setSelectedOperatorId] = useState<string>(initialOperatorId || 'any'); // 'any' or operator.id
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedSlotTime, setSelectedSlotTime] = useState<string>('');
 
@@ -70,13 +71,20 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, onNa
     }
   }, [businessHours, closures, selectedDate]);
 
-  // When initialServiceId prop changes
+  // When initialServiceId or initialOperatorId prop changes
   useEffect(() => {
     if (initialServiceId) {
       setSelectedServiceId(initialServiceId);
-      setCurrentStep(2);
+      if (initialOperatorId) {
+        setSelectedOperatorId(initialOperatorId);
+        setCurrentStep(3);
+      } else {
+        setCurrentStep(2);
+      }
+    } else if (initialOperatorId) {
+      setSelectedOperatorId(initialOperatorId);
     }
-  }, [initialServiceId]);
+  }, [initialServiceId, initialOperatorId]);
 
   const selectedService = allServices.find(s => s.id === selectedServiceId);
   const availableOperators = selectedServiceId

@@ -68,4 +68,16 @@ export interface TimeSlot {
   existingAppointment?: Appointment;
 }
 
+export interface GalleryItem {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  description: string;
+  tag?: string;
+  featured?: boolean;
+  isVideo?: boolean;
+  videoUrl?: string;
+}
+
 export type PageView = 'home' | 'booking' | 'services' | 'gallery' | 'my-appointments' | 'contacts' | 'admin';

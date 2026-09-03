@@ -93,17 +93,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           {/* Logo & Brand Name */}
           <div
             onClick={() => onNavigate('home')}
-            className="flex items-center space-x-3.5 cursor-pointer group"
+            className="flex items-center space-x-3.5 cursor-pointer group py-1"
           >
-            <DRLogo size="md" variant="light" />
-            <div>
-              <div className="font-serif italic text-2xl font-light tracking-tight text-[#1A1A1A] group-hover:opacity-75 transition-opacity">
-                Dario Riolo
-              </div>
-              <div className="text-[9px] font-bold tracking-[0.25em] uppercase text-[#1A1A1A]/60">
-                Barber Shop · Catania
-              </div>
-            </div>
+            <DRLogo size="sm" mode="full" className="h-12 w-auto max-w-[200px]" />
           </div>
 
           {/* Desktop Nav Links */}

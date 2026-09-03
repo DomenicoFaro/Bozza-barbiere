@@ -1,4 +1,4 @@
-import { Service, Operator, OperatorService, BusinessHours, Closure, Appointment } from '../types';
+import { Service, Operator, OperatorService, BusinessHours, Closure, Appointment, GalleryItem } from '../types';
 
 export const BUSINESS_INFO = {
   name: 'Dario Riolo Barber Shop',
@@ -244,47 +244,4 @@ export const INITIAL_APPOINTMENTS: Appointment[] = [
   },
 ];
 
-export const GALLERY_ITEMS = [
-  {
-    id: 'gal-1',
-    title: 'Il Salone & Postazioni Taglio',
-    category: 'salone',
-    image: '/src/assets/images/salon_interior_1788436756013.jpg',
-    description: 'Postazioni minimali con ampi specchi retroilluminati, finiture in legno di rovere chiaro e poltrone ergonomiche in pelle nera.',
-  },
-  {
-    id: 'gal-2',
-    title: 'Area Relax & Dettagli Vintage',
-    category: 'salone',
-    image: '/src/assets/images/salon_detail_1788436773878.jpg',
-    description: 'Angolo accoglienza con divano Chesterfield, prodotti professionali selezionati e atmosfera luminosa e riservata.',
-  },
-  {
-    id: 'gal-3',
-    title: 'Rituale Panno Caldo all\'Italiana',
-    category: 'barba',
-    image: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80',
-    description: 'Vaporizzazione con oli essenziali all\'eucalipto e rasatura a mano libera per un benessere assoluto della pelle.',
-  },
-  {
-    id: 'gal-4',
-    title: 'Razor Fade & Styling Classico',
-    category: 'tagli',
-    image: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80',
-    description: 'Precisione millimetrica nelle sfumature a forbice e rasoio, rispettando la naturale direzione del capello.',
-  },
-  {
-    id: 'gal-5',
-    title: 'Cura & Modellatura Barba',
-    category: 'barba',
-    image: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80',
-    description: 'Geometrie nette, rifiniture contorni a lama e idratazione profonda con balsami artigianali.',
-  },
-  {
-    id: 'gal-6',
-    title: 'Strumentazione e Cura del Dettaglio',
-    category: 'dettagli',
-    image: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=80',
-    description: 'Strumenti igienizzati a norma ospedaliera e lame monouso per la massima sicurezza e igiene di ogni cliente.',
-  },
-];
+export const GALLERY_ITEMS: GalleryItem[] = [];

@@ -20,15 +20,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 1: Brand & Philosophy */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3.5">
-              <DRLogo size="md" variant="dark" />
-              <div>
-                <span className="font-serif italic text-xl font-light tracking-tight text-white block">
-                  Dario Riolo
-                </span>
-                <span className="block text-[9px] font-bold tracking-[0.25em] text-white/50 uppercase">
-                  Barber Shop · Catania
-                </span>
-              </div>
+              <DRLogo size="md" mode="full" className="h-14 w-auto max-w-[220px]" />
             </div>
             <p className="text-xs text-white/70 leading-relaxed">
               Un atelier contemporaneo dove l'antica maestria della barbieria all'italiana si fonde con tagli sartoriali e trattamenti esclusivi di benessere.
