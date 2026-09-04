@@ -15,5 +15,14 @@ if (!isSupabaseConfigured) {
 // così il resto del sito continua a funzionare senza login.
 export const supabase = createClient(
   supabaseUrl || 'https://placeholder.supabase.co',
-  supabaseAnonKey || 'placeholder-anon-key'
+  supabaseAnonKey || 'placeholder-anon-key',
+  {
+    auth: {
+      // Mantiene l'accesso anche dopo aver chiuso e riaperto il browser.
+      persistSession: true,
+      storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+    },
+  }
 );
