@@ -4,10 +4,12 @@ import { BUSINESS_INFO } from '../data/initialData';
 interface BrandLogoProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'hero';
   variant?: 'light' | 'dark' | 'transparent';
-  mode?: 'full' | 'icon';
+  mode?: 'full' | 'icon' | 'emblem';
   className?: string;
   showText?: boolean;
 }
+
+export const LOGO_SRC = '/assets/giuseppe_logo_crop.png';
 
 const heightClasses = {
   xs: 'h-8',
@@ -28,9 +30,11 @@ const iconSizes = {
 };
 
 /**
- * Logo testuale del salone: monogramma "G" in un cerchio + scritta
- * "Parrucchiere Uomo da Giuseppe". Usa currentColor, quindi si adatta
- * allo sfondo chiaro o scuro in cui viene inserito.
+ * Logo del salone (teschio con rasoi incrociati) + scritta.
+ * - full: logo + "Parrucchiere uomo / Da Giuseppe" (header, footer)
+ * - emblem: solo il logo grande
+ * - icon: logo quadrato piccolo
+ * Il nero dell'immagine si fonde con lo sfondo scuro grazie al blend "lighten".
  */
 export const BrandLogo: React.FC<BrandLogoProps> = ({
   size = 'md',
@@ -38,24 +42,30 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   className = '',
   showText = true,
 }) => {
-  const monogram = (
-    <span
-      className="inline-flex items-center justify-center aspect-square h-full rounded-full border-2 border-current font-serif italic font-semibold leading-none shrink-0"
-      style={{ fontSize: '1.4em' }}
-      aria-hidden="true"
-    >
-      {BUSINESS_INFO.monogram}
-    </span>
+  const img = (
+    <img
+      src={LOGO_SRC}
+      alt={`Logo ${BUSINESS_INFO.name}`}
+      className="h-full w-auto object-contain mix-blend-lighten"
+      draggable={false}
+    />
   );
 
   if (mode === 'icon') {
     return (
       <div
-        className={`inline-flex items-center justify-center select-none ${iconSizes[size]} ${className}`}
+        className={`inline-flex items-center justify-center overflow-hidden select-none ${iconSizes[size]} ${className}`}
         title={BUSINESS_INFO.name}
-        aria-label={BUSINESS_INFO.name}
       >
-        {monogram}
+        <img src={LOGO_SRC} alt="Logo" className="w-full h-full object-cover mix-blend-lighten" />
+      </div>
+    );
+  }
+
+  if (mode === 'emblem') {
+    return (
+      <div className={`inline-flex select-none ${heightClasses[size]} ${className}`} title={BUSINESS_INFO.name}>
+        {img}
       </div>
     );
   }
@@ -66,13 +76,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       title={`${BUSINESS_INFO.name} · ${BUSINESS_INFO.city}`}
       aria-label={BUSINESS_INFO.name}
     >
-      {monogram}
+      {img}
       {showText && (
-        <span className="flex flex-col leading-tight">
-          <span className="text-[9px] uppercase tracking-[0.25em] font-bold opacity-70">
-            Parrucchiere Uomo
+        <span className="flex flex-col leading-none whitespace-nowrap">
+          <span className="text-[9px] uppercase tracking-[0.3em] font-semibold text-white/60">
+            Parrucchiere uomo
           </span>
-          <span className="font-serif italic text-xl font-medium">da Giuseppe</span>
+          <span className="font-script text-[28px] leading-[1.1] text-[#F2EFEA]">
+            da <span className="text-[#E3162F]">G</span>iuseppe
+          </span>
         </span>
       )}
     </div>

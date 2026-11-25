@@ -243,15 +243,15 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* Wizard Header & Breadcrumbs (Only if not in step 5) */}
       {currentStep < 5 && (
         <div className="space-y-6">
-          <div className="text-center max-w-xl mx-auto space-y-2 border-b border-[#1A1A1A] pb-6">
-            <span className="text-[10px] font-bold text-[#1A1A1A]/60 uppercase tracking-[0.2em] block">
+          <div className="text-center max-w-xl mx-auto space-y-2 border-b border-[#2E2E2E] pb-6">
+            <span className="text-[10px] font-bold text-[#F2EFEA]/60 uppercase tracking-[0.2em] block">
               Prenotazione Online · Da Giuseppe
             </span>
-            <h1 className="text-3xl sm:text-4xl font-serif italic font-light text-[#1A1A1A]">
-              Prenota il tuo Appuntamento
+            <h1 className="text-3xl sm:text-4xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
+              Prenota il tuo taglio
             </h1>
-            <p className="text-xs text-[#1A1A1A]/70">
-              Zero attese. Slot orari riservati esclusivamente per te a Catania.
+            <p className="text-xs text-[#F2EFEA]/70">
+              Scegli servizio, giorno e orario. Ti aspettiamo in Via Galermo 288/E.
             </p>
           </div>
 
@@ -265,19 +265,19 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   key={step.num}
                   className={`p-3 border transition-all rounded-none ${
                     isCurrent
-                      ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+                      ? 'bg-[#C8102E] text-white border-[#C8102E]'
                       : isPast
-                      ? 'bg-white border-[#1A1A1A] text-[#1A1A1A]'
-                      : 'bg-[#EFEDE9]/60 border-[#1A1A1A]/20 text-[#1A1A1A]/50'
+                      ? 'bg-[#151515] border-[#2E2E2E] text-[#F2EFEA]'
+                      : 'bg-[#1C1C1C]/60 border-[#F2EFEA]/20 text-[#F2EFEA]/50'
                   }`}
                 >
                   <div className="flex items-center space-x-2 mb-1">
                     <span
                       className={`w-4 h-4 text-[9px] font-bold flex items-center justify-center border ${
                         isCurrent
-                          ? 'bg-white text-[#1A1A1A] border-white'
+                          ? 'bg-[#C8102E] text-white border-[#C8102E]'
                           : isPast
-                          ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+                          ? 'bg-transparent text-[#C8102E] border-[#C8102E]'
                           : 'bg-transparent text-current border-current opacity-60'
                       }`}
                     >
@@ -296,8 +296,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           </div>
 
           {isAdvancing && (
-            <div className="flex items-center justify-center space-x-2 text-[11px] font-bold uppercase tracking-widest text-[#1A1A1A]/70 animate-pulse">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <div className="flex items-center justify-center space-x-2 text-[11px] font-bold uppercase tracking-widest text-[#F2EFEA]/70 animate-pulse">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
               <span>Selezionato, passo successivo...</span>
             </div>
           )}
@@ -309,12 +309,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 1 && (
         <StepTransition dimmed={isAdvancing} className="space-y-6">
-          <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
+          <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
             <div>
-              <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
+              <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Passo 1: Seleziona il Servizio
               </h2>
-              <p className="text-xs text-[#1A1A1A]/70 mt-1">
+              <p className="text-xs text-[#F2EFEA]/70 mt-1">
                 Tutti i prezzi includono lavaggio specifico e styling finale con prodotti professionali. Seleziona una card per continuare automaticamente.
               </p>
             </div>
@@ -336,27 +336,27 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   }}
                   className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
-                      ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
-                      : 'bg-white border-[#1A1A1A] hover:bg-[#EFEDE9]/50'
+                      ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
+                      : 'bg-[#151515] border-[#2E2E2E] hover:bg-[#242424]/50'
                   }`}
                 >
                   <div>
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className={`font-serif italic text-lg ${isSelected ? 'text-white' : 'text-[#1A1A1A]'}`}>
+                      <h3 className={`font-display uppercase tracking-wide text-lg ${isSelected ? 'text-white' : 'text-[#F2EFEA]'}`}>
                         {service.name}
                       </h3>
-                      <span className={`text-2xl font-serif italic font-light ${isSelected ? 'text-white' : 'text-[#1A1A1A]'}`}>
+                      <span className={`text-2xl font-display uppercase tracking-wide font-light ${isSelected ? 'text-white' : 'text-[#F2EFEA]'}`}>
                         €{service.price}
                       </span>
                     </div>
 
-                    <p className={`text-xs leading-relaxed mb-4 ${isSelected ? 'text-white/80' : 'text-[#1A1A1A]/70'}`}>
+                    <p className={`text-xs leading-relaxed mb-4 ${isSelected ? 'text-white/80' : 'text-[#F2EFEA]/70'}`}>
                       {service.description}
                     </p>
                   </div>
 
-                  <div className={`flex justify-between items-center pt-3 border-t text-xs ${isSelected ? 'border-white/20' : 'border-[#1A1A1A]/10'}`}>
-                    <span className={`flex items-center text-[11px] ${isSelected ? 'text-white/80' : 'text-[#1A1A1A]/70'}`}>
+                  <div className={`flex justify-between items-center pt-3 border-t text-xs ${isSelected ? 'border-white/20' : 'border-[#F2EFEA]/10'}`}>
+                    <span className={`flex items-center text-[11px] ${isSelected ? 'text-white/80' : 'text-[#F2EFEA]/70'}`}>
                       <Clock className="w-3.5 h-3.5 mr-1 opacity-70" />
                       {service.duration_minutes} minuti
                     </span>
@@ -364,8 +364,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     <span
                       className={`font-bold px-2 py-0.5 text-[9px] uppercase tracking-widest border ${
                         isSelected
-                          ? 'bg-white text-[#1A1A1A] border-white'
-                          : 'bg-[#FDFCFB] text-[#1A1A1A] border-[#1A1A1A]'
+                          ? 'bg-[#C8102E] text-white border-[#C8102E]'
+                          : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
                       }`}
                     >
                       {isSelected ? 'Selezionato' : 'Scegli'}
@@ -383,18 +383,18 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 2 && (
         <StepTransition dimmed={isAdvancing} className="space-y-6">
-          <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
+          <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
             <div>
-              <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
-                Passo 2: Scegli il Parrucchiere
+              <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
+                Passo 2: Con chi?
               </h2>
-              <p className="text-xs text-[#1A1A1A]/70 mt-1">
-                Servizio selezionato: <strong className="text-[#1A1A1A]">{selectedService?.name}</strong> ({selectedService?.duration_minutes} min • €{selectedService?.price})
+              <p className="text-xs text-[#F2EFEA]/70 mt-1">
+                Servizio selezionato: <strong className="text-[#F2EFEA]">{selectedService?.name}</strong> ({selectedService?.duration_minutes} min • €{selectedService?.price})
               </p>
             </div>
             <button
               onClick={() => setCurrentStep(1)}
-              className="text-[11px] uppercase tracking-wider font-bold text-[#1A1A1A]/70 hover:text-[#1A1A1A] flex items-center gap-1"
+              className="text-[11px] uppercase tracking-wider font-bold text-[#F2EFEA]/70 hover:text-[#F2EFEA] flex items-center gap-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Cambia servizio
@@ -410,26 +410,26 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               }}
               className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                 selectedOperatorId === 'any'
-                  ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
-                  : 'bg-white border-[#1A1A1A] hover:bg-[#EFEDE9]/50'
+                  ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
+                  : 'bg-[#151515] border-[#2E2E2E] hover:bg-[#242424]/50'
               }`}
             >
               <div className="text-center space-y-3">
                 <div className={`w-16 h-16 rounded-none mx-auto flex items-center justify-center border ${
-                  selectedOperatorId === 'any' ? 'bg-white text-[#1A1A1A] border-white' : 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+                  selectedOperatorId === 'any' ? 'bg-[#C8102E] text-white border-[#C8102E]' : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
                 }`}>
                   <Sparkles className="w-7 h-7" />
                 </div>
                 <div>
-                  <h3 className={`font-serif italic text-lg ${selectedOperatorId === 'any' ? 'text-white' : 'text-[#1A1A1A]'}`}>
+                  <h3 className={`font-display uppercase tracking-wide text-lg ${selectedOperatorId === 'any' ? 'text-white' : 'text-[#F2EFEA]'}`}>
                     Nessuna preferenza
                   </h3>
                   <p className={`text-[10px] font-bold uppercase tracking-wider mt-0.5 ${
-                    selectedOperatorId === 'any' ? 'text-white/80' : 'text-[#1A1A1A]/70'
+                    selectedOperatorId === 'any' ? 'text-white/80' : 'text-[#F2EFEA]/70'
                   }`}>
                     Primo parrucchiere disponibile
                   </p>
-                  <p className={`text-xs mt-2 ${selectedOperatorId === 'any' ? 'text-white/70' : 'text-[#1A1A1A]/60'}`}>
+                  <p className={`text-xs mt-2 ${selectedOperatorId === 'any' ? 'text-white/70' : 'text-[#F2EFEA]/60'}`}>
                     Massima flessibilità oraria: ti assegneremo il primo professionista libero.
                   </p>
                 </div>
@@ -439,8 +439,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                 <span
                   className={`inline-block w-full py-1.5 border text-[10px] font-bold uppercase tracking-widest ${
                     selectedOperatorId === 'any'
-                      ? 'bg-white text-[#1A1A1A] border-white'
-                      : 'bg-[#FDFCFB] text-[#1A1A1A] border-[#1A1A1A]'
+                      ? 'bg-[#C8102E] text-white border-[#C8102E]'
+                      : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
                   }`}
                 >
                   {selectedOperatorId === 'any' ? 'Selezionato' : 'Scegli'}
@@ -460,8 +460,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   }}
                   className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
-                      ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
-                      : 'bg-white border-[#1A1A1A] hover:bg-[#EFEDE9]/50'
+                      ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
+                      : 'bg-[#151515] border-[#2E2E2E] hover:bg-[#242424]/50'
                   }`}
                 >
                   <div className="text-center space-y-3">
@@ -471,15 +471,15 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       className="w-16 h-16 rounded-none object-cover mx-auto border border-current"
                     />
                     <div>
-                      <h3 className={`font-serif italic text-lg ${isSelected ? 'text-white' : 'text-[#1A1A1A]'}`}>
+                      <h3 className={`font-display uppercase tracking-wide text-lg ${isSelected ? 'text-white' : 'text-[#F2EFEA]'}`}>
                         {operator.name}
                       </h3>
                       <p className={`text-[10px] font-bold uppercase tracking-wider mt-0.5 ${
-                        isSelected ? 'text-white/80' : 'text-[#1A1A1A]/70'
+                        isSelected ? 'text-white/80' : 'text-[#F2EFEA]/70'
                       }`}>
                         {operator.role}
                       </p>
-                      <p className={`text-xs mt-2 line-clamp-2 ${isSelected ? 'text-white/70' : 'text-[#1A1A1A]/60'}`}>
+                      <p className={`text-xs mt-2 line-clamp-2 ${isSelected ? 'text-white/70' : 'text-[#F2EFEA]/60'}`}>
                         {operator.bio}
                       </p>
                     </div>
@@ -489,8 +489,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     <span
                       className={`inline-block w-full py-1.5 border text-[10px] font-bold uppercase tracking-widest ${
                         isSelected
-                          ? 'bg-white text-[#1A1A1A] border-white'
-                          : 'bg-[#FDFCFB] text-[#1A1A1A] border-[#1A1A1A]'
+                          ? 'bg-[#C8102E] text-white border-[#C8102E]'
+                          : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
                       }`}
                     >
                       {isSelected ? 'Selezionato' : 'Scegli'}
@@ -504,7 +504,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="flex justify-start items-center pt-4">
             <button
               onClick={() => setCurrentStep(1)}
-              className="px-5 py-2.5 border border-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider text-[#1A1A1A] hover:bg-white flex items-center space-x-1.5 rounded-none"
+              className="px-5 py-2.5 border border-[#2E2E2E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#151515] flex items-center space-x-1.5 rounded-none"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro</span>
@@ -518,18 +518,18 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 3 && (
         <StepTransition dimmed={isAdvancing} className="space-y-8">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-[#1A1A1A] pb-3">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-[#2E2E2E] pb-3">
             <div>
-              <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
+              <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Passo 3: Seleziona Giorno e Orario
               </h2>
-              <p className="text-xs text-[#1A1A1A]/70 mt-1">
-                Parrucchiere: <strong className="text-[#1A1A1A]">{selectedOperatorId === 'any' ? 'Primo disponibile' : selectedOperator?.name}</strong> • Servizio: <strong className="text-[#1A1A1A]">{selectedService?.name}</strong> ({selectedService?.duration_minutes} min)
+              <p className="text-xs text-[#F2EFEA]/70 mt-1">
+                Parrucchiere: <strong className="text-[#F2EFEA]">{selectedOperatorId === 'any' ? 'Primo disponibile' : selectedOperator?.name}</strong> • Servizio: <strong className="text-[#F2EFEA]">{selectedService?.name}</strong> ({selectedService?.duration_minutes} min)
               </p>
             </div>
             <button
               onClick={() => setCurrentStep(2)}
-              className="text-[11px] uppercase tracking-wider font-bold text-[#1A1A1A]/70 hover:text-[#1A1A1A] flex items-center gap-1 self-start sm:self-auto"
+              className="text-[11px] uppercase tracking-wider font-bold text-[#F2EFEA]/70 hover:text-[#F2EFEA] flex items-center gap-1 self-start sm:self-auto"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Cambia parrucchiere
@@ -538,7 +538,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
           {/* Calendario dei Giorni (Orizzontale scrollabile) */}
           <div className="space-y-3">
-            <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A]">
+            <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#F2EFEA]">
               1. Scegli il Giorno
             </label>
             <div className="flex space-x-2 overflow-x-auto pb-3 pt-1">
@@ -555,16 +555,16 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     }}
                     className={`flex-shrink-0 w-20 py-3 px-2 rounded-none text-center transition-all flex flex-col items-center justify-center border ${
                       isSelected
-                        ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-sm'
+                        ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-sm'
                         : d.isSelectable
-                        ? 'bg-white text-[#1A1A1A] border-[#1A1A1A] hover:bg-[#EFEDE9]'
-                        : 'bg-[#EFEDE9]/40 text-[#1A1A1A]/30 border-[#1A1A1A]/10 cursor-not-allowed'
+                        ? 'bg-[#151515] text-[#F2EFEA] border-[#2E2E2E] hover:border-[#C8102E]'
+                        : 'bg-[#1C1C1C]/40 text-[#F2EFEA]/30 border-[#F2EFEA]/10 cursor-not-allowed'
                     }`}
                   >
                     <span className="text-[9px] font-bold uppercase tracking-widest">
                       {d.dayName}
                     </span>
-                    <span className="text-2xl font-serif italic font-light my-0.5">
+                    <span className="text-2xl font-display uppercase tracking-wide font-light my-0.5">
                       {d.dayNum}
                     </span>
                     <span className="text-[9px] uppercase tracking-wider">
@@ -577,20 +577,20 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           </div>
 
           {/* Griglia degli Slot Orari con LEGENDA OBBLIGATORIA (Verde = Disponibile, Rosso = Occupato) */}
-          <div className="bg-white border border-[#1A1A1A] p-6 space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#1A1A1A] pb-4">
+          <div className="bg-[#151515] border border-[#2E2E2E] p-6 space-y-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#2E2E2E] pb-4">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A]">
+                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#F2EFEA]">
                   2. Scegli l'Orario per {selectedDate}
                 </label>
-                <p className="text-[11px] text-[#1A1A1A]/70 mt-0.5">
+                <p className="text-[11px] text-[#F2EFEA]/70 mt-0.5">
                   Intervalli ogni 30 minuti. Il servizio richiede {selectedService?.duration_minutes} minuti.
                 </p>
               </div>
 
               {/* LEGENDA COLORI FISSA COME DA PRD */}
-              <div className="flex items-center space-x-4 text-xs font-medium bg-[#EFEDE9] px-3.5 py-1.5 border border-[#1A1A1A]">
-                <span className="text-[#1A1A1A] text-[10px] uppercase tracking-wider font-bold">
+              <div className="flex items-center space-x-4 text-xs font-medium bg-[#1C1C1C] px-3.5 py-1.5 border border-[#2E2E2E]">
+                <span className="text-[#F2EFEA] text-[10px] uppercase tracking-wider font-bold">
                   Legenda:
                 </span>
                 <div className="flex items-center space-x-1.5">
@@ -605,13 +605,13 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
             </div>
 
             {slotsLoading ? (
-              <div className="p-8 text-center text-[#1A1A1A]/60 text-xs uppercase tracking-wider font-bold">
+              <div className="p-8 text-center text-[#F2EFEA]/60 text-xs uppercase tracking-wider font-bold">
                 Verifica disponibilità in corso...
               </div>
             ) : slots.length === 0 ? (
-              <div className="p-8 text-center text-[#1A1A1A]/70 space-y-2">
+              <div className="p-8 text-center text-[#F2EFEA]/70 space-y-2">
                 <AlertCircle className="w-8 h-8 opacity-60 mx-auto" />
-                <p className="text-sm font-semibold text-[#1A1A1A]">
+                <p className="text-sm font-semibold text-[#F2EFEA]">
                   Nessun orario di apertura disponibile per la data selezionata.
                 </p>
                 <p className="text-xs">
@@ -633,10 +633,10 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       }}
                       className={`py-3 px-2 rounded-none text-center font-mono text-xs font-bold transition-all relative border ${
                         isSelected
-                          ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-md'
+                          ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
                           : slot.available
-                          ? 'bg-emerald-50 text-emerald-950 border-emerald-400 hover:bg-emerald-100 cursor-pointer'
-                          : 'bg-rose-50 text-rose-400 border-rose-200 cursor-not-allowed line-through opacity-70'
+                          ? 'bg-emerald-950/40 text-emerald-950 border-emerald-400 hover:bg-emerald-900/40 cursor-pointer'
+                          : 'bg-rose-950/40 text-rose-400 border-rose-800 cursor-not-allowed line-through opacity-70'
                       }`}
                       title={slot.available ? `Disponibile alle ${slot.time}` : `Orario ${slot.time} non disponibile (${slot.reason || 'occupato'})`}
                     >
@@ -644,7 +644,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                         <span
                           className={`w-2 h-2 rounded-full shrink-0 ${
                             isSelected
-                              ? 'bg-white'
+                              ? 'bg-[#151515]'
                               : slot.available
                               ? 'bg-emerald-600'
                               : 'bg-rose-500'
@@ -667,7 +667,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="flex justify-start items-center pt-4">
             <button
               onClick={() => setCurrentStep(2)}
-              className="px-5 py-2.5 border border-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider text-[#1A1A1A] hover:bg-white flex items-center space-x-1.5 rounded-none"
+              className="px-5 py-2.5 border border-[#2E2E2E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#151515] flex items-center space-x-1.5 rounded-none"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro</span>
@@ -681,18 +681,18 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 4 && (
         <div className="space-y-8">
-          <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
+          <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
             <div>
-              <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
+              <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Passo 4: Riepilogo & Dati Personali
               </h2>
-              <p className="text-xs text-[#1A1A1A]/70 mt-1">
+              <p className="text-xs text-[#F2EFEA]/70 mt-1">
                 Controlla i dettagli del tuo appuntamento e inserisci i tuoi recapiti per la conferma.
               </p>
             </div>
             <button
               onClick={() => setCurrentStep(3)}
-              className="text-[11px] uppercase tracking-wider font-bold text-[#1A1A1A]/70 hover:text-[#1A1A1A] flex items-center gap-1"
+              className="text-[11px] uppercase tracking-wider font-bold text-[#F2EFEA]/70 hover:text-[#F2EFEA] flex items-center gap-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Modifica orario
@@ -701,65 +701,65 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Box Riepilogo Ordine */}
-            <div className="lg:col-span-5 bg-white p-6 border border-[#1A1A1A] space-y-4">
-              <h3 className="font-serif italic text-lg font-normal text-[#1A1A1A] border-b border-[#1A1A1A] pb-2">
+            <div className="lg:col-span-5 bg-[#151515] p-6 border border-[#2E2E2E] space-y-4">
+              <h3 className="font-display uppercase tracking-wide text-lg font-normal text-[#F2EFEA] border-b border-[#2E2E2E] pb-2">
                 Dettagli Prenotazione
               </h3>
 
               <div className="space-y-3 text-xs">
-                <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
-                  <span className="text-[#1A1A1A]/60">Trattamento:</span>
-                  <span className="font-bold text-[#1A1A1A]">{selectedService?.name}</span>
+                <div className="flex justify-between py-1 border-b border-[#F2EFEA]/10">
+                  <span className="text-[#F2EFEA]/60">Trattamento:</span>
+                  <span className="font-bold text-[#F2EFEA]">{selectedService?.name}</span>
                 </div>
 
-                <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
-                  <span className="text-[#1A1A1A]/60">Parrucchiere:</span>
-                  <span className="font-bold text-[#1A1A1A]">
+                <div className="flex justify-between py-1 border-b border-[#F2EFEA]/10">
+                  <span className="text-[#F2EFEA]/60">Parrucchiere:</span>
+                  <span className="font-bold text-[#F2EFEA]">
                     {selectedOperatorId === 'any' ? 'Primo disponibile' : selectedOperator?.name}
                   </span>
                 </div>
 
-                <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
-                  <span className="text-[#1A1A1A]/60">Data:</span>
-                  <span className="font-bold text-[#1A1A1A]">{selectedDate}</span>
+                <div className="flex justify-between py-1 border-b border-[#F2EFEA]/10">
+                  <span className="text-[#F2EFEA]/60">Data:</span>
+                  <span className="font-bold text-[#F2EFEA]">{selectedDate}</span>
                 </div>
 
-                <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
-                  <span className="text-[#1A1A1A]/60">Orario di inizio:</span>
-                  <span className="font-bold text-[#1A1A1A]">{selectedSlotTime}</span>
+                <div className="flex justify-between py-1 border-b border-[#F2EFEA]/10">
+                  <span className="text-[#F2EFEA]/60">Orario di inizio:</span>
+                  <span className="font-bold text-[#F2EFEA]">{selectedSlotTime}</span>
                 </div>
 
-                <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
-                  <span className="text-[#1A1A1A]/60">Durata prevista:</span>
-                  <span className="font-semibold text-[#1A1A1A]">{selectedService?.duration_minutes} minuti</span>
+                <div className="flex justify-between py-1 border-b border-[#F2EFEA]/10">
+                  <span className="text-[#F2EFEA]/60">Durata prevista:</span>
+                  <span className="font-semibold text-[#F2EFEA]">{selectedService?.duration_minutes} minuti</span>
                 </div>
 
-                <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
-                  <span className="text-[#1A1A1A]/60">Luogo:</span>
-                  <span className="font-medium text-[#1A1A1A] text-right">Via Galermo 288/E, Catania</span>
+                <div className="flex justify-between py-1 border-b border-[#F2EFEA]/10">
+                  <span className="text-[#F2EFEA]/60">Luogo:</span>
+                  <span className="font-medium text-[#F2EFEA] text-right">Via Galermo 288/E, Catania</span>
                 </div>
 
-                <div className="flex justify-between items-center pt-3 border-t border-[#1A1A1A]">
-                  <span className="font-bold uppercase tracking-wider text-[11px] text-[#1A1A1A]">Prezzo totale al salone:</span>
-                  <span className="font-serif italic text-3xl font-light text-[#1A1A1A]">
+                <div className="flex justify-between items-center pt-3 border-t border-[#2E2E2E]">
+                  <span className="font-bold uppercase tracking-wider text-[11px] text-[#F2EFEA]">Prezzo totale al salone:</span>
+                  <span className="font-display uppercase tracking-wide text-3xl font-light text-[#F2EFEA]">
                     €{selectedService?.price}
                   </span>
                 </div>
-                <p className="text-[10px] uppercase tracking-wider text-[#1A1A1A]/60 text-right">
+                <p className="text-[10px] uppercase tracking-wider text-[#F2EFEA]/60 text-right">
                   Pagamento diretto in negozio (Contanti o Carta)
                 </p>
               </div>
             </div>
 
             {/* Form Dati Cliente */}
-            <div className="lg:col-span-7 bg-white p-6 sm:p-8 border border-[#1A1A1A] space-y-5">
-              <h3 className="font-serif italic text-lg font-normal text-[#1A1A1A] border-b border-[#1A1A1A] pb-2">
+            <div className="lg:col-span-7 bg-[#151515] p-6 sm:p-8 border border-[#2E2E2E] space-y-5">
+              <h3 className="font-display uppercase tracking-wide text-lg font-normal text-[#F2EFEA] border-b border-[#2E2E2E] pb-2">
                 I Tuoi Dati di Contatto
               </h3>
 
               {errorMsg && (
-                <div className="p-3 bg-rose-50 border border-rose-300 text-xs text-rose-900 flex items-center space-x-2">
-                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                <div className="p-3 bg-rose-950/40 border border-rose-800 text-xs text-rose-900 flex items-center space-x-2">
+                  <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
                   <span>{errorMsg}</span>
                 </div>
               )}
@@ -767,7 +767,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               <form onSubmit={handleConfirmBooking} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">
                       Nome *
                     </label>
                     <input
@@ -776,12 +776,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       value={customerFirstName}
                       onChange={(e) => setCustomerFirstName(e.target.value)}
                       placeholder="Mario"
-                      className="w-full px-3.5 py-2.5 rounded-none border border-[#1A1A1A] text-xs bg-[#FDFCFB] focus:outline-none focus:ring-1 focus:ring-[#1A1A1A]"
+                      className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">
                       Cognome *
                     </label>
                     <input
@@ -790,13 +790,13 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       value={customerLastName}
                       onChange={(e) => setCustomerLastName(e.target.value)}
                       placeholder="Rossi"
-                      className="w-full px-3.5 py-2.5 rounded-none border border-[#1A1A1A] text-xs bg-[#FDFCFB] focus:outline-none focus:ring-1 focus:ring-[#1A1A1A]"
+                      className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">
                     Numero di Telefono (per conferma e promemoria) *
                   </label>
                   <input
@@ -805,15 +805,15 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                     placeholder="+39 340 1234567"
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#1A1A1A] text-xs bg-[#FDFCFB] focus:outline-none focus:ring-1 focus:ring-[#1A1A1A]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   />
-                  <p className="text-[10px] text-[#1A1A1A]/60 mt-1">
+                  <p className="text-[10px] text-[#F2EFEA]/60 mt-1">
                     Ti consentirà anche di ritrovare e gestire la tua prenotazione nella sezione "I miei appuntamenti".
                   </p>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">
                     Indirizzo Email (facoltativo)
                   </label>
                   <input
@@ -821,12 +821,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     value={customerEmail}
                     onChange={(e) => setCustomerEmail(e.target.value)}
                     placeholder="mario.rossi@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#1A1A1A] text-xs bg-[#FDFCFB] focus:outline-none focus:ring-1 focus:ring-[#1A1A1A]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">
                     Note per il parrucchiere (facoltativo)
                   </label>
                   <textarea
@@ -834,7 +834,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     value={customerNotes}
                     onChange={(e) => setCustomerNotes(e.target.value)}
                     placeholder="Es. Sfumatura a pelle, barba molto corta, pelle delicata..."
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#1A1A1A] text-xs bg-[#FDFCFB] focus:outline-none focus:ring-1 focus:ring-[#1A1A1A]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   />
                 </div>
 
@@ -842,7 +842,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-none border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-md transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+                    className="w-full py-3.5 rounded-none border border-[#C8102E] bg-[#C8102E] hover:bg-[#E3162F] text-white text-[11px] font-bold uppercase tracking-wider shadow-md transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
                   >
                     <CheckCircle2 className="w-4 h-4 opacity-70" />
                     <span>{isSubmitting ? 'Salvataggio in corso...' : 'Conferma Definitiva Prenotazione'}</span>
@@ -855,7 +855,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="flex justify-start">
             <button
               onClick={() => setCurrentStep(3)}
-              className="px-5 py-2.5 border border-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider text-[#1A1A1A] hover:bg-white flex items-center space-x-1.5 rounded-none"
+              className="px-5 py-2.5 border border-[#2E2E2E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#151515] flex items-center space-x-1.5 rounded-none"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro al calendario</span>
@@ -868,61 +868,61 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* STEP 5: SCHERMATA DI SUCCESSO E DOWNLOAD .ICS (FASE 4) */}
       {/* ========================================================================= */}
       {currentStep === 5 && confirmedAppointment && (
-        <div className="max-w-2xl mx-auto bg-white p-8 sm:p-10 border border-[#1A1A1A] shadow-md text-center space-y-6 animate-in zoom-in-95">
-          <div className="w-16 h-16 rounded-none bg-[#1A1A1A] text-white mx-auto flex items-center justify-center border border-[#1A1A1A]">
+        <div className="max-w-2xl mx-auto bg-[#151515] p-8 sm:p-10 border border-[#2E2E2E] shadow-md text-center space-y-6 animate-in zoom-in-95">
+          <div className="w-16 h-16 rounded-none bg-[#C8102E] text-white mx-auto flex items-center justify-center border border-[#C8102E]">
             <CheckCircle2 className="w-8 h-8" />
           </div>
 
-          <div className="space-y-2 border-b border-[#1A1A1A] pb-6">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A]/60 block">
+          <div className="space-y-2 border-b border-[#2E2E2E] pb-6">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F2EFEA]/60 block">
               Prenotazione Confermata
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif italic font-light text-[#1A1A1A]">
+            <h2 className="text-3xl sm:text-4xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
               Ti aspettiamo in Salone!
             </h2>
-            <p className="text-xs sm:text-sm text-[#1A1A1A]/70">
+            <p className="text-xs sm:text-sm text-[#F2EFEA]/70">
               Il tuo appuntamento è stato registrato con successo nel nostro sistema.
             </p>
           </div>
 
           {/* Booking Code Highlight Card */}
-          <div className="p-4 bg-[#EFEDE9] border border-[#1A1A1A] max-w-sm mx-auto">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A]/70 block">
+          <div className="p-4 bg-[#1C1C1C] border border-[#2E2E2E] max-w-sm mx-auto">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA]/70 block">
               Codice Prenotazione Univoco
             </span>
-            <span className="text-3xl font-serif italic font-light tracking-wider text-[#1A1A1A] block my-1">
+            <span className="text-3xl font-display uppercase tracking-wide font-light tracking-wider text-[#F2EFEA] block my-1">
               {confirmedAppointment.booking_code}
             </span>
-            <span className="text-[10px] text-[#1A1A1A]/60">
+            <span className="text-[10px] text-[#F2EFEA]/60">
               Salva questo codice per consultare o modificare il tuo appuntamento.
             </span>
           </div>
 
           {/* Details recap table */}
-          <div className="bg-[#FDFCFB] p-4 text-xs text-left space-y-2 border border-[#1A1A1A]">
-            <div className="flex justify-between border-b border-[#1A1A1A]/10 pb-1">
-              <span className="text-[#1A1A1A]/60">Cliente:</span>
-              <span className="font-bold text-[#1A1A1A]">{confirmedAppointment.customer_name}</span>
+          <div className="bg-[#0B0B0B] p-4 text-xs text-left space-y-2 border border-[#2E2E2E]">
+            <div className="flex justify-between border-b border-[#F2EFEA]/10 pb-1">
+              <span className="text-[#F2EFEA]/60">Cliente:</span>
+              <span className="font-bold text-[#F2EFEA]">{confirmedAppointment.customer_name}</span>
             </div>
-            <div className="flex justify-between border-b border-[#1A1A1A]/10 pb-1">
-              <span className="text-[#1A1A1A]/60">Servizio:</span>
-              <span className="font-bold text-[#1A1A1A]">{selectedService?.name}</span>
+            <div className="flex justify-between border-b border-[#F2EFEA]/10 pb-1">
+              <span className="text-[#F2EFEA]/60">Servizio:</span>
+              <span className="font-bold text-[#F2EFEA]">{selectedService?.name}</span>
             </div>
-            <div className="flex justify-between border-b border-[#1A1A1A]/10 pb-1">
-              <span className="text-[#1A1A1A]/60">Parrucchiere:</span>
-              <span className="font-bold text-[#1A1A1A]">
+            <div className="flex justify-between border-b border-[#F2EFEA]/10 pb-1">
+              <span className="text-[#F2EFEA]/60">Parrucchiere:</span>
+              <span className="font-bold text-[#F2EFEA]">
                 {StorageService.getOperatorById(confirmedAppointment.operator_id)?.name}
               </span>
             </div>
-            <div className="flex justify-between border-b border-[#1A1A1A]/10 pb-1">
-              <span className="text-[#1A1A1A]/60">Data e Orario:</span>
-              <span className="font-bold text-[#1A1A1A]">
+            <div className="flex justify-between border-b border-[#F2EFEA]/10 pb-1">
+              <span className="text-[#F2EFEA]/60">Data e Orario:</span>
+              <span className="font-bold text-[#F2EFEA]">
                 {confirmedAppointment.appointment_date} dalle {confirmedAppointment.start_time} alle {confirmedAppointment.end_time}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#1A1A1A]/60">Indirizzo:</span>
-              <span className="font-bold text-[#1A1A1A]">{BUSINESS_INFO.address}</span>
+              <span className="text-[#F2EFEA]/60">Indirizzo:</span>
+              <span className="font-bold text-[#F2EFEA]">{BUSINESS_INFO.address}</span>
             </div>
           </div>
 
@@ -930,7 +930,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => StorageService.downloadICalendar(confirmedAppointment)}
-              className="px-6 py-3 rounded-none border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white font-bold text-[11px] uppercase tracking-wider shadow transition-all flex items-center justify-center space-x-2"
+              className="px-6 py-3 rounded-none border border-[#C8102E] bg-[#C8102E] hover:bg-[#E3162F] text-white font-bold text-[11px] uppercase tracking-wider shadow transition-all flex items-center justify-center space-x-2"
             >
               <Download className="w-4 h-4" />
               <span>Aggiungi al Calendario (.ics)</span>
@@ -938,7 +938,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
             <button
               onClick={() => onNavigate('my-appointments')}
-              className="px-5 py-3 rounded-none border border-[#1A1A1A] bg-transparent hover:bg-[#EFEDE9] text-[#1A1A1A] font-bold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+              className="px-5 py-3 rounded-none border border-[#2E2E2E] bg-transparent hover:bg-[#242424] text-[#F2EFEA] font-bold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
             >
               <BookmarkCheck className="w-4 h-4" />
               <span>Visualizza nei miei appuntamenti</span>
@@ -953,7 +953,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                 setSelectedSlotTime('');
                 setConfirmedAppointment(null);
               }}
-              className="text-xs uppercase tracking-wider font-semibold text-[#1A1A1A]/70 hover:text-[#1A1A1A] underline underline-offset-4"
+              className="text-xs uppercase tracking-wider font-semibold text-[#F2EFEA]/70 hover:text-[#F2EFEA] underline underline-offset-4"
             >
               Effettua un'altra prenotazione
             </button>

@@ -1,23 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { PageView } from '../types';
 import { BrandLogo } from '../components/BrandLogo';
-import { BUSINESS_INFO, GALLERY_ITEMS } from '../data/initialData';
+import { BUSINESS_INFO } from '../data/initialData';
 import { StorageService } from '../services/storage';
-import { MediaStorageService } from '../services/mediaStorage';
-import { AtelierVideoPlayer } from '../components/AtelierVideoPlayer';
-import { 
-  Scissors, 
-  Calendar, 
+import {
+  Scissors,
+  Calendar,
   Clock,
   MapPin,
-  Sparkles,
-  CheckCircle2, 
-  ArrowRight, 
-  ShieldCheck, 
+  Phone,
+  ArrowRight,
   Star,
-  Users,
-  Compass,
-  Image as ImageIcon
+  ThumbsUp,
+  Image as ImageIcon,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -25,264 +20,190 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
-  const services = StorageService.getServices().filter(s => s.active);
-  const popularServices = services.filter(s => s.popular).slice(0, 4);
-  const operators = StorageService.getOperators().filter(o => o.active);
+  const services = StorageService.getServices().filter((s) => s.active);
+  const popularServices = services.filter((s) => s.popular).slice(0, 3);
+  const operator = StorageService.getOperators().filter((o) => o.active)[0];
   const shopStatus = StorageService.getShopCurrentStatus();
+  const gallery = StorageService.getGalleryItems().filter((g) => !g.isVideo).slice(0, 5);
+  const hours = StorageService.getBusinessHours();
 
   return (
     <div className="space-y-20 pb-20">
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* HERO */}
+      <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-[#2E2E2E]">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.07] bg-[radial-gradient(circle_at_80%_20%,#C8102E,transparent_55%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Column: Headline & Intent */}
+            {/* Testo */}
             <div className="lg:col-span-7 space-y-6 text-left">
-              <div className="inline-flex items-center space-x-2.5 px-3 py-1 border border-[#1A1A1A] bg-white text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                <span>Via Galermo 288/E · Catania</span>
+              <div className="inline-flex items-center space-x-2.5 px-3 py-1 border border-[#C8102E] text-[10px] uppercase tracking-[0.25em] font-bold text-white">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C8102E] animate-pulse" />
+                <span>Galermo · Catania</span>
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3 mb-2">
-                  <BrandLogo size="md" mode="full" className="h-12 w-auto max-w-[200px]" />
-                </div>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif italic font-light text-[#1A1A1A] tracking-tight leading-[1.12]">
-                  Il tuo parrucchiere di fiducia a Galermo.
+              <div className="space-y-1">
+                <span className="font-script text-4xl sm:text-5xl text-[#E3162F] block leading-none">
+                  Giuseppe Distefano
+                </span>
+                <h1 className="font-display uppercase font-bold text-5xl sm:text-6xl lg:text-7xl leading-[1.02] text-[#F2EFEA]">
+                  Capelli e barba <br />
+                  <span className="text-[#C8102E]">fatti bene.</span>
                 </h1>
               </div>
 
-              <p className="text-base text-[#1A1A1A]/70 max-w-2xl leading-relaxed">
-                Tagli classici e moderni, cura della barba e un servizio attento e cordiale. Parrucchiere per uomo a Catania, in Via Galermo: il 96% dei clienti lo consiglia.
+              <p className="text-base text-[#F2EFEA]/70 max-w-xl leading-relaxed">
+                Parrucchiere per uomo in Via Galermo 288/E, a Catania. Dal taglio classico alla sfumatura, dalla barba
+                al rasoio al look nuovo: scegli quando passare e prenota online in un minuto.
               </p>
 
-              {/* Status pill & opening info */}
-              <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
-                <div className="flex items-center space-x-2 px-3 py-1.5 bg-white border border-[#1A1A1A]">
-                  <Clock className="w-3.5 h-3.5 opacity-60" />
-                  <span className="font-bold text-[11px] uppercase tracking-wider text-[#1A1A1A]">{shopStatus.text}</span>
-                </div>
-              </div>
-
-              {/* CTA Buttons */}
-              <div className="pt-4 flex flex-col sm:flex-row gap-3 sm:items-center">
-                <button
-                  onClick={() => onNavigate('booking')}
-                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all border border-[#1A1A1A] group"
-                >
-                  <Calendar className="w-4 h-4 mr-2 opacity-80" />
-                  <span>Prenota appuntamento</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-2 transition-transform group-hover:translate-x-1 opacity-70" />
-                </button>
-                <button
-                  onClick={() => onNavigate('services')}
-                  className="inline-flex items-center justify-center px-6 py-3.5 rounded-none bg-transparent hover:bg-[#1A1A1A] hover:text-white text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider border border-[#1A1A1A] transition-all"
-                >
-                  <span>Consulta il listino servizi</span>
-                </button>
-              </div>
-
-              {/* Trust badges */}
-              <div className="pt-6 border-t border-[#1A1A1A]/20 grid grid-cols-3 gap-4 text-xs">
-                <div className="space-y-1">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#1A1A1A]">0 Sovrapposizioni</div>
-                  <div className="text-[#1A1A1A]/60 text-[11px]">Slot riservati e puntuali</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#1A1A1A]">96% Consigliato</div>
-                  <div className="text-[#1A1A1A]/60 text-[11px]">Dalle recensioni dei clienti</div>
-                </div>
-                <div className="space-y-1">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#1A1A1A]">Su Appuntamento</div>
-                  <div className="text-[#1A1A1A]/60 text-[11px]">Niente attese inutili</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Interactive Video & Fast Booking Box */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="border border-[#1A1A1A] bg-[#1A1A1A] overflow-hidden shadow-lg">
-                <AtelierVideoPlayer onNavigate={onNavigate} showDetails={false} className="border-0" />
-              </div>
-
-              {/* Fast Booking Preview Card */}
-              <div className="bg-white border border-[#1A1A1A] p-6 space-y-4">
-                <div className="flex items-center justify-between border-b border-[#1A1A1A] pb-3">
-                  <div className="flex items-center space-x-2">
-                    <Sparkles className="w-4 h-4 opacity-70" />
-                    <h3 className="font-serif italic text-lg font-normal text-[#1A1A1A]">
-                      Prenotazione in 4 Fasi
-                    </h3>
-                  </div>
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-800 bg-emerald-50 border border-emerald-300 px-2 py-0.5">
-                    Disponibilità Live
+              <div className="flex flex-wrap items-center gap-3 pt-1 text-xs">
+                <div className="flex items-center space-x-2 px-3 py-1.5 bg-[#151515] border border-[#2E2E2E]">
+                  <span
+                    className={`w-2 h-2 rounded-full ${shopStatus.isOpen ? 'bg-emerald-500' : 'bg-amber-500'}`}
+                  />
+                  <span className="font-bold text-[11px] uppercase tracking-wider text-[#F2EFEA]">
+                    {shopStatus.text}
                   </span>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="p-3 bg-[#FDFCFB] border border-[#1A1A1A]/30">
-                    <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A1A1A] block mb-0.5">1. Servizio</span>
-                    <span className="text-[#1A1A1A]/70 text-[11px]">Taglio, Barba, Relax</span>
-                  </div>
-                  <div className="p-3 bg-[#FDFCFB] border border-[#1A1A1A]/30">
-                    <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A1A1A] block mb-0.5">2. Parrucchiere</span>
-                    <span className="text-[#1A1A1A]/70 text-[11px]">Giuseppe</span>
-                  </div>
-                  <div className="p-3 bg-[#FDFCFB] border border-[#1A1A1A]/30">
-                    <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A1A1A] block mb-0.5">3. Orario</span>
-                    <span className="text-[#1A1A1A]/70 text-[11px]">Slot orario dedicato</span>
-                  </div>
-                  <div className="p-3 bg-[#FDFCFB] border border-[#1A1A1A]/30">
-                    <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A1A1A] block mb-0.5">4. Conferma</span>
-                    <span className="text-[#1A1A1A]/70 text-[11px]">Codice & file .ics</span>
-                  </div>
-                </div>
-
+              <div className="pt-3 flex flex-col sm:flex-row gap-3 sm:items-center">
                 <button
                   onClick={() => onNavigate('booking')}
-                  className="w-full py-3 border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white font-bold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-[#C8102E] hover:bg-[#E3162F] text-white text-xs font-bold uppercase tracking-[0.15em] transition-all group"
                 >
-                  <span>Inizia la prenotazione ora</span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-70" />
+                  <Calendar className="w-4 h-4 mr-2" />
+                  <span>Prenota ora</span>
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                 </button>
+                <a
+                  href={`tel:${BUSINESS_INFO.phoneRaw}`}
+                  className="inline-flex items-center justify-center px-6 py-4 border border-[#F2EFEA]/40 hover:border-[#F2EFEA] text-[#F2EFEA] text-xs font-bold uppercase tracking-[0.15em] transition-all"
+                >
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span>{BUSINESS_INFO.phone}</span>
+                </a>
+              </div>
+
+              <div className="pt-6 mt-2 border-t border-[#2E2E2E] grid grid-cols-3 gap-4">
+                <div>
+                  <div className="font-display text-3xl font-bold text-[#C8102E] leading-none">96%</div>
+                  <div className="text-[11px] text-[#F2EFEA]/60 mt-1">dei clienti ci consiglia</div>
+                </div>
+                <div>
+                  <div className="font-display text-3xl font-bold text-[#C8102E] leading-none">1 min</div>
+                  <div className="text-[11px] text-[#F2EFEA]/60 mt-1">per prenotare online</div>
+                </div>
+                <div>
+                  <div className="font-display text-3xl font-bold text-[#C8102E] leading-none">0 code</div>
+                  <div className="text-[11px] text-[#F2EFEA]/60 mt-1">si viene su appuntamento</div>
+                </div>
               </div>
             </div>
 
-          </div>
-        </div>
-      </section>
-
-      {/* DEDICATED VIDEO REEL SHOWCASE: DARIO RIOLO ALL'OPERA */}
-      <section className="bg-[#111111] text-white py-16 -mx-4 px-4 sm:px-6 lg:px-8 border-y border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left / Craft Details */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center space-x-2 px-3 py-1 border border-white/20 bg-white/5 text-[10px] uppercase tracking-[0.2em] font-bold text-white">
-                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                <span>Video Reel Live · Via Galermo 288/E</span>
-              </div>
-
-              <div className="space-y-2">
-                <span className="text-xs uppercase font-mono tracking-widest text-white/50 block">
-                  Da Giuseppe
-                </span>
-                <h2 className="text-3xl sm:text-5xl font-serif italic font-light leading-tight text-white">
-                  Il taglio che fa per te.
-                </h2>
-              </div>
-
-              <p className="text-sm text-white/70 leading-relaxed max-w-xl">
-                Forbice, macchinetta e rasoio con la precisione di chi fa questo mestiere ogni giorno, nel nostro salone di Galermo a Catania.
-              </p>
-
-              {/* 3 Step Craft Details */}
-              <div className="space-y-4 pt-3 border-t border-white/10">
-                <div className="flex items-start space-x-4">
-                  <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">01.</span>
-                  <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Ascolto & Consiglio</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Ti consigliamo il taglio più adatto al tuo viso e al tuo stile.</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">02.</span>
-                  <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Sfumature & Rifinitura</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Passaggi graduali, basette pulite e contorni precisi.</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">03.</span>
-                  <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Piega & Finitura</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Un look curato che dura per tutta la giornata.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-giuseppe' })}
-                  className="px-7 py-3.5 bg-white hover:bg-neutral-200 text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
-                >
-                  <Scissors className="w-4 h-4" />
-                  <span>Prenota il tuo taglio da Giuseppe</span>
-                </button>
-                <button
-                  onClick={() => onNavigate('gallery')}
-                  className="px-6 py-3.5 bg-transparent hover:bg-white/10 text-white text-[11px] font-bold uppercase tracking-wider border border-white/30 transition-all flex items-center justify-center space-x-2"
-                >
-                  <span>Guarda la galleria fotografica</span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-70" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right / Video Player Frame */}
+            {/* Logo grande */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm">
-                <AtelierVideoPlayer onNavigate={onNavigate} showDetails={true} />
+              <div className="relative w-full max-w-md">
+                <div className="absolute -inset-3 border border-[#C8102E]/40 translate-x-3 translate-y-3" />
+                <div className="relative bg-[#020607] border border-[#2E2E2E] p-6 flex items-center justify-center">
+                  <BrandLogo mode="emblem" className="h-72 sm:h-80 w-auto" />
+                </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
+
+      {/* I NOSTRI LAVORI */}
+      {gallery.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#2E2E2E] pb-6 mb-8 gap-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] font-bold text-[#C8102E]">
+                <ImageIcon className="w-3.5 h-3.5" />
+                <span>Il nostro lavoro</span>
+              </div>
+              <h2 className="font-display uppercase font-bold text-4xl sm:text-5xl text-[#F2EFEA]">
+                I tagli parlano da soli
+              </h2>
+            </div>
+            <button
+              onClick={() => onNavigate('gallery')}
+              className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:text-[#E3162F]"
+            >
+              <span>Vedi tutta la galleria</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-1" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {gallery.slice(0, 5).map((g, i) => (
+              <button
+                key={g.id}
+                onClick={() => onNavigate('gallery')}
+                className={`relative overflow-hidden bg-[#151515] border border-[#2E2E2E] group aspect-square ${
+                  i === 0 ? 'col-span-2 row-span-2' : ''
+                }`}
+              >
+                <img
+                  src={g.image}
+                  alt={g.title || 'Taglio realizzato da Giuseppe'}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* SERVIZI IN EVIDENZA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#1A1A1A] pb-6 mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#2E2E2E] pb-6 mb-10 gap-4">
           <div className="space-y-2">
-            <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]/60">
+            <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] font-bold text-[#C8102E]">
               <Scissors className="w-3.5 h-3.5" />
-              <span>Listino Prezzi</span>
+              <span>Listino</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-serif italic font-light text-[#1A1A1A]">
-              Servizi in Evidenza
+            <h2 className="font-display uppercase font-bold text-4xl sm:text-5xl text-[#F2EFEA]">
+              Cosa possiamo fare per te
             </h2>
           </div>
           <button
             onClick={() => onNavigate('services')}
-            className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:underline"
+            className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:text-[#E3162F]"
           >
-            <span>Vedi tutti i {services.length} trattamenti</span>
+            <span>Tutti i {services.length} servizi</span>
             <ArrowRight className="w-3.5 h-3.5 ml-1" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {popularServices.map((service) => (
             <div
               key={service.id}
-              className="bg-white border border-[#1A1A1A] p-6 hover:shadow-md transition-all flex flex-col justify-between group"
+              className="bg-[#151515] border border-[#2E2E2E] hover:border-[#C8102E] p-7 transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className="flex justify-between items-start mb-4 border-b border-[#1A1A1A]/10 pb-3">
-                  <span className="text-3xl font-serif italic font-light text-[#1A1A1A]">
+                <div className="flex justify-between items-start mb-4 pb-4 border-b border-[#2E2E2E]">
+                  <h3 className="font-display uppercase font-semibold text-2xl text-[#F2EFEA]">{service.name}</h3>
+                  <span className="font-display text-4xl font-bold text-[#C8102E] leading-none">
                     €{service.price}
                   </span>
-                  <span className="inline-flex items-center px-2 py-0.5 text-[10px] uppercase tracking-wider font-semibold border border-[#1A1A1A] bg-[#FDFCFB] text-[#1A1A1A]">
-                    <Clock className="w-3 h-3 mr-1 opacity-60" />
-                    {service.duration_minutes} min
-                  </span>
                 </div>
-
-                <h3 className="font-serif italic text-xl font-normal text-[#1A1A1A] mb-2">
-                  {service.name}
-                </h3>
-                <p className="text-xs text-[#1A1A1A]/70 leading-relaxed line-clamp-3 mb-6">
-                  {service.description}
-                </p>
+                <p className="text-sm text-[#F2EFEA]/65 leading-relaxed mb-5">{service.description}</p>
+                <span className="inline-flex items-center text-[11px] uppercase tracking-wider text-[#F2EFEA]/50">
+                  <Clock className="w-3.5 h-3.5 mr-1.5" />
+                  {service.duration_minutes} minuti
+                </span>
               </div>
 
               <button
                 onClick={() => onNavigate('booking', { serviceId: service.id })}
-                className="w-full py-2.5 bg-transparent group-hover:bg-[#1A1A1A] text-[#1A1A1A] group-hover:text-white text-[10px] font-bold uppercase tracking-wider border border-[#1A1A1A] transition-all flex items-center justify-center space-x-1.5"
+                className="mt-6 w-full py-3 border border-[#F2EFEA]/30 group-hover:bg-[#C8102E] group-hover:border-[#C8102E] text-[#F2EFEA] text-[11px] font-bold uppercase tracking-[0.15em] transition-all flex items-center justify-center space-x-2"
               >
-                <span>Prenota questo servizio</span>
+                <span>Prenota</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -290,175 +211,94 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* L'ATMOSFERA DEL SALONE (GALLERY PREVIEW) */}
-      <section className="bg-[#EFEDE9] text-[#1A1A1A] py-16 -mx-4 px-4 sm:px-6 lg:px-8 border-y border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]/60">
-                <Compass className="w-3.5 h-3.5" />
-                <span>Il Salone</span>
+      {/* GIUSEPPE + DOVE SIAMO */}
+      <section className="bg-[#111111] py-16 px-4 sm:px-6 lg:px-8 border-y border-[#2E2E2E]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {operator && (
+            <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+              <div className="w-44 h-44 shrink-0 overflow-hidden border-2 border-[#C8102E] bg-black">
+                <img src={operator.photo_url} alt={operator.name} className="w-full h-full object-cover" />
               </div>
-              <h2 className="text-3xl sm:text-4xl font-serif italic font-light leading-tight text-[#1A1A1A]">
-                Un salone dove sentirsi a casa.
-              </h2>
-              <p className="text-xs text-[#1A1A1A]/70 leading-relaxed">
-                Da Giuseppe, in Via Galermo 288/E, trovi un ambiente accogliente e un servizio cordiale: che tu voglia un taglio classico, una sistemata alla barba o un look più moderno, sarai ascoltato con attenzione.
-              </p>
-
-              <div className="space-y-3 pt-2">
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#1A1A1A] shrink-0 mt-0.5" />
-                  <p className="text-xs text-[#1A1A1A]/80">
-                    <strong className="text-[#1A1A1A]">Igiene e sicurezza assolute:</strong> Strumenti sempre puliti e sanificati dopo ogni cliente.
-                  </p>
+              <div className="space-y-3 text-center sm:text-left">
+                <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-[#C8102E]">
+                  Chi ti taglia i capelli
+                </span>
+                <h2 className="font-display uppercase font-bold text-4xl text-[#F2EFEA] leading-none">
+                  {operator.name}
+                </h2>
+                <p className="text-sm text-[#F2EFEA]/70 leading-relaxed">
+                  Al lavoro nel suo salone di Galermo: ascolta quello che vuoi, ti consiglia quello che sta bene a te
+                  e non ti lascia andare via finché non sei a posto.
+                </p>
+                <div className="inline-flex items-center space-x-2 text-xs text-[#F2EFEA]/70">
+                  <ThumbsUp className="w-4 h-4 text-[#C8102E]" />
+                  <span>Consigliato dal 96% dei clienti</span>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#1A1A1A] shrink-0 mt-0.5" />
-                  <p className="text-xs text-[#1A1A1A]/80">
-                    <strong className="text-[#1A1A1A]">Zero code o attese:</strong> La gestione su appuntamento garantisce che la poltrona sia pronta per te all'orario stabilito.
-                  </p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#1A1A1A] shrink-0 mt-0.5" />
-                  <p className="text-xs text-[#1A1A1A]/80">
-                    <strong className="text-[#1A1A1A]">Consigli su misura:</strong> Ascoltiamo le tue esigenze e valorizziamo i tuoi lineamenti.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-4">
-                <button
-                  onClick={() => onNavigate('gallery')}
-                  className="px-6 py-3 border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all flex items-center space-x-2"
-                >
-                  <span>Guarda tutti gli scatti della galleria</span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-70" />
-                </button>
-              </div>
-            </div>
-
-            {/* Atelier Brand Identity & Video Presentation */}
-            <div className="lg:col-span-7">
-              {/* Official Atelier Logo & Identity */}
-              <div className="border border-[#1A1A1A] bg-white p-6 flex flex-col justify-between space-y-6 max-w-md">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center space-x-2 px-2.5 py-1 bg-[#1A1A1A] text-white text-[9px] font-bold uppercase tracking-widest">
-                    <span>Il Salone</span>
-                  </div>
-                  <div className="py-4 flex items-center justify-center bg-[#EFEDE9] border border-[#1A1A1A]/20 p-4">
-                    <img src="/assets/giuseppe_logo.jpg" alt="Barber Giuseppe Distefano" className="max-h-40 w-auto object-contain" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif italic text-xl font-light text-[#1A1A1A]">
-                      Parrucchiere Uomo da Giuseppe
-                    </h3>
-                    <p className="text-xs text-[#1A1A1A]/70 mt-1 leading-relaxed">
-                      Parrucchiere per uomo in Via Galermo 288/E, nel quartiere Galermo a Catania.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-[#1A1A1A]/20 flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-[#1A1A1A]/60">Catania, Sicilia</span>
+                <div>
                   <button
-                    onClick={() => onNavigate('gallery')}
-                    className="text-[10px] uppercase font-bold tracking-wider text-[#1A1A1A] hover:underline flex items-center space-x-1"
+                    onClick={() => onNavigate('booking', { operatorId: operator.id })}
+                    className="mt-2 px-7 py-3 bg-[#C8102E] hover:bg-[#E3162F] text-white text-[11px] font-bold uppercase tracking-[0.15em] transition-all"
                   >
-                    <span>Apri Galleria</span>
+                    Prenota da Giuseppe
                   </button>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          )}
 
-      {/* I NOSTRI BARBIERI */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]/60">
-            <Users className="w-3.5 h-3.5" />
-            <span>Il Titolare</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-serif italic font-light text-[#1A1A1A]">
-            Giuseppe Distefano
-          </h2>
-          <p className="text-xs text-[#1A1A1A]/70 leading-relaxed">
-            Dedizione per il dettaglio e attenzione al cliente, ogni giorno.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 max-w-md mx-auto gap-8">
-          {operators.map((op) => (
-            <div 
-              key={op.id}
-              className="bg-white border border-[#1A1A1A] p-6 text-center space-y-4 flex flex-col items-center"
-            >
-              <div className="w-24 h-24 rounded-full overflow-hidden border border-[#1A1A1A] p-1 bg-[#EFEDE9]">
-                <img 
-                  src={op.photo_url} 
-                  alt={op.name}
-                  className="w-full h-full object-cover rounded-full"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <h3 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
-                  {op.name}
-                </h3>
-                <span className="text-[10px] uppercase tracking-widest font-bold text-[#1A1A1A]/60 block">
-                  {op.role}
-                </span>
-              </div>
-
-              <p className="text-xs text-[#1A1A1A]/70 leading-relaxed">
-                {op.bio}
-              </p>
-
-              <div className="pt-2 w-full">
-                <button
-                  onClick={() => onNavigate('booking', { operatorId: op.id })}
-                  className="w-full py-2.5 bg-transparent hover:bg-[#1A1A1A] hover:text-white text-[#1A1A1A] text-[10px] font-bold uppercase tracking-wider border border-[#1A1A1A] transition-all"
+          <div className="bg-[#151515] border border-[#2E2E2E] p-7 space-y-5">
+            <div className="flex items-start space-x-3">
+              <MapPin className="w-5 h-5 text-[#C8102E] shrink-0 mt-0.5" />
+              <div>
+                <h3 className="font-display uppercase font-semibold text-xl text-[#F2EFEA]">Dove siamo</h3>
+                <p className="text-sm text-[#F2EFEA]/70">{BUSINESS_INFO.address}</p>
+                <a
+                  href={BUSINESS_INFO.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] font-bold uppercase tracking-wider text-[#E3162F] hover:underline"
                 >
-                  Prenota con {op.name.split(' ')[0]}
-                </button>
+                  Apri su Google Maps
+                </a>
               </div>
             </div>
-          ))}
+            <div className="border-t border-[#2E2E2E] pt-4 space-y-1.5 text-xs">
+              {hours.map((h) => (
+                <div key={h.id} className="flex justify-between text-[#F2EFEA]/70">
+                  <span>{h.day_name}</span>
+                  <span className="font-mono">{h.is_closed ? 'Chiuso' : `${h.open_time} – ${h.close_time}`}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FOOTER CTA BANNER */}
-      <section className="bg-[#1A1A1A] text-white py-14 -mx-4 px-4 sm:px-6 lg:px-8 border-t border-[#1A1A1A]">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] font-bold text-white/60">
-            <Star className="w-3.5 h-3.5 fill-current" />
-            <span>Galermo · Catania</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl font-serif italic font-light tracking-tight text-white">
-            La tua poltrona ti aspetta.
-          </h2>
-
-          <p className="text-sm text-white/70 max-w-xl mx-auto leading-relaxed">
-            Seleziona il trattamento desiderato, prenota il tuo appuntamento in meno di 2 minuti.
-          </p>
-
-          <div className="pt-2 flex flex-col sm:flex-row justify-center gap-4">
-            <button
-              onClick={() => onNavigate('booking')}
-              className="px-8 py-3.5 bg-white hover:bg-[#EFEDE9] text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider transition-all"
-            >
-              Prenota ora online
-            </button>
-            <button
-              onClick={() => onNavigate('contacts')}
-              className="px-8 py-3.5 bg-transparent hover:bg-white/10 text-white text-[11px] font-bold uppercase tracking-wider border border-white/30 transition-all"
-            >
-              Come raggiungerci
-            </button>
-          </div>
+      {/* CTA FINALE */}
+      <section className="max-w-4xl mx-auto px-4 text-center space-y-6">
+        <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.3em] font-bold text-[#C8102E]">
+          <Star className="w-3.5 h-3.5 fill-current" />
+          <span>Ti aspettiamo</span>
+        </div>
+        <h2 className="font-display uppercase font-bold text-4xl sm:text-6xl text-[#F2EFEA] leading-tight">
+          Pronto per un taglio <span className="text-[#C8102E]">nuovo?</span>
+        </h2>
+        <p className="text-sm text-[#F2EFEA]/65 max-w-md mx-auto">
+          Scegli il servizio, il giorno e l'orario. Niente telefonate, niente attese.
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
+          <button
+            onClick={() => onNavigate('booking')}
+            className="px-9 py-4 bg-[#C8102E] hover:bg-[#E3162F] text-white text-xs font-bold uppercase tracking-[0.15em] transition-all"
+          >
+            Prenota il tuo posto
+          </button>
+          <button
+            onClick={() => onNavigate('contacts')}
+            className="px-9 py-4 border border-[#F2EFEA]/40 hover:border-[#F2EFEA] text-[#F2EFEA] text-xs font-bold uppercase tracking-[0.15em] transition-all"
+          >
+            Come arrivare
+          </button>
         </div>
       </section>
     </div>

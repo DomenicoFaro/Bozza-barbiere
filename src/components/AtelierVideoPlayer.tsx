@@ -158,7 +158,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
   };
 
   return (
-    <div className={`relative bg-[#1A1A1A] border border-[#1A1A1A] overflow-hidden text-white flex flex-col ${className}`}>
+    <div className={`relative bg-[#C8102E] border border-[#C8102E] overflow-hidden text-white flex flex-col ${className}`}>
       {/* Hidden file input for video selection */}
       <input 
         ref={fileInputRef}
@@ -220,7 +220,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
             {/* Center Play Icon when paused */}
             {!isPlaying && (
               <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 backdrop-blur-[2px]">
-                <div className="w-16 h-16 rounded-full bg-white text-[#1A1A1A] flex items-center justify-center pl-1 shadow-2xl transition-transform transform scale-100 hover:scale-110">
+                <div className="w-16 h-16 rounded-full bg-[#C8102E] text-white flex items-center justify-center pl-1 shadow-2xl transition-transform transform scale-100 hover:scale-110">
                   <Play className="w-8 h-8 fill-current" />
                 </div>
               </div>
@@ -283,7 +283,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
               Da Giuseppe · Galermo, Catania
             </span>
 
-            <h3 className="font-serif italic text-2xl font-light text-white mb-2 leading-tight">
+            <h3 className="font-display uppercase tracking-wide text-2xl font-light text-white mb-2 leading-tight">
               Carica il tuo Video Reel Originale
             </h3>
 
@@ -296,7 +296,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
                 e.stopPropagation();
                 fileInputRef.current?.click();
               }}
-              className="px-6 py-3.5 bg-white text-[#1A1A1A] hover:bg-neutral-200 font-bold text-[11px] uppercase tracking-wider flex items-center space-x-2 shadow-2xl transition-all"
+              className="px-6 py-3.5 bg-[#C8102E] text-white hover:bg-[#E3162F] font-bold text-[11px] uppercase tracking-wider flex items-center space-x-2 shadow-2xl transition-all"
             >
               <Upload className="w-4 h-4" />
               <span>Seleziona File Video (.mp4)</span>
@@ -330,7 +330,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
               <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-white/60 block mb-1">
                 L'Arte del Taglio a Catania
               </span>
-              <h3 className="font-serif italic text-lg font-light text-white leading-snug">
+              <h3 className="font-display uppercase tracking-wide text-lg font-light text-white leading-snug">
                 Forbice su pettine & Sfumatura Taper
               </h3>
             </div>
@@ -356,7 +356,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
             {onNavigate && (
               <button
                 onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-giuseppe' })}
-                className="flex-1 py-3 px-4 bg-white hover:bg-neutral-200 text-[#1A1A1A] font-bold text-[10px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+                className="flex-1 py-3 px-4 bg-[#C8102E] hover:bg-[#E3162F] text-white font-bold text-[10px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
               >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Prenota da Giuseppe</span>

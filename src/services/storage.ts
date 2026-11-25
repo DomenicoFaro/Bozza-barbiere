@@ -468,7 +468,7 @@ export const StorageService = {
       return {
         isOpen: false,
         text: 'Oggi Chiuso',
-        nextOpen: 'Riapre Martedì alle 08:30',
+        nextOpen: 'Riapre Lunedì alle 08:30',
       };
     }
 

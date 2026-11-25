@@ -51,7 +51,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDFCFB] text-[#1A1A1A]">
+    <div className="min-h-screen flex flex-col bg-[#0B0B0B] text-[#F2EFEA]">
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
 
       <main className="flex-1">

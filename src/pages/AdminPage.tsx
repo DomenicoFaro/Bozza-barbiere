@@ -173,7 +173,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   if (authLoading) {
     return (
       <div className="max-w-md mx-auto px-4 py-20 text-center">
-        <RefreshCw className="w-6 h-6 mx-auto animate-spin text-[#1A1A1A]/50" />
+        <RefreshCw className="w-6 h-6 mx-auto animate-spin text-[#F2EFEA]/50" />
       </div>
     );
   }
@@ -184,23 +184,23 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   if (!user) {
     return (
       <div className="max-w-md mx-auto px-4 py-20">
-        <div className="bg-white rounded-none p-8 border border-[#1A1A1A] shadow-none space-y-6 text-center">
+        <div className="bg-[#151515] rounded-none p-8 border border-[#2E2E2E] shadow-none space-y-6 text-center">
           <BrandLogo size="lg" className="mx-auto" />
           <div className="space-y-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A] block">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA] block">
               Area Riservata
             </span>
-            <h1 className="text-3xl font-serif italic font-light text-[#1A1A1A]">
+            <h1 className="text-3xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
               Pannello Gestione Titolare
             </h1>
-            <p className="text-xs text-[#767676]">
+            <p className="text-xs text-[#9A9A9A]">
               Accedi con il tuo account per gestire agenda, servizi, orari e appuntamenti. Solo gli account abilitati come amministratore possono entrare.
             </p>
           </div>
 
           <button
             onClick={() => setShowAuthModal(true)}
-            className="w-full py-3 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+            className="w-full py-3 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
           >
             <Lock className="w-4 h-4 text-white" />
             <span>Accedi al Pannello</span>
@@ -218,23 +218,23 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   if (!isAdmin) {
     return (
       <div className="max-w-md mx-auto px-4 py-20">
-        <div className="bg-white rounded-none p-8 border border-[#1A1A1A] shadow-none space-y-6 text-center">
-          <ShieldAlert className="w-10 h-10 mx-auto text-rose-600" />
+        <div className="bg-[#151515] rounded-none p-8 border border-[#2E2E2E] shadow-none space-y-6 text-center">
+          <ShieldAlert className="w-10 h-10 mx-auto text-rose-400" />
           <div className="space-y-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-rose-700 block">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-rose-400 block">
               Accesso Negato
             </span>
-            <h1 className="text-2xl font-serif italic font-light text-[#1A1A1A]">
+            <h1 className="text-2xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
               Questo account non è amministratore
             </h1>
-            <p className="text-xs text-[#767676]">
+            <p className="text-xs text-[#9A9A9A]">
               L'account {user.email} non ha i permessi per accedere al pannello di gestione. Contatta il titolare per essere abilitato.
             </p>
           </div>
 
           <button
             onClick={handleLogout}
-            className="w-full py-3 rounded-none border border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#EFEDE9] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+            className="w-full py-3 rounded-none border border-[#2E2E2E] text-[#F2EFEA] hover:bg-[#242424] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
           >
             <LogOut className="w-4 h-4" />
             <span>Esci e prova con un altro account</span>
@@ -250,19 +250,19 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Top Admin Header Bar */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-none border border-[#1A1A1A]">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#151515] p-6 rounded-none border border-[#2E2E2E]">
         <div className="flex items-center space-x-4">
           <BrandLogo size="md" />
           <div>
             <div className="flex items-center space-x-2">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A]">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA]">
                 Pannello Controllo
               </span>
-              <span className="px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-900 text-[10px] font-bold tracking-wider uppercase border border-emerald-300">
+              <span className="px-2 py-0.5 rounded-none bg-emerald-900/40 text-emerald-400 text-[10px] font-bold tracking-wider uppercase border border-emerald-700">
                 Titolare Attivo
               </span>
             </div>
-            <h1 className="text-3xl font-serif italic font-light text-[#1A1A1A]">
+            <h1 className="text-3xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
               Agenda & Gestione Salone
             </h1>
           </div>
@@ -271,7 +271,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
         <div className="flex items-center space-x-3 self-end md:self-auto">
           <button
             onClick={() => setIsManualBookingOpen(true)}
-            className="px-4 py-2.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5 border border-[#1A1A1A]"
+            className="px-4 py-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5 border border-[#C8102E]"
           >
             <Plus className="w-4 h-4 text-white" />
             <span>Nuovo Appuntamento</span>
@@ -279,15 +279,15 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
 
           <button
             onClick={() => setIsClosureModalOpen(true)}
-            className="px-3.5 py-2.5 rounded-none bg-white hover:bg-rose-50 text-rose-800 border border-rose-300 text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5"
+            className="px-3.5 py-2.5 rounded-none bg-[#151515] hover:bg-rose-950/40 text-rose-400 border border-rose-800 text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5"
           >
-            <Ban className="w-3.5 h-3.5 text-rose-600" />
+            <Ban className="w-3.5 h-3.5 text-rose-400" />
             <span>Blocca Slot / Ferie</span>
           </button>
 
           <button
             onClick={handleLogout}
-            className="p-2.5 rounded-none bg-white hover:bg-[#EFEDE9] text-[#1A1A1A] border border-[#1A1A1A]"
+            className="p-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white border border-[#2E2E2E]"
             title="Esci dall'area admin"
           >
             <LogOut className="w-4 h-4" />
@@ -296,13 +296,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex space-x-2 border-b border-[#1A1A1A] pb-3 overflow-x-auto">
+      <div className="flex space-x-2 border-b border-[#2E2E2E] pb-3 overflow-x-auto">
         <button
           onClick={() => setActiveTab('agenda')}
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'agenda'
-              ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-              : 'bg-white text-[#767676] hover:text-[#1A1A1A] border-[#1A1A1A]'
+              ? 'bg-[#C8102E] text-white border-[#C8102E]'
+              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
           }`}
         >
           <Calendar className="w-3.5 h-3.5" />
@@ -313,8 +313,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           onClick={() => setActiveTab('appointments')}
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'appointments'
-              ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-              : 'bg-white text-[#767676] hover:text-[#1A1A1A] border-[#1A1A1A]'
+              ? 'bg-[#C8102E] text-white border-[#C8102E]'
+              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
           }`}
         >
           <Clock className="w-3.5 h-3.5" />
@@ -325,8 +325,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           onClick={() => setActiveTab('services')}
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'services'
-              ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-              : 'bg-white text-[#767676] hover:text-[#1A1A1A] border-[#1A1A1A]'
+              ? 'bg-[#C8102E] text-white border-[#C8102E]'
+              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
           }`}
         >
           <Scissors className="w-3.5 h-3.5" />
@@ -337,8 +337,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           onClick={() => setActiveTab('operators')}
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'operators'
-              ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-              : 'bg-white text-[#767676] hover:text-[#1A1A1A] border-[#1A1A1A]'
+              ? 'bg-[#C8102E] text-white border-[#C8102E]'
+              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
           }`}
         >
           <User className="w-3.5 h-3.5" />
@@ -349,8 +349,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           onClick={() => setActiveTab('hours')}
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'hours'
-              ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-              : 'bg-white text-[#767676] hover:text-[#1A1A1A] border-[#1A1A1A]'
+              ? 'bg-[#C8102E] text-white border-[#C8102E]'
+              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
           }`}
         >
           <Sliders className="w-3.5 h-3.5" />
@@ -366,15 +366,15 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           {/* Controls & Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
             {/* Date selector */}
-            <div className="bg-white p-4 rounded-none border border-[#1A1A1A]">
-              <label className="block text-[10px] font-bold uppercase tracking-widest text-[#767676] mb-1">
+            <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E]">
+              <label className="block text-[10px] font-bold uppercase tracking-widest text-[#9A9A9A] mb-1">
                 Data Selezionata
               </label>
               <input
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full text-xs font-bold text-[#1A1A1A] focus:outline-none bg-transparent"
+                className="w-full text-xs font-bold text-[#F2EFEA] focus:outline-none bg-transparent"
               />
             </div>
 
@@ -382,65 +382,65 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             <div className="flex space-x-2">
               <button
                 onClick={() => setSelectedDate(getFormattedDate(0))}
-                className="flex-1 py-3 px-3 rounded-none bg-white border border-[#1A1A1A] text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:bg-[#EFEDE9]"
+                className="flex-1 py-3 px-3 rounded-none bg-[#151515] border border-[#2E2E2E] text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#242424]"
               >
                 Oggi
               </button>
               <button
                 onClick={() => setSelectedDate(getFormattedDate(1))}
-                className="flex-1 py-3 px-3 rounded-none bg-white border border-[#1A1A1A] text-xs font-bold uppercase tracking-wider text-[#1A1A1A] hover:bg-[#EFEDE9]"
+                className="flex-1 py-3 px-3 rounded-none bg-[#151515] border border-[#2E2E2E] text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#242424]"
               >
                 Domani
               </button>
             </div>
 
             {/* Stat: Appuntamenti */}
-            <div className="bg-white p-4 rounded-none border border-[#1A1A1A]">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#767676] block">
+            <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E]">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#9A9A9A] block">
                 Appuntamenti Giornata
               </span>
-              <span className="text-2xl font-serif italic font-light text-[#1A1A1A]">
+              <span className="text-2xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
                 {activeDayAppointments.length} clienti
               </span>
             </div>
 
             {/* Stat: Incasso Stimato */}
-            <div className="bg-white p-4 rounded-none border border-[#1A1A1A]">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#767676] block">
+            <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E]">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#9A9A9A] block">
                 Incasso Stimato
               </span>
-              <span className="text-2xl font-serif italic font-light text-[#1A1A1A]">
+              <span className="text-2xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
                 €{totalRevenueEst}
               </span>
             </div>
           </div>
 
           {/* Agenda Grid: Columns for each operator */}
-          <div className="bg-white rounded-none border border-[#1A1A1A] overflow-x-auto">
+          <div className="bg-[#151515] rounded-none border border-[#2E2E2E] overflow-x-auto">
             <div className="min-w-[768px]">
               {/* Header Columns */}
-              <div className="grid grid-cols-12 border-b border-[#1A1A1A] bg-[#EFEDE9] p-3 text-xs font-bold uppercase tracking-wider text-[#1A1A1A]">
-                <div className="col-span-2 text-center text-[#767676]">Orario</div>
+              <div className="grid grid-cols-12 border-b border-[#2E2E2E] bg-[#1C1C1C] p-3 text-xs font-bold uppercase tracking-wider text-[#F2EFEA]">
+                <div className="col-span-2 text-center text-[#9A9A9A]">Orario</div>
                 {operators.map((op) => (
                   <div key={op.id} className="col-span-3 text-center flex items-center justify-center space-x-2">
                     <img
                       src={op.photo_url}
                       alt={op.name}
-                      className="w-5 h-5 rounded-full object-cover border border-[#1A1A1A]"
+                      className="w-5 h-5 rounded-full object-cover border border-[#2E2E2E]"
                     />
-                    <span className="font-serif italic capitalize text-sm">{op.name}</span>
+                    <span className="font-display uppercase tracking-wide capitalize text-sm">{op.name}</span>
                   </div>
                 ))}
-                <div className="col-span-1 text-center text-[10px] text-[#767676]">Note</div>
+                <div className="col-span-1 text-center text-[10px] text-[#9A9A9A]">Note</div>
               </div>
 
               {/* Time slot rows */}
-              <div className="divide-y divide-[#1A1A1A]/15 text-xs">
+              <div className="divide-y divide-[#2E2E2E]/15 text-xs">
                 {timeGridRows.map((timeStr) => {
                   return (
-                    <div key={timeStr} className="grid grid-cols-12 min-h-[58px] items-stretch hover:bg-[#FDFCFB] transition-colors">
+                    <div key={timeStr} className="grid grid-cols-12 min-h-[58px] items-stretch hover:bg-[#0B0B0B] transition-colors">
                       {/* Time label */}
-                      <div className="col-span-2 flex items-center justify-center font-mono font-bold text-[#767676] bg-[#EFEDE9]/40 border-r border-[#1A1A1A]/20">
+                      <div className="col-span-2 flex items-center justify-center font-mono font-bold text-[#9A9A9A] bg-[#1C1C1C]/40 border-r border-[#F2EFEA]/20">
                         {timeStr}
                       </div>
 
@@ -461,38 +461,38 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                         );
 
                         return (
-                          <div key={op.id} className="col-span-3 p-1.5 border-r border-[#1A1A1A]/20 flex flex-col justify-center">
+                          <div key={op.id} className="col-span-3 p-1.5 border-r border-[#F2EFEA]/20 flex flex-col justify-center">
                             {apt ? (
                               <div
                                 className={`p-2.5 rounded-none border text-[11px] relative group ${
                                   apt.status === 'completed'
                                     ? 'bg-gray-100 border-gray-400 text-gray-800'
-                                    : 'bg-[#FDFCFB] border-[#1A1A1A] text-[#1A1A1A]'
+                                    : 'bg-[#0B0B0B] border-[#2E2E2E] text-[#F2EFEA]'
                                 }`}
                               >
                                 <div className="flex justify-between items-start font-bold">
-                                  <span className="font-serif italic text-xs">{apt.customer_name}</span>
-                                  <span className="font-mono text-[9px] bg-white px-1 border border-[#1A1A1A]">
+                                  <span className="font-display uppercase tracking-wide text-xs">{apt.customer_name}</span>
+                                  <span className="font-mono text-[9px] bg-[#151515] px-1 border border-[#2E2E2E]">
                                     {apt.booking_code}
                                   </span>
                                 </div>
-                                <div className="text-[10px] text-[#767676] mt-0.5">
+                                <div className="text-[10px] text-[#9A9A9A] mt-0.5">
                                   {StorageService.getServiceById(apt.service_id)?.name} ({apt.start_time} - {apt.end_time})
                                 </div>
-                                <div className="text-[10px] text-[#1A1A1A] font-medium flex items-center gap-1 mt-1">
-                                  <Phone className="w-2.5 h-2.5 text-[#1A1A1A]" />
+                                <div className="text-[10px] text-[#F2EFEA] font-medium flex items-center gap-1 mt-1">
+                                  <Phone className="w-2.5 h-2.5 text-[#F2EFEA]" />
                                   <span>{apt.customer_phone}</span>
                                 </div>
 
                                 {/* Quick actions on hover */}
-                                <div className="mt-1 pt-1 border-t border-[#1A1A1A]/20 flex justify-end space-x-1 opacity-90">
+                                <div className="mt-1 pt-1 border-t border-[#F2EFEA]/20 flex justify-end space-x-1 opacity-90">
                                   {apt.status !== 'completed' && (
                                     <button
                                       onClick={async () => {
                                         await StorageService.adminUpdateAppointmentStatus(apt.id, 'completed');
                                         triggerRefresh();
                                       }}
-                                      className="px-1.5 py-0.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-[9px] font-bold uppercase tracking-wider"
+                                      className="px-1.5 py-0.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white text-[9px] font-bold uppercase tracking-wider"
                                       title="Segna come completato"
                                     >
                                       ✓ Completa
@@ -505,7 +505,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                         triggerRefresh();
                                       }
                                     }}
-                                    className="px-1.5 py-0.5 rounded-none bg-rose-50 hover:bg-rose-100 text-rose-700 text-[9px] border border-rose-200 uppercase font-bold"
+                                    className="px-1.5 py-0.5 rounded-none bg-rose-950/40 hover:bg-rose-900/40 text-rose-400 text-[9px] border border-rose-800 uppercase font-bold"
                                     title="Cancella appuntamento"
                                   >
                                     Cancella
@@ -513,7 +513,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                 </div>
                               </div>
                             ) : closure ? (
-                              <div className="p-2 rounded-none bg-rose-50 text-rose-800 text-[10px] italic border border-rose-200">
+                              <div className="p-2 rounded-none bg-rose-950/40 text-rose-400 text-[10px] italic border border-rose-800">
                                 Chiuso: {closure.reason || 'Ferie/Pausa'}
                               </div>
                             ) : (
@@ -524,7 +524,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                   setManualDate(selectedDate);
                                   setIsManualBookingOpen(true);
                                 }}
-                                className="w-full h-full min-h-[36px] rounded-none border border-dashed border-[#1A1A1A]/30 hover:border-[#1A1A1A] hover:bg-[#EFEDE9] text-[#767676] hover:text-[#1A1A1A] flex items-center justify-center text-[10px] font-bold uppercase tracking-wider transition-colors"
+                                className="w-full h-full min-h-[36px] rounded-none border border-dashed border-[#F2EFEA]/30 hover:border-[#C8102E] hover:bg-[#242424] text-[#9A9A9A] hover:text-[#F2EFEA] flex items-center justify-center text-[10px] font-bold uppercase tracking-wider transition-colors"
                               >
                                 + Libero
                               </button>
@@ -534,7 +534,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                       })}
 
                       {/* Side note column */}
-                      <div className="col-span-1 flex items-center justify-center text-[10px] text-[#767676]/50">
+                      <div className="col-span-1 flex items-center justify-center text-[10px] text-[#9A9A9A]/50">
                         •
                       </div>
                     </div>
@@ -551,14 +551,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {activeTab === 'appointments' && (
         <div className="space-y-6">
-          <div className="bg-white p-4 rounded-none border border-[#1A1A1A] flex flex-wrap gap-4 items-center justify-between">
+          <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E] flex flex-wrap gap-4 items-center justify-between">
             <div className="flex flex-wrap gap-3 items-center">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-[#1A1A1A]">Filtra per:</span>
+              <span className="text-[10px] uppercase font-bold tracking-wider text-[#F2EFEA]">Filtra per:</span>
 
               <select
                 value={filterOperator}
                 onChange={(e) => setFilterOperator(e.target.value)}
-                className="text-xs px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                className="text-xs px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
               >
                 <option value="all">Tutti i parrucchieri</option>
                 {operators.map(o => (
@@ -569,7 +569,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="text-xs px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                className="text-xs px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
               >
                 <option value="all">Tutti gli stati</option>
                 <option value="confirmed">Confermati</option>
@@ -578,15 +578,15 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </select>
             </div>
 
-            <span className="text-xs text-[#767676]">
+            <span className="text-xs text-[#9A9A9A]">
               {allAppointments.length} record totali nel database
             </span>
           </div>
 
-          <div className="bg-white rounded-none border border-[#1A1A1A] overflow-hidden">
+          <div className="bg-[#151515] rounded-none border border-[#2E2E2E] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#EFEDE9] text-[#1A1A1A] font-bold uppercase tracking-wider text-[10px] border-b border-[#1A1A1A]">
+                <thead className="bg-[#1C1C1C] text-[#F2EFEA] font-bold uppercase tracking-wider text-[10px] border-b border-[#2E2E2E]">
                   <tr>
                     <th className="p-3.5">Codice</th>
                     <th className="p-3.5">Cliente & Telefono</th>
@@ -597,40 +597,40 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     <th className="p-3.5 text-right">Azioni</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1A1A1A]/15">
+                <tbody className="divide-y divide-[#2E2E2E]/15">
                   {allAppointments
                     .filter(a => (filterOperator === 'all' || a.operator_id === filterOperator) && (filterStatus === 'all' || a.status === filterStatus))
                     .map((apt) => {
                       const srv = StorageService.getServiceById(apt.service_id);
                       const op = StorageService.getOperatorById(apt.operator_id);
                       return (
-                        <tr key={apt.id} className="hover:bg-[#FDFCFB] transition-colors">
-                          <td className="p-3.5 font-mono font-bold text-[#1A1A1A]">
+                        <tr key={apt.id} className="hover:bg-[#0B0B0B] transition-colors">
+                          <td className="p-3.5 font-mono font-bold text-[#F2EFEA]">
                             {apt.booking_code}
                           </td>
                           <td className="p-3.5">
-                            <span className="font-serif italic text-sm text-[#1A1A1A] block">{apt.customer_name}</span>
-                            <span className="text-[#767676]">{apt.customer_phone}</span>
+                            <span className="font-display uppercase tracking-wide text-sm text-[#F2EFEA] block">{apt.customer_name}</span>
+                            <span className="text-[#9A9A9A]">{apt.customer_phone}</span>
                           </td>
                           <td className="p-3.5">
-                            <span className="font-bold text-[#1A1A1A]">{srv?.name || 'Servizio'}</span>
-                            <span className="text-[11px] text-[#767676] block">€{srv?.price} • {srv?.duration_minutes}m</span>
+                            <span className="font-bold text-[#F2EFEA]">{srv?.name || 'Servizio'}</span>
+                            <span className="text-[11px] text-[#9A9A9A] block">€{srv?.price} • {srv?.duration_minutes}m</span>
                           </td>
-                          <td className="p-3.5 font-serif italic text-sm text-[#1A1A1A]">
+                          <td className="p-3.5 font-display uppercase tracking-wide text-sm text-[#F2EFEA]">
                             {op?.name || 'Non assegnato'}
                           </td>
                           <td className="p-3.5">
-                            <span className="font-bold text-[#1A1A1A] block">{apt.appointment_date}</span>
-                            <span className="text-[#767676]">{apt.start_time} - {apt.end_time}</span>
+                            <span className="font-bold text-[#F2EFEA] block">{apt.appointment_date}</span>
+                            <span className="text-[#9A9A9A]">{apt.start_time} - {apt.end_time}</span>
                           </td>
                           <td className="p-3.5">
                             <span
                               className={`px-2 py-0.5 rounded-none text-[10px] font-bold uppercase tracking-wider border ${
                                 apt.status === 'confirmed'
-                                  ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                                  ? 'bg-emerald-900/40 text-emerald-400 border-emerald-700'
                                   : apt.status === 'completed'
                                   ? 'bg-gray-100 text-gray-800 border-gray-300'
-                                  : 'bg-rose-100 text-rose-800 border-rose-300'
+                                  : 'bg-rose-900/40 text-rose-400 border-rose-800'
                               }`}
                             >
                               {apt.status}
@@ -643,7 +643,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                   await StorageService.adminUpdateAppointmentStatus(apt.id, 'completed');
                                   triggerRefresh();
                                 }}
-                                className="px-2.5 py-1 rounded-none bg-[#1A1A1A] text-white font-bold uppercase tracking-wider text-[9px]"
+                                className="px-2.5 py-1 rounded-none bg-[#C8102E] text-white font-bold uppercase tracking-wider text-[9px]"
                               >
                                 Completa
                               </button>
@@ -654,7 +654,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                   await StorageService.adminUpdateAppointmentStatus(apt.id, 'cancelled');
                                   triggerRefresh();
                                 }}
-                                className="px-2.5 py-1 rounded-none bg-rose-50 text-rose-700 font-bold uppercase tracking-wider text-[9px] border border-rose-200"
+                                className="px-2.5 py-1 rounded-none bg-rose-950/40 text-rose-400 font-bold uppercase tracking-wider text-[9px] border border-rose-800"
                               >
                                 Cancella
                               </button>
@@ -677,16 +677,16 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
         <div className="space-y-6">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
+              <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Listino Servizi & Tariffe
               </h2>
-              <p className="text-xs text-[#767676]">
+              <p className="text-xs text-[#9A9A9A]">
                 Modifica prezzi, durate o crea nuovi trattamenti per il salone.
               </p>
             </div>
             <button
               onClick={() => setIsNewServiceModalOpen(true)}
-              className="px-4 py-2.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5 border border-[#1A1A1A]"
+              className="px-4 py-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5 border border-[#C8102E]"
             >
               <Plus className="w-4 h-4 text-white" />
               <span>Aggiungi Servizio</span>
@@ -697,36 +697,36 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             {services.map((service) => (
               <div
                 key={service.id}
-                className="bg-white rounded-none p-6 border border-[#1A1A1A] space-y-4"
+                className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4"
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A] bg-[#EFEDE9] px-2 py-0.5 border border-[#1A1A1A]">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA] bg-[#1C1C1C] px-2 py-0.5 border border-[#2E2E2E]">
                       {service.category}
                     </span>
-                    <h3 className="font-serif italic font-light text-xl text-[#1A1A1A] mt-2">
+                    <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA] mt-2">
                       {service.name}
                     </h3>
                   </div>
 
                   <div className="text-right">
-                    <span className="text-2xl font-serif italic font-light text-[#1A1A1A]">
+                    <span className="text-2xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
                       €{service.price}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-xs text-[#767676] line-clamp-3">
+                <p className="text-xs text-[#9A9A9A] line-clamp-3">
                   {service.description}
                 </p>
 
-                <div className="flex justify-between items-center pt-3 border-t border-[#1A1A1A]/20 text-xs text-[#767676]">
-                  <span className="flex items-center gap-1 font-bold uppercase text-[10px] tracking-wider text-[#1A1A1A]">
-                    <Clock className="w-3.5 h-3.5 text-[#1A1A1A]" />
+                <div className="flex justify-between items-center pt-3 border-t border-[#F2EFEA]/20 text-xs text-[#9A9A9A]">
+                  <span className="flex items-center gap-1 font-bold uppercase text-[10px] tracking-wider text-[#F2EFEA]">
+                    <Clock className="w-3.5 h-3.5 text-[#F2EFEA]" />
                     {service.duration_minutes} min
                   </span>
 
-                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border ${service.active ? 'bg-emerald-100 text-emerald-900 border-emerald-300' : 'bg-rose-100 text-rose-900 border-rose-300'}`}>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border ${service.active ? 'bg-emerald-900/40 text-emerald-400 border-emerald-700' : 'bg-rose-900/40 text-rose-900 border-rose-800'}`}>
                     {service.active ? 'Attivo' : 'Disattivato'}
                   </span>
                 </div>
@@ -734,9 +734,9 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <div className="flex space-x-2 pt-2">
                   <button
                     onClick={() => setEditingService(service)}
-                    className="flex-1 py-2 rounded-none border border-[#1A1A1A] hover:bg-[#EFEDE9] text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] flex items-center justify-center space-x-1"
+                    className="flex-1 py-2 rounded-none border border-[#2E2E2E] hover:bg-[#242424] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] flex items-center justify-center space-x-1"
                   >
-                    <Edit3 className="w-3.5 h-3.5 text-[#1A1A1A]" />
+                    <Edit3 className="w-3.5 h-3.5 text-[#F2EFEA]" />
                     <span>Modifica</span>
                   </button>
 
@@ -747,8 +747,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     }}
                     className={`px-3 py-2 rounded-none text-[10px] font-bold uppercase tracking-wider border ${
                       service.active
-                        ? 'border-rose-200 text-rose-700 hover:bg-rose-50'
-                        : 'border-emerald-200 text-emerald-700 hover:bg-emerald-50'
+                        ? 'border-rose-800 text-rose-400 hover:bg-rose-950/40'
+                        : 'border-emerald-700 text-emerald-400 hover:bg-emerald-950/40'
                     }`}
                   >
                     {service.active ? 'Disattiva' : 'Attiva'}
@@ -767,10 +767,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
         <div className="space-y-6">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
+              <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Team & Operatori Salone
               </h2>
-              <p className="text-xs text-[#767676]">
+              <p className="text-xs text-[#9A9A9A]">
                 Configura i parrucchieri abilitati e i servizi che ciascuno può eseguire.
               </p>
             </div>
@@ -780,28 +780,28 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             {operators.map((op) => (
               <div
                 key={op.id}
-                className="bg-white rounded-none p-6 border border-[#1A1A1A] space-y-4 text-center"
+                className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4 text-center"
               >
                 <img
                   src={op.photo_url}
                   alt={op.name}
-                  className="w-20 h-20 rounded-full object-cover mx-auto border border-[#1A1A1A]"
+                  className="w-20 h-20 rounded-full object-cover mx-auto border border-[#2E2E2E]"
                 />
 
                 <div>
-                  <h3 className="font-serif italic font-light text-xl text-[#1A1A1A]">
+                  <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA]">
                     {op.name}
                   </h3>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A] mt-1">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA] mt-1">
                     {op.role}
                   </p>
-                  <p className="text-xs text-[#767676] mt-2">
+                  <p className="text-xs text-[#9A9A9A] mt-2">
                     {op.bio}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#1A1A1A]/20 text-left">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#767676] block mb-2">
+                <div className="pt-3 border-t border-[#F2EFEA]/20 text-left">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#9A9A9A] block mb-2">
                     Servizi Assegnati:
                   </span>
                   <div className="flex flex-wrap gap-1">
@@ -810,7 +810,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                       .map(m => {
                         const s = StorageService.getServiceById(m.service_id);
                         return s ? (
-                          <span key={m.service_id} className="text-[10px] bg-[#EFEDE9] border border-[#1A1A1A] px-1.5 py-0.5 text-[#1A1A1A] font-medium">
+                          <span key={m.service_id} className="text-[10px] bg-[#1C1C1C] border border-[#2E2E2E] px-1.5 py-0.5 text-[#F2EFEA] font-medium">
                             {s.name}
                           </span>
                         ) : null;
@@ -820,9 +820,9 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
 
                 <button
                   onClick={() => setEditingOperator(op)}
-                  className="w-full py-2.5 rounded-none border border-[#1A1A1A] hover:bg-[#EFEDE9] text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] flex items-center justify-center space-x-1 transition-colors"
+                  className="w-full py-2.5 rounded-none border border-[#2E2E2E] hover:bg-[#242424] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] flex items-center justify-center space-x-1 transition-colors"
                 >
-                  <Edit3 className="w-3.5 h-3.5 text-[#1A1A1A]" />
+                  <Edit3 className="w-3.5 h-3.5 text-[#F2EFEA]" />
                   <span>Modifica Ruolo & Bio</span>
                 </button>
               </div>
@@ -837,19 +837,19 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {activeTab === 'hours' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Orari settimanali */}
-          <div className="bg-white rounded-none p-6 border border-[#1A1A1A] space-y-4">
-            <h3 className="font-serif italic font-light text-xl text-[#1A1A1A] border-b border-[#1A1A1A] pb-3">
+          <div className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4">
+            <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
               Orari Settimanali Ufficiali
             </h3>
             <div className="space-y-3 text-xs">
               {businessHours.map((h) => (
-                <div key={h.id} className="flex justify-between items-center py-2.5 border-b border-[#1A1A1A]/10">
-                  <span className="font-bold uppercase tracking-wider text-[11px] text-[#1A1A1A] w-28">{h.day_name}</span>
+                <div key={h.id} className="flex justify-between items-center py-2.5 border-b border-[#F2EFEA]/10">
+                  <span className="font-bold uppercase tracking-wider text-[11px] text-[#F2EFEA] w-28">{h.day_name}</span>
                   <span>
                     {h.is_closed ? (
-                      <span className="text-rose-700 font-bold uppercase text-[10px] tracking-wider">Chiuso</span>
+                      <span className="text-rose-400 font-bold uppercase text-[10px] tracking-wider">Chiuso</span>
                     ) : (
-                      <span className="font-medium text-[#1A1A1A]">{h.open_time} – {h.close_time}</span>
+                      <span className="font-medium text-[#F2EFEA]">{h.open_time} – {h.close_time}</span>
                     )}
                   </span>
                   <button
@@ -860,7 +860,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                       StorageService.saveBusinessHours(updated);
                       triggerRefresh();
                     }}
-                    className="text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] hover:underline"
+                    className="text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:underline"
                   >
                     {h.is_closed ? 'Imposta Aperto' : 'Imposta Chiuso'}
                   </button>
@@ -870,14 +870,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Chiusure straordinarie / Ferie */}
-          <div className="bg-white rounded-none p-6 border border-[#1A1A1A] space-y-4">
-            <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
-              <h3 className="font-serif italic font-light text-xl text-[#1A1A1A]">
+          <div className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4">
+            <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+              <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA]">
                 Chiusure Straordinarie & Ferie
               </h3>
               <button
                 onClick={() => setIsClosureModalOpen(true)}
-                className="px-3 py-1.5 rounded-none bg-[#1A1A1A] text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 hover:bg-black"
+                className="px-3 py-1.5 rounded-none bg-[#C8102E] text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 hover:bg-[#E3162F]"
               >
                 <Plus className="w-3 h-3" />
                 Aggiungi
@@ -885,14 +885,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             </div>
 
             {closures.length === 0 ? (
-              <p className="text-xs text-[#767676]">Nessuna chiusura programmata.</p>
+              <p className="text-xs text-[#9A9A9A]">Nessuna chiusura programmata.</p>
             ) : (
               <div className="space-y-3 text-xs">
                 {closures.map((c) => (
-                  <div key={c.id} className="flex justify-between items-center p-3.5 rounded-none bg-[#FDFCFB] border border-[#1A1A1A]">
+                  <div key={c.id} className="flex justify-between items-center p-3.5 rounded-none bg-[#0B0B0B] border border-[#2E2E2E]">
                     <div>
-                      <span className="font-bold text-[#1A1A1A] block">{c.date}</span>
-                      <span className="text-[#767676] text-[11px]">
+                      <span className="font-bold text-[#F2EFEA] block">{c.date}</span>
+                      <span className="text-[#9A9A9A] text-[11px]">
                         {c.reason} {c.operator_id ? `(${StorageService.getOperatorById(c.operator_id)?.name})` : '(Tutto il salone)'}
                       </span>
                     </div>
@@ -901,7 +901,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                         StorageService.deleteClosure(c.id);
                         triggerRefresh();
                       }}
-                      className="text-rose-700 hover:text-rose-900 p-1"
+                      className="text-rose-400 hover:text-rose-900 p-1"
                       title="Elimina chiusura"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -919,58 +919,58 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {isManualBookingOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-none max-w-lg w-full p-6 sm:p-8 space-y-4 border border-[#1A1A1A] max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
-              <h3 className="font-serif italic font-light text-2xl text-[#1A1A1A]">
+          <div className="bg-[#151515] rounded-none max-w-lg w-full p-6 sm:p-8 space-y-4 border border-[#2E2E2E] max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+              <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA]">
                 Nuovo Appuntamento Manuale
               </h3>
               <button
                 onClick={() => setIsManualBookingOpen(false)}
-                className="text-[#1A1A1A] hover:text-black font-bold text-lg"
+                className="text-[#F2EFEA] hover:text-black font-bold text-lg"
               >
                 ✕
               </button>
             </div>
 
             {manualError && (
-              <div className="p-3 rounded-none bg-rose-50 text-rose-800 text-xs border border-rose-200">
+              <div className="p-3 rounded-none bg-rose-950/40 text-rose-400 text-xs border border-rose-800">
                 {manualError}
               </div>
             )}
 
             <form onSubmit={handleCreateManualBooking} className="space-y-4 text-xs">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Nome Cliente *</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Nome Cliente *</label>
                 <input
                   type="text"
                   required
                   value={manualClientName}
                   onChange={(e) => setManualClientName(e.target.value)}
                   placeholder="Nome del cliente..."
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Numero di Telefono *</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Numero di Telefono *</label>
                 <input
                   type="tel"
                   required
                   value={manualClientPhone}
                   onChange={(e) => setManualClientPhone(e.target.value)}
                   placeholder="+39 ..."
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Servizio *</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Servizio *</label>
                   <select
                     required
                     value={manualServiceId}
                     onChange={(e) => setManualServiceId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   >
                     <option value="">Seleziona...</option>
                     {services.map(s => (
@@ -980,12 +980,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Parrucchiere *</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Parrucchiere *</label>
                   <select
                     required
                     value={manualOperatorId}
                     onChange={(e) => setManualOperatorId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   >
                     <option value="">Seleziona...</option>
                     {operators.map(o => (
@@ -997,22 +997,22 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Data *</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Data *</label>
                   <input
                     type="date"
                     required
                     value={manualDate}
                     onChange={(e) => setManualDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Orario Inizio *</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Orario Inizio *</label>
                   <select
                     value={manualTime}
                     onChange={(e) => setManualTime(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   >
                     {timeGridRows.map(t => (
                       <option key={t} value={t}>{t}</option>
@@ -1022,13 +1022,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Note interne</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Note interne</label>
                 <textarea
                   rows={2}
                   value={manualNotes}
                   onChange={(e) => setManualNotes(e.target.value)}
                   placeholder="Es. Prenotazione telefonica, cliente fisso..."
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
@@ -1036,13 +1036,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setIsManualBookingOpen(false)}
-                  className="px-4 py-2.5 rounded-none border border-[#1A1A1A] text-[#1A1A1A] text-[10px] font-bold uppercase tracking-wider hover:bg-[#EFEDE9]"
+                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
                 >
                   Annulla
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white font-bold uppercase tracking-wider text-[10px] border border-[#1A1A1A]"
+                  className="px-5 py-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white font-bold uppercase tracking-wider text-[10px] border border-[#C8102E]"
                 >
                   Registra Appuntamento
                 </button>
@@ -1057,29 +1057,29 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {isClosureModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-none max-w-md w-full p-6 space-y-4 border border-[#1A1A1A]">
-            <h3 className="font-serif italic font-light text-2xl text-[#1A1A1A] border-b border-[#1A1A1A] pb-3">
+          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
               Aggiungi Chiusura Straordinaria / Ferie
             </h3>
 
             <form onSubmit={handleAddClosure} className="space-y-3 text-xs">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Data Chiusura *</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Data Chiusura *</label>
                 <input
                   type="date"
                   required
                   value={closureDate}
                   onChange={(e) => setClosureDate(e.target.value)}
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Operatore Interessato</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Operatore Interessato</label>
                 <select
                   value={closureOperatorId}
                   onChange={(e) => setClosureOperatorId(e.target.value)}
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 >
                   <option value="all">Tutto il Salone (Chiusura completa)</option>
                   {operators.map(o => (
@@ -1089,14 +1089,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Motivo / Descrizione *</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Motivo / Descrizione *</label>
                 <input
                   type="text"
                   required
                   value={closureReason}
                   onChange={(e) => setClosureReason(e.target.value)}
                   placeholder="Es. Ferie estive, Corso di aggiornamento..."
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
@@ -1104,7 +1104,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setIsClosureModalOpen(false)}
-                  className="px-4 py-2.5 rounded-none border border-[#1A1A1A] text-[#1A1A1A] text-[10px] font-bold uppercase tracking-wider hover:bg-[#EFEDE9]"
+                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
                 >
                   Annulla
                 </button>
@@ -1125,39 +1125,39 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {editingService && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-none max-w-md w-full p-6 space-y-4 border border-[#1A1A1A]">
-            <h3 className="font-serif italic font-light text-2xl text-[#1A1A1A] border-b border-[#1A1A1A] pb-3">
+          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
               Modifica Servizio: {editingService.name}
             </h3>
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Nome Servizio</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Nome Servizio</label>
                 <input
                   type="text"
                   value={editingService.name}
                   onChange={(e) => setEditingService({ ...editingService, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Prezzo (€)</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Prezzo (€)</label>
                   <input
                     type="number"
                     value={editingService.price}
                     onChange={(e) => setEditingService({ ...editingService, price: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Durata (minuti)</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Durata (minuti)</label>
                   <select
                     value={editingService.duration_minutes}
                     onChange={(e) => setEditingService({ ...editingService, duration_minutes: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   >
                     <option value={30}>30 minuti</option>
                     <option value={45}>45 minuti</option>
@@ -1169,12 +1169,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Descrizione</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Descrizione</label>
                 <textarea
                   rows={3}
                   value={editingService.description}
                   onChange={(e) => setEditingService({ ...editingService, description: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
@@ -1182,7 +1182,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setEditingService(null)}
-                  className="px-4 py-2.5 rounded-none border border-[#1A1A1A] text-[#1A1A1A] text-[10px] font-bold uppercase tracking-wider hover:bg-[#EFEDE9]"
+                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
                 >
                   Annulla
                 </button>
@@ -1193,7 +1193,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     setEditingService(null);
                     triggerRefresh();
                   }}
-                  className="px-5 py-2.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white font-bold uppercase tracking-wider text-[10px] border border-[#1A1A1A]"
+                  className="px-5 py-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white font-bold uppercase tracking-wider text-[10px] border border-[#C8102E]"
                 >
                   Salva Modifiche
                 </button>
@@ -1208,8 +1208,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {isNewServiceModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-none max-w-md w-full p-6 space-y-4 border border-[#1A1A1A]">
-            <h3 className="font-serif italic font-light text-2xl text-[#1A1A1A] border-b border-[#1A1A1A] pb-3">
+          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
               Aggiungi Nuovo Trattamento
             </h3>
 
@@ -1238,34 +1238,34 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               className="space-y-3 text-xs"
             >
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Nome Trattamento *</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Nome Trattamento *</label>
                 <input
                   name="name"
                   type="text"
                   required
                   placeholder="Es. Trattamento Barba Luxury..."
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Prezzo (€) *</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Prezzo (€) *</label>
                   <input
                     name="price"
                     type="number"
                     required
                     placeholder="15"
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Durata</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Durata</label>
                   <select
                     name="duration"
                     defaultValue={30}
-                    className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                   >
                     <option value={30}>30 minuti</option>
                     <option value={45}>45 minuti</option>
@@ -1276,11 +1276,11 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Categoria</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Categoria</label>
                 <select
                   name="category"
                   defaultValue="barba"
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 >
                   <option value="capelli">Capelli</option>
                   <option value="barba">Barba</option>
@@ -1290,13 +1290,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Descrizione *</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Descrizione *</label>
                 <textarea
                   name="desc"
                   required
                   rows={2}
                   placeholder="Descrivi il trattamento e i prodotti inclusi..."
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
@@ -1304,13 +1304,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setIsNewServiceModalOpen(false)}
-                  className="px-4 py-2.5 rounded-none border border-[#1A1A1A] text-[#1A1A1A] text-[10px] font-bold uppercase tracking-wider hover:bg-[#EFEDE9]"
+                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
                 >
                   Annulla
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white font-bold uppercase tracking-wider text-[10px] border border-[#1A1A1A]"
+                  className="px-5 py-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white font-bold uppercase tracking-wider text-[10px] border border-[#C8102E]"
                 >
                   Crea Servizio
                 </button>
@@ -1325,39 +1325,39 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {editingOperator && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-none max-w-md w-full p-6 space-y-4 border border-[#1A1A1A]">
-            <h3 className="font-serif italic font-light text-2xl text-[#1A1A1A] border-b border-[#1A1A1A] pb-3">
+          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
               Modifica Profilo: {editingOperator.name}
             </h3>
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Nome e Cognome</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Nome e Cognome</label>
                 <input
                   type="text"
                   value={editingOperator.name}
                   onChange={(e) => setEditingOperator({ ...editingOperator, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Ruolo / Titolo</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Ruolo / Titolo</label>
                 <input
                   type="text"
                   value={editingOperator.role}
                   onChange={(e) => setEditingOperator({ ...editingOperator, role: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Biografia breve</label>
+                <label className="block text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] mb-1">Biografia breve</label>
                 <textarea
                   rows={3}
                   value={editingOperator.bio || ''}
                   onChange={(e) => setEditingOperator({ ...editingOperator, bio: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
+                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
                 />
               </div>
 
@@ -1365,7 +1365,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setEditingOperator(null)}
-                  className="px-4 py-2.5 rounded-none border border-[#1A1A1A] text-[#1A1A1A] text-[10px] font-bold uppercase tracking-wider hover:bg-[#EFEDE9]"
+                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
                 >
                   Annulla
                 </button>
@@ -1376,7 +1376,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     setEditingOperator(null);
                     triggerRefresh();
                   }}
-                  className="px-5 py-2.5 rounded-none bg-[#1A1A1A] hover:bg-black text-white font-bold uppercase tracking-wider text-[10px] border border-[#1A1A1A]"
+                  className="px-5 py-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white font-bold uppercase tracking-wider text-[10px] border border-[#C8102E]"
                 >
                   Salva Profilo
                 </button>

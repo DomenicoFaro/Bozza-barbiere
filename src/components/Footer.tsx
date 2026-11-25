@@ -15,22 +15,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const { isAdmin } = useAuth();
 
   return (
-    <footer className="bg-[#1A1A1A] text-white border-t border-[#1A1A1A]">
+    <footer className="bg-black text-white border-t border-[#2E2E2E]">
       {/* Top Footer Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Col 1: Brand & Philosophy */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3.5">
-              <BrandLogo size="md" mode="full" className="h-14 w-auto max-w-[220px]" />
+              <BrandLogo mode="full" className="h-16" />
             </div>
             <p className="text-xs text-white/70 leading-relaxed">
-              Il parrucchiere per uomo di Galermo, a Catania: tagli classici e moderni, cura della barba e tanta cordialità.
+              Parrucchiere per uomo a Galermo, Catania. Taglio, barba e rasoio: vieni, siediti e lascia fare a Giuseppe.
             </p>
             <div className="pt-2 flex items-center space-x-2">
               <button
                 onClick={() => onNavigate('booking')}
-                className="inline-flex items-center px-4 py-2 border border-white bg-white text-[#1A1A1A] hover:bg-transparent hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all rounded-none"
+                className="inline-flex items-center px-4 py-2 border border-[#C8102E] bg-[#C8102E] text-white hover:bg-transparent hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all rounded-none"
               >
                 <Calendar className="w-3.5 h-3.5 mr-1.5" />
                 Prenota online
@@ -51,7 +51,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="space-y-4">
             <div className="border-b border-white/20 pb-2">
               <span className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-bold block mb-1">Orari Salone</span>
-              <h4 className="font-serif italic text-lg font-light text-white flex items-center gap-2">
+              <h4 className="font-display uppercase tracking-wide text-lg font-light text-white flex items-center gap-2">
                 <Clock className="w-4 h-4 opacity-70" />
                 Orari di Apertura
               </h4>
@@ -84,7 +84,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="space-y-4">
             <div className="border-b border-white/20 pb-2">
               <span className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-bold block mb-1">Posizione</span>
-              <h4 className="font-serif italic text-lg font-light text-white flex items-center gap-2">
+              <h4 className="font-display uppercase tracking-wide text-lg font-light text-white flex items-center gap-2">
                 <MapPin className="w-4 h-4 opacity-70" />
                 Dove Siamo
               </h4>
@@ -126,7 +126,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="space-y-4">
             <div className="border-b border-white/20 pb-2">
               <span className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-bold block mb-1">Indice</span>
-              <h4 className="font-serif italic text-lg font-light text-white flex items-center gap-2">
+              <h4 className="font-display uppercase tracking-wide text-lg font-light text-white flex items-center gap-2">
                 <Scissors className="w-4 h-4 opacity-70" />
                 Esplora
               </h4>
@@ -137,7 +137,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('home')}
                   className="hover:text-white transition-colors uppercase tracking-wider text-[11px]"
                 >
-                  Home Page
+                  Home
                 </button>
               </li>
               <li>
@@ -145,7 +145,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('booking')}
                   className="hover:text-white transition-colors uppercase tracking-wider text-[11px]"
                 >
-                  Prenota Appuntamento Online
+                  Prenota online
                 </button>
               </li>
               <li>
@@ -153,7 +153,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('services')}
                   className="hover:text-white transition-colors uppercase tracking-wider text-[11px]"
                 >
-                  Listino Servizi & Prezzi
+                  Listino prezzi
                 </button>
               </li>
               <li>
@@ -161,7 +161,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('gallery')}
                   className="hover:text-white transition-colors uppercase tracking-wider text-[11px]"
                 >
-                  Galleria Fotografica
+                  Galleria
                 </button>
               </li>
               <li>
@@ -177,7 +177,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('contacts')}
                   className="hover:text-white transition-colors uppercase tracking-wider text-[11px]"
                 >
-                  Contatti & Orari
+                  Contatti e orari
                 </button>
               </li>
             </ul>
@@ -190,7 +190,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p>© {new Date().getFullYear()} Parrucchiere Uomo da Giuseppe — Tutti i diritti riservati.</p>
           <p className="flex items-center gap-1 uppercase tracking-widest text-[10px]">
-            <span>Parrucchiere per uomo a Catania</span>
+            <span>Galermo · Catania</span>
             <Heart className="w-3 h-3 text-white/70 ml-1" />
           </p>
         </div>

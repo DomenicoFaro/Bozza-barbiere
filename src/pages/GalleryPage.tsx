@@ -39,9 +39,9 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
 
   const categories = [
     { id: 'all', label: 'Tutti i Contenuti' },
-    { id: 'tagli', label: 'Tagli & Sfumature' },
-    { id: 'video', label: 'Video & Reel Live' },
-    { id: 'salone', label: 'Salone & Arredi' },
+    { id: 'tagli', label: 'Tagli' },
+    { id: 'video', label: 'Video' },
+    { id: 'salone', label: 'Il salone' },
   ];
 
   const filteredItems = activeCategory === 'all'
@@ -112,17 +112,17 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#1A1A1A] pb-6 gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#2E2E2E] pb-6 gap-4">
         <div className="max-w-3xl space-y-3">
-          <div className="inline-flex items-center space-x-2 text-[#1A1A1A]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
+          <div className="inline-flex items-center space-x-2 text-[#F2EFEA]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
             <ImageIcon className="w-3.5 h-3.5" />
-            <span>Galleria · Galermo, Catania</span>
+            <span>Galleria</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-serif italic font-light text-[#1A1A1A] tracking-tight">
-            Galleria Ufficiale
+          <h1 className="text-4xl sm:text-5xl font-display uppercase tracking-wide font-light text-[#F2EFEA]">
+            I nostri lavori
           </h1>
-          <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">
-            I nostri tagli, le rifiniture e la cura della barba, direttamente dal salone di Via Galermo 288/E.
+          <p className="text-sm text-[#F2EFEA]/70 leading-relaxed">
+            Tagli, sfumature e barba, direttamente dal salone di Via Galermo 288/E.
           </p>
         </div>
 
@@ -131,7 +131,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
             {items.length > 0 && (
               <button
                 onClick={handleClearAll}
-                className="inline-flex items-center px-3.5 py-2.5 bg-white hover:bg-red-50 text-red-600 border border-red-300 text-[10px] font-bold uppercase tracking-wider transition-all"
+                className="inline-flex items-center px-3.5 py-2.5 bg-[#151515] hover:bg-red-950/40 text-red-400 border border-red-800 text-[10px] font-bold uppercase tracking-wider transition-all"
                 title="Elimina tutti gli elementi"
               >
                 <Trash2 className="w-3.5 h-3.5 mr-1.5" />
@@ -146,7 +146,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                 setNewMediaPreview('');
                 setShowAddModal(true);
               }}
-              className="inline-flex items-center px-4 py-2.5 bg-[#1A1A1A] hover:bg-black text-white text-[11px] font-bold uppercase tracking-wider transition-all shadow-sm"
+              className="inline-flex items-center px-4 py-2.5 bg-[#C8102E] hover:bg-[#E3162F] text-white text-[11px] font-bold uppercase tracking-wider transition-all shadow-sm"
             >
               <Plus className="w-4 h-4 mr-2" />
               <span>Aggiungi Foto o Video</span>
@@ -157,16 +157,16 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
 
       {/* Filter Tabs */}
       {items.length > 0 && (
-        <div className="flex items-center space-x-2 overflow-x-auto pb-2 border-b border-[#1A1A1A]/20">
-          <Filter className="w-3.5 h-3.5 text-[#1A1A1A]/60 mr-1 hidden sm:inline-block shrink-0" />
+        <div className="flex items-center space-x-2 overflow-x-auto pb-2 border-b border-[#F2EFEA]/20">
+          <Filter className="w-3.5 h-3.5 text-[#F2EFEA]/60 mr-1 hidden sm:inline-block shrink-0" />
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               className={`px-4 py-2 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all border ${
                 activeCategory === cat.id
-                  ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-                  : 'bg-white text-[#1A1A1A]/70 hover:text-[#1A1A1A] border-[#1A1A1A]/30 hover:border-[#1A1A1A]'
+                  ? 'bg-[#C8102E] text-white border-[#C8102E]'
+                  : 'bg-[#151515] text-[#F2EFEA]/70 hover:text-[#F2EFEA] border-[#F2EFEA]/30 hover:border-[#C8102E]'
               }`}
             >
               {cat.label}
@@ -182,7 +182,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
             <div
               key={item.id}
               onClick={() => setLightboxItem(item)}
-              className="group relative rounded-none overflow-hidden border border-[#1A1A1A] bg-white transition-all cursor-pointer aspect-[4/3] flex flex-col justify-end"
+              className="group relative rounded-none overflow-hidden border border-[#2E2E2E] bg-[#151515] transition-all cursor-pointer aspect-[4/3] flex flex-col justify-end"
             >
               {item.isVideo && item.videoUrl ? (
                 <video
@@ -204,7 +204,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
 
               {/* Badges on Top */}
               <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#1A1A1A] bg-white/95 px-2.5 py-1 border border-[#1A1A1A] shadow-sm">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-black/70 px-2.5 py-1 border border-[#2E2E2E] shadow-sm">
                   {item.category}
                 </span>
 
@@ -231,7 +231,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
               {/* Video Play Icon in Center if video */}
               {item.isVideo && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                  <div className="w-12 h-12 rounded-full bg-white/90 text-[#1A1A1A] flex items-center justify-center pl-0.5 shadow-xl transition-transform group-hover:scale-110">
+                  <div className="w-12 h-12 rounded-full bg-[#C8102E] text-white flex items-center justify-center pl-0.5 shadow-xl transition-transform group-hover:scale-110">
                     <Play className="w-5 h-5 fill-current" />
                   </div>
                 </div>
@@ -247,15 +247,15 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           ))}
         </div>
       ) : (
-        <div className="border border-dashed border-[#1A1A1A]/40 p-12 text-center bg-white space-y-5">
-          <div className="w-14 h-14 mx-auto rounded-full bg-[#EFEDE9] flex items-center justify-center text-[#1A1A1A]">
+        <div className="border border-dashed border-[#F2EFEA]/40 p-12 text-center bg-[#151515] space-y-5">
+          <div className="w-14 h-14 mx-auto rounded-full bg-[#1C1C1C] flex items-center justify-center text-[#F2EFEA]">
             <ImageIcon className="w-7 h-7 opacity-60" />
           </div>
           <div className="max-w-md mx-auto space-y-2">
-            <h3 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
+            <h3 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
               Tutte le foto e i video precedenti sono stati rimossi
             </h3>
-            <p className="text-xs text-[#1A1A1A]/70 leading-relaxed">
+            <p className="text-xs text-[#F2EFEA]/70 leading-relaxed">
               {isAdmin
                 ? 'La galleria è ora completamente pulita e pronta ad accogliere i tuoi scatti autentici o i tuoi video reel. Premi il pulsante qui sotto per caricarli in qualsiasi momento.'
                 : 'La galleria sarà presto aggiornata con nuovi scatti.'}
@@ -269,7 +269,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                 setNewMediaPreview('');
                 setShowAddModal(true);
               }}
-              className="inline-flex items-center px-6 py-3 bg-[#1A1A1A] text-white text-[11px] font-bold uppercase tracking-wider hover:bg-black transition-all shadow-md"
+              className="inline-flex items-center px-6 py-3 bg-[#C8102E] text-white text-[11px] font-bold uppercase tracking-wider hover:bg-[#E3162F] transition-all shadow-md"
             >
               <Plus className="w-4 h-4 mr-2" />
               <span>Aggiungi Foto o Video</span>
@@ -285,7 +285,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           onClick={() => setLightboxItem(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-[#1A1A1A] rounded-none overflow-hidden border border-white/30 shadow-2xl flex flex-col"
+            className="relative max-w-4xl w-full bg-[#C8102E] rounded-none overflow-hidden border border-white/30 shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Action buttons on top right */}
@@ -301,7 +301,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
               )}
               <button
                 onClick={() => setLightboxItem(null)}
-                className="p-2 bg-black/80 text-white hover:bg-white hover:text-black border border-white/30 transition-colors"
+                className="p-2 bg-black/80 text-white hover:bg-[#151515] hover:text-black border border-white/30 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -335,7 +335,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
             <div className="p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-white/20 bg-[#141414]">
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#1A1A1A] bg-white px-2 py-0.5">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#F2EFEA] bg-[#151515] px-2 py-0.5">
                     {lightboxItem.category}
                   </span>
                   {lightboxItem.tag && (
@@ -344,7 +344,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                     </span>
                   )}
                 </div>
-                <h3 className="font-serif italic text-2xl font-light text-white pt-1">
+                <h3 className="font-display uppercase tracking-wide text-2xl font-light text-white pt-1">
                   {lightboxItem.title}
                 </h3>
                 <p className="text-xs text-white/75 max-w-xl leading-relaxed">
@@ -358,7 +358,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                     setLightboxItem(null);
                     onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-giuseppe' });
                   }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-white hover:bg-neutral-200 text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-[#C8102E] hover:bg-[#E3162F] text-white text-[11px] font-bold uppercase tracking-wider transition-all"
                 >
                   <Scissors className="w-3.5 h-3.5 mr-2" />
                   <span>Prenota da Giuseppe</span>
@@ -376,29 +376,29 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           onClick={() => setShowAddModal(false)}
         >
           <div 
-            className="bg-white border border-[#1A1A1A] max-w-md w-full p-6 space-y-5"
+            className="bg-[#151515] border border-[#2E2E2E] max-w-md w-full p-6 space-y-5"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
+            <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
               <div className="flex items-center space-x-2">
                 {isVideoFile ? <Video className="w-4 h-4" /> : <ImageIcon className="w-4 h-4" />}
-                <h3 className="font-serif italic text-lg font-light text-[#1A1A1A]">
+                <h3 className="font-display uppercase tracking-wide text-lg font-light text-[#F2EFEA]">
                   Aggiungi Nuovo Contenuto
                 </h3>
               </div>
-              <button onClick={() => setShowAddModal(false)} className="p-1 hover:bg-[#EFEDE9]">
+              <button onClick={() => setShowAddModal(false)} className="p-1 hover:bg-[#242424]">
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <form onSubmit={handleAddNewItem} className="space-y-4 text-xs">
               <div>
-                <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#1A1A1A]">
+                <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#F2EFEA]">
                   Seleziona File (Foto o Video) *
                 </label>
                 <div 
                   onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-[#1A1A1A]/40 p-4 text-center cursor-pointer hover:border-[#1A1A1A] transition-colors bg-[#FDFCFB]"
+                  className="border-2 border-dashed border-[#F2EFEA]/40 p-4 text-center cursor-pointer hover:border-[#C8102E] transition-colors bg-[#0B0B0B]"
                 >
                   {newMediaPreview ? (
                     <div className="space-y-2">
@@ -408,26 +408,26 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                           muted 
                           autoPlay 
                           loop 
-                          className="max-h-36 mx-auto object-contain border border-[#1A1A1A]" 
+                          className="max-h-36 mx-auto object-contain border border-[#2E2E2E]" 
                         />
                       ) : (
                         <img 
                           src={newMediaPreview} 
                           alt="Preview" 
-                          className="max-h-36 mx-auto object-contain border border-[#1A1A1A]" 
+                          className="max-h-36 mx-auto object-contain border border-[#2E2E2E]" 
                         />
                       )}
-                      <span className="text-[10px] text-[#1A1A1A]/70 block underline">
+                      <span className="text-[10px] text-[#F2EFEA]/70 block underline">
                         Clicca per cambiare file ({isVideoFile ? 'Video' : 'Foto'})
                       </span>
                     </div>
                   ) : (
                     <div className="space-y-1.5 py-4">
-                      <Upload className="w-6 h-6 mx-auto text-[#1A1A1A]/60" />
-                      <p className="font-semibold text-[11px] text-[#1A1A1A]">
+                      <Upload className="w-6 h-6 mx-auto text-[#F2EFEA]/60" />
+                      <p className="font-semibold text-[11px] text-[#F2EFEA]">
                         Carica foto o video dal dispositivo
                       </p>
-                      <p className="text-[10px] text-[#1A1A1A]/60">
+                      <p className="text-[10px] text-[#F2EFEA]/60">
                         JPG, PNG, WebP o MP4
                       </p>
                     </div>
@@ -443,7 +443,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#1A1A1A]">
+                <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#F2EFEA]">
                   Titolo *
                 </label>
                 <input 
@@ -452,28 +452,28 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                   placeholder="Es. Sfumatura Taper & Texture Crop"
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
-                  className="w-full p-2.5 border border-[#1A1A1A] bg-white text-[#1A1A1A] focus:outline-none"
+                  className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
                 />
               </div>
 
               {!isVideoFile && (
                 <div>
-                  <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#1A1A1A]">
+                  <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#F2EFEA]">
                     Categoria
                   </label>
                   <select
                     value={newCategory}
                     onChange={(e) => setNewCategory(e.target.value)}
-                    className="w-full p-2.5 border border-[#1A1A1A] bg-white text-[#1A1A1A] focus:outline-none"
+                    className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
                   >
-                    <option value="tagli">Tagli & Sfumature</option>
-                    <option value="salone">Salone & Arredi</option>
+                    <option value="tagli">Tagli</option>
+                    <option value="salone">Il salone</option>
                   </select>
                 </div>
               )}
 
               <div>
-                <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#1A1A1A]">
+                <label className="font-bold text-[10px] uppercase tracking-wider block mb-1 text-[#F2EFEA]">
                   Descrizione o Dettagli Tecnici
                 </label>
                 <textarea 
@@ -481,7 +481,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                   placeholder="Descrivi la tecnica, i prodotti utilizzati o la particolarità del look..."
                   value={newDescription}
                   onChange={(e) => setNewDescription(e.target.value)}
-                  className="w-full p-2.5 border border-[#1A1A1A] bg-white text-[#1A1A1A] focus:outline-none"
+                  className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
                 />
               </div>
 
@@ -489,14 +489,14 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="w-1/2 py-2.5 border border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#EFEDE9] font-bold text-[10px] uppercase tracking-wider transition-colors"
+                  className="w-1/2 py-2.5 border border-[#2E2E2E] text-[#F2EFEA] hover:bg-[#242424] font-bold text-[10px] uppercase tracking-wider transition-colors"
                 >
                   Annulla
                 </button>
                 <button
                   type="submit"
                   disabled={!newMediaPreview || !newTitle.trim()}
-                  className="w-1/2 py-2.5 border border-[#1A1A1A] bg-[#1A1A1A] hover:bg-black disabled:opacity-50 text-white font-bold text-[10px] uppercase tracking-wider transition-colors flex items-center justify-center space-x-1"
+                  className="w-1/2 py-2.5 border border-[#C8102E] bg-[#C8102E] hover:bg-[#E3162F] disabled:opacity-50 text-white font-bold text-[10px] uppercase tracking-wider transition-colors flex items-center justify-center space-x-1"
                 >
                   <Check className="w-3.5 h-3.5" />
                   <span>Salva</span>
