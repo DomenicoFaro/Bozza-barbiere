@@ -320,7 +320,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {allServices.map((service) => {
               const isSelected = selectedServiceId === service.id;
               return (
@@ -334,28 +334,28 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     }
                     advanceToStep(2);
                   }}
-                  className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
+                  className={`p-3.5 sm:p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
                       ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
                       : 'bg-[#2D2D32] border-[#4A4A51] hover:bg-[#424249]/50'
                   }`}
                 >
                   <div>
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className={`font-display uppercase tracking-wide text-lg ${isSelected ? 'text-white' : 'text-[#F2EFEA]'}`}>
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-0.5 mb-2">
+                      <h3 className={`font-display uppercase tracking-wide text-base sm:text-lg leading-tight ${isSelected ? 'text-white' : 'text-[#F2EFEA]'}`}>
                         {service.name}
                       </h3>
-                      <span className={`text-2xl font-display uppercase tracking-wide font-light ${isSelected ? 'text-white' : 'text-[#F2EFEA]'}`}>
+                      <span className={`text-xl sm:text-2xl font-display uppercase tracking-wide font-light ${isSelected ? 'text-white' : 'text-[#F2EFEA]'}`}>
                         €{service.price}
                       </span>
                     </div>
 
-                    <p className={`text-xs leading-relaxed mb-4 ${isSelected ? 'text-white/80' : 'text-[#F2EFEA]/70'}`}>
+                    <p className={`text-[11px] sm:text-xs leading-relaxed mb-3 sm:mb-4 line-clamp-3 sm:line-clamp-none ${isSelected ? 'text-white/80' : 'text-[#F2EFEA]/70'}`}>
                       {service.description}
                     </p>
                   </div>
 
-                  <div className={`flex justify-between items-center pt-3 border-t text-xs ${isSelected ? 'border-white/20' : 'border-[#F2EFEA]/10'}`}>
+                  <div className={`flex flex-wrap justify-between items-center gap-1 pt-3 border-t text-xs ${isSelected ? 'border-white/20' : 'border-[#F2EFEA]/10'}`}>
                     <span className={`flex items-center text-[11px] ${isSelected ? 'text-white/80' : 'text-[#F2EFEA]/70'}`}>
                       <Clock className="w-3.5 h-3.5 mr-1 opacity-70" />
                       {service.duration_minutes} minuti
@@ -408,7 +408,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                 setSelectedOperatorId('any');
                 advanceToStep(3);
               }}
-              className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
+              className={`p-3.5 sm:p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                 selectedOperatorId === 'any'
                   ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
                   : 'bg-[#2D2D32] border-[#4A4A51] hover:bg-[#424249]/50'
@@ -458,7 +458,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     setSelectedOperatorId(operator.id);
                     advanceToStep(3);
                   }}
-                  className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
+                  className={`p-3.5 sm:p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
                       ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
                       : 'bg-[#2D2D32] border-[#4A4A51] hover:bg-[#424249]/50'
