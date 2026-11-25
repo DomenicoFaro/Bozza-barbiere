@@ -102,7 +102,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       {/* Page Title */}
-      <div className="max-w-3xl space-y-3 border-b border-[#2E2E2E] pb-6">
+      <div className="max-w-3xl space-y-3 border-b border-[#4A4A51] pb-6">
         <div className="inline-flex items-center space-x-2 text-[#F2EFEA]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
           <BookmarkCheck className="w-3.5 h-3.5" />
           <span>Gestione Prenotazioni · Servizio Clienti</span>
@@ -119,14 +119,14 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
 
       {/* Feedback messages */}
       {cancelSuccessMsg && (
-        <div className="p-4 bg-emerald-950/40 border border-emerald-400 text-xs text-emerald-950 flex items-center space-x-3 rounded-none">
+        <div className="p-4 bg-emerald-950/40 border border-emerald-400 text-xs text-emerald-300 flex items-center space-x-3 rounded-none">
           <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
           <span>{cancelSuccessMsg}</span>
         </div>
       )}
 
       {rescheduleSuccessMsg && (
-        <div className="p-4 bg-[#1C1C1C] border border-[#2E2E2E] text-xs text-[#F2EFEA] flex items-center space-x-3 rounded-none">
+        <div className="p-4 bg-[#38383E] border border-[#4A4A51] text-xs text-[#F2EFEA] flex items-center space-x-3 rounded-none">
           <CheckCircle2 className="w-5 h-5 text-[#F2EFEA] shrink-0" />
           <span>{rescheduleSuccessMsg}</span>
         </div>
@@ -134,7 +134,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
 
       {/* Se loggato: nessun box di ricerca, gli appuntamenti sono già mostrati sotto */}
       {!user && !showManualSearch && (
-        <div className="bg-[#151515] rounded-none p-6 sm:p-8 border border-[#2E2E2E] text-center space-y-4">
+        <div className="bg-[#2D2D32] rounded-none p-6 sm:p-8 border border-[#4A4A51] text-center space-y-4">
           <LogIn className="w-8 h-8 mx-auto opacity-60" />
           <h3 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
             Accedi per vedere subito i tuoi appuntamenti
@@ -152,7 +152,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
             </button>
             <button
               onClick={() => setShowManualSearch(true)}
-              className="px-6 py-3 rounded-none border border-[#2E2E2E] text-[#F2EFEA] hover:bg-[#242424] text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+              className="px-6 py-3 rounded-none border border-[#4A4A51] text-[#F2EFEA] hover:bg-[#424249] text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
             >
               <Search className="w-4 h-4" />
               <span>Cerca con telefono o codice</span>
@@ -162,7 +162,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
       )}
 
       {!user && showManualSearch && (
-        <div className="bg-[#151515] rounded-none p-6 sm:p-8 border border-[#2E2E2E]">
+        <div className="bg-[#2D2D32] rounded-none p-6 sm:p-8 border border-[#4A4A51]">
           <form onSubmit={handleSearch} className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#F2EFEA]">
@@ -184,7 +184,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Es. +39 340 1234567 oppure GD-7319"
-                  className="w-full pl-10 pr-4 py-3 rounded-none border border-[#2E2E2E] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#0B0B0B]"
+                  className="w-full pl-10 pr-4 py-3 rounded-none border border-[#4A4A51] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#222226]"
                 />
               </div>
               <button
@@ -209,7 +209,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
       {/* Search Results */}
       {hasSearched && (
         <div className="space-y-6">
-          <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+          <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
             <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
               Risultati Trovati ({results.length})
             </h2>
@@ -221,7 +221,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
           </div>
 
           {results.length === 0 ? (
-            <div className="bg-[#151515] rounded-none p-10 text-center border border-[#2E2E2E] space-y-4">
+            <div className="bg-[#2D2D32] rounded-none p-10 text-center border border-[#4A4A51] space-y-4">
               <AlertCircle className="w-8 h-8 opacity-60 mx-auto" />
               <h3 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Nessun appuntamento trovato
@@ -247,22 +247,22 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                 return (
                   <div
                     key={apt.id}
-                    className={`bg-[#151515] rounded-none p-6 border transition-all ${
+                    className={`bg-[#2D2D32] rounded-none p-6 border transition-all ${
                       isCancelled
                         ? 'border-rose-800 bg-rose-50/30 opacity-70'
-                        : 'border-[#2E2E2E]'
+                        : 'border-[#4A4A51]'
                     }`}
                   >
                     <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-[#F2EFEA]/15 pb-4">
                       <div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-xs font-mono font-bold text-[#F2EFEA] bg-[#1C1C1C] px-2.5 py-0.5 border border-[#2E2E2E]">
+                          <span className="text-xs font-mono font-bold text-[#F2EFEA] bg-[#38383E] px-2.5 py-0.5 border border-[#4A4A51]">
                             {apt.booking_code}
                           </span>
                           <span
                             className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 border ${
                               isCancelled
-                                ? 'bg-rose-900/40 text-rose-900 border-rose-800'
+                                ? 'bg-rose-900/40 text-rose-300 border-rose-800'
                                 : isCompleted
                                 ? 'bg-gray-100 text-gray-800 border-gray-300'
                                 : 'bg-[#C8102E] text-white border-[#C8102E]'
@@ -302,7 +302,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                     </div>
 
                     {apt.notes && (
-                      <p className="text-xs text-[#F2EFEA]/70 bg-[#1C1C1C] p-3 border border-[#F2EFEA]/20 mb-4">
+                      <p className="text-xs text-[#F2EFEA]/70 bg-[#38383E] p-3 border border-[#F2EFEA]/20 mb-4">
                         <strong className="text-[#F2EFEA]">Note:</strong> {apt.notes}
                       </p>
                     )}
@@ -318,7 +318,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                           <>
                             <button
                               onClick={() => StorageService.downloadICalendar(apt)}
-                              className="px-3 py-1.5 border border-[#2E2E2E] hover:bg-[#242424] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider flex items-center space-x-1"
+                              className="px-3 py-1.5 border border-[#4A4A51] hover:bg-[#424249] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider flex items-center space-x-1"
                               title="Salva nel calendario del tuo smartphone o computer"
                             >
                               <Download className="w-3.5 h-3.5 opacity-70" />
@@ -327,7 +327,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
 
                             <button
                               onClick={() => setRescheduleAppointment(apt)}
-                              className="px-3 py-1.5 border border-[#2E2E2E] hover:bg-[#242424] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider flex items-center space-x-1"
+                              className="px-3 py-1.5 border border-[#4A4A51] hover:bg-[#424249] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider flex items-center space-x-1"
                             >
                               <MessageSquare className="w-3.5 h-3.5 opacity-70" />
                               <span>Modifica orario</span>
@@ -361,7 +361,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
       {/* MODALE DI CONFERMA CANCELLAZIONE (FASE 5) */}
       {cancellingAppointment && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E] shadow-2xl">
+          <div className="bg-[#2D2D32] rounded-none max-w-md w-full p-6 space-y-4 border border-[#4A4A51] shadow-2xl">
             <div className="flex items-center space-x-3 text-rose-400">
               <AlertCircle className="w-6 h-6" />
               <h3 className="font-display uppercase tracking-wide text-xl font-light text-[#F2EFEA]">
@@ -374,10 +374,10 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
               Lo slot orario verrà immediatamente rimesso a disposizione degli altri clienti.
             </p>
 
-            <div className="flex justify-end space-x-3 pt-3 border-t border-[#2E2E2E]">
+            <div className="flex justify-end space-x-3 pt-3 border-t border-[#4A4A51]">
               <button
                 onClick={() => setCancellingAppointment(null)}
-                className="px-4 py-2 border border-[#2E2E2E] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-gray-100"
+                className="px-4 py-2 border border-[#4A4A51] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-gray-100"
               >
                 Annulla operazione
               </button>
@@ -395,7 +395,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
       {/* MODALE RICHIESTA MODIFICA (FASE 5) */}
       {rescheduleAppointment && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E] shadow-2xl">
+          <div className="bg-[#2D2D32] rounded-none max-w-md w-full p-6 space-y-4 border border-[#4A4A51] shadow-2xl">
             <div className="flex items-center space-x-3 text-[#F2EFEA]">
               <MessageSquare className="w-5 h-5 opacity-70" />
               <h3 className="font-display uppercase tracking-wide text-2xl font-light">
@@ -418,11 +418,11 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                   value={rescheduleNotes}
                   onChange={(e) => setRescheduleNotes(e.target.value)}
                   placeholder="Es. Vorrei spostare a giovedì pomeriggio dopo le 16:30..."
-                  className="w-full p-3 rounded-none border border-[#2E2E2E] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#0B0B0B]"
+                  className="w-full p-3 rounded-none border border-[#4A4A51] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#222226]"
                 />
               </div>
 
-              <div className="flex justify-between items-center pt-3 border-t border-[#2E2E2E]">
+              <div className="flex justify-between items-center pt-3 border-t border-[#4A4A51]">
                 <a
                   href={`tel:${BUSINESS_INFO.phoneRaw}`}
                   className="text-[11px] text-[#F2EFEA] font-bold uppercase tracking-wider flex items-center gap-1 hover:underline"
@@ -435,7 +435,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                   <button
                     type="button"
                     onClick={() => setRescheduleAppointment(null)}
-                    className="px-3.5 py-2 border border-[#2E2E2E] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-gray-100"
+                    className="px-3.5 py-2 border border-[#4A4A51] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-gray-100"
                   >
                     Chiudi
                   </button>

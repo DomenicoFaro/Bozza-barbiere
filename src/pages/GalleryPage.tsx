@@ -112,7 +112,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#2E2E2E] pb-6 gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#4A4A51] pb-6 gap-4">
         <div className="max-w-3xl space-y-3">
           <div className="inline-flex items-center space-x-2 text-[#F2EFEA]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
             <ImageIcon className="w-3.5 h-3.5" />
@@ -131,7 +131,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
             {items.length > 0 && (
               <button
                 onClick={handleClearAll}
-                className="inline-flex items-center px-3.5 py-2.5 bg-[#151515] hover:bg-red-950/40 text-red-400 border border-red-800 text-[10px] font-bold uppercase tracking-wider transition-all"
+                className="inline-flex items-center px-3.5 py-2.5 bg-[#2D2D32] hover:bg-red-950/40 text-red-400 border border-red-800 text-[10px] font-bold uppercase tracking-wider transition-all"
                 title="Elimina tutti gli elementi"
               >
                 <Trash2 className="w-3.5 h-3.5 mr-1.5" />
@@ -166,7 +166,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
               className={`px-4 py-2 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all border ${
                 activeCategory === cat.id
                   ? 'bg-[#C8102E] text-white border-[#C8102E]'
-                  : 'bg-[#151515] text-[#F2EFEA]/70 hover:text-[#F2EFEA] border-[#F2EFEA]/30 hover:border-[#C8102E]'
+                  : 'bg-[#2D2D32] text-[#F2EFEA]/70 hover:text-[#F2EFEA] border-[#F2EFEA]/30 hover:border-[#C8102E]'
               }`}
             >
               {cat.label}
@@ -182,7 +182,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
             <div
               key={item.id}
               onClick={() => setLightboxItem(item)}
-              className="group relative rounded-none overflow-hidden border border-[#2E2E2E] bg-[#151515] transition-all cursor-pointer aspect-[4/3] flex flex-col justify-end"
+              className="group relative rounded-none overflow-hidden border border-[#4A4A51] bg-[#2D2D32] transition-all cursor-pointer aspect-[4/3] flex flex-col justify-end"
             >
               {item.isVideo && item.videoUrl ? (
                 <video
@@ -204,13 +204,13 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
 
               {/* Badges on Top */}
               <div className="absolute top-3 inset-x-3 flex items-center justify-between z-10">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-black/70 px-2.5 py-1 border border-[#2E2E2E] shadow-sm">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-black/70 px-2.5 py-1 border border-[#4A4A51] shadow-sm">
                   {item.category}
                 </span>
 
                 <div className="flex items-center space-x-1.5">
                   {item.isVideo && (
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-black px-2 py-0.5 flex items-center space-x-1 border border-white/20 shadow-sm">
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-white bg-[#17171A] px-2 py-0.5 flex items-center space-x-1 border border-white/20 shadow-sm">
                       <Play className="w-2.5 h-2.5 fill-current" />
                       <span>Video</span>
                     </span>
@@ -247,8 +247,8 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           ))}
         </div>
       ) : (
-        <div className="border border-dashed border-[#F2EFEA]/40 p-12 text-center bg-[#151515] space-y-5">
-          <div className="w-14 h-14 mx-auto rounded-full bg-[#1C1C1C] flex items-center justify-center text-[#F2EFEA]">
+        <div className="border border-dashed border-[#F2EFEA]/40 p-12 text-center bg-[#2D2D32] space-y-5">
+          <div className="w-14 h-14 mx-auto rounded-full bg-[#38383E] flex items-center justify-center text-[#F2EFEA]">
             <ImageIcon className="w-7 h-7 opacity-60" />
           </div>
           <div className="max-w-md mx-auto space-y-2">
@@ -301,14 +301,14 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
               )}
               <button
                 onClick={() => setLightboxItem(null)}
-                className="p-2 bg-black/80 text-white hover:bg-[#151515] hover:text-black border border-white/30 transition-colors"
+                className="p-2 bg-black/80 text-white hover:bg-[#2D2D32] hover:text-white border border-white/30 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Media Presentation */}
-            <div className="max-h-[70vh] overflow-hidden flex items-center justify-center bg-black">
+            <div className="max-h-[70vh] overflow-hidden flex items-center justify-center bg-[#17171A]">
               {lightboxItem.isVideo ? (
                 <video
                   src={lightboxItem.videoUrl || lightboxItem.image}
@@ -335,7 +335,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
             <div className="p-6 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-t border-white/20 bg-[#141414]">
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#F2EFEA] bg-[#151515] px-2 py-0.5">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#F2EFEA] bg-[#2D2D32] px-2 py-0.5">
                     {lightboxItem.category}
                   </span>
                   {lightboxItem.tag && (
@@ -376,17 +376,17 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           onClick={() => setShowAddModal(false)}
         >
           <div 
-            className="bg-[#151515] border border-[#2E2E2E] max-w-md w-full p-6 space-y-5"
+            className="bg-[#2D2D32] border border-[#4A4A51] max-w-md w-full p-6 space-y-5"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+            <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
               <div className="flex items-center space-x-2">
                 {isVideoFile ? <Video className="w-4 h-4" /> : <ImageIcon className="w-4 h-4" />}
                 <h3 className="font-display uppercase tracking-wide text-lg font-light text-[#F2EFEA]">
                   Aggiungi Nuovo Contenuto
                 </h3>
               </div>
-              <button onClick={() => setShowAddModal(false)} className="p-1 hover:bg-[#242424]">
+              <button onClick={() => setShowAddModal(false)} className="p-1 hover:bg-[#424249]">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -398,7 +398,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                 </label>
                 <div 
                   onClick={() => fileInputRef.current?.click()}
-                  className="border-2 border-dashed border-[#F2EFEA]/40 p-4 text-center cursor-pointer hover:border-[#C8102E] transition-colors bg-[#0B0B0B]"
+                  className="border-2 border-dashed border-[#F2EFEA]/40 p-4 text-center cursor-pointer hover:border-[#C8102E] transition-colors bg-[#222226]"
                 >
                   {newMediaPreview ? (
                     <div className="space-y-2">
@@ -408,13 +408,13 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                           muted 
                           autoPlay 
                           loop 
-                          className="max-h-36 mx-auto object-contain border border-[#2E2E2E]" 
+                          className="max-h-36 mx-auto object-contain border border-[#4A4A51]" 
                         />
                       ) : (
                         <img 
                           src={newMediaPreview} 
                           alt="Preview" 
-                          className="max-h-36 mx-auto object-contain border border-[#2E2E2E]" 
+                          className="max-h-36 mx-auto object-contain border border-[#4A4A51]" 
                         />
                       )}
                       <span className="text-[10px] text-[#F2EFEA]/70 block underline">
@@ -452,7 +452,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                   placeholder="Es. Sfumatura Taper & Texture Crop"
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
-                  className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                  className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
                 />
               </div>
 
@@ -464,7 +464,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                   <select
                     value={newCategory}
                     onChange={(e) => setNewCategory(e.target.value)}
-                    className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                    className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
                   >
                     <option value="tagli">Tagli</option>
                     <option value="salone">Il salone</option>
@@ -481,7 +481,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                   placeholder="Descrivi la tecnica, i prodotti utilizzati o la particolarità del look..."
                   value={newDescription}
                   onChange={(e) => setNewDescription(e.target.value)}
-                  className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                  className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
                 />
               </div>
 
@@ -489,7 +489,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="w-1/2 py-2.5 border border-[#2E2E2E] text-[#F2EFEA] hover:bg-[#242424] font-bold text-[10px] uppercase tracking-wider transition-colors"
+                  className="w-1/2 py-2.5 border border-[#4A4A51] text-[#F2EFEA] hover:bg-[#424249] font-bold text-[10px] uppercase tracking-wider transition-colors"
                 >
                   Annulla
                 </button>

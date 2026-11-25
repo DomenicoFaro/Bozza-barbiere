@@ -170,7 +170,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
 
       {/* Video Container (9:16 portrait style) */}
       <div 
-        className={`relative w-full aspect-[9/16] max-h-[640px] bg-black overflow-hidden select-none cursor-pointer group ${
+        className={`relative w-full aspect-[9/16] max-h-[640px] bg-[#17171A] overflow-hidden select-none cursor-pointer group ${
           isDragging ? 'ring-4 ring-white' : ''
         }`}
         onClick={() => {

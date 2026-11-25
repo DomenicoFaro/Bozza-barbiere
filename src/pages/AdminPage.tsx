@@ -184,7 +184,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   if (!user) {
     return (
       <div className="max-w-md mx-auto px-4 py-20">
-        <div className="bg-[#151515] rounded-none p-8 border border-[#2E2E2E] shadow-none space-y-6 text-center">
+        <div className="bg-[#2D2D32] rounded-none p-8 border border-[#4A4A51] shadow-none space-y-6 text-center">
           <BrandLogo size="lg" className="mx-auto" />
           <div className="space-y-2">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA] block">
@@ -218,7 +218,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   if (!isAdmin) {
     return (
       <div className="max-w-md mx-auto px-4 py-20">
-        <div className="bg-[#151515] rounded-none p-8 border border-[#2E2E2E] shadow-none space-y-6 text-center">
+        <div className="bg-[#2D2D32] rounded-none p-8 border border-[#4A4A51] shadow-none space-y-6 text-center">
           <ShieldAlert className="w-10 h-10 mx-auto text-rose-400" />
           <div className="space-y-2">
             <span className="text-[10px] font-bold uppercase tracking-widest text-rose-400 block">
@@ -234,7 +234,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
 
           <button
             onClick={handleLogout}
-            className="w-full py-3 rounded-none border border-[#2E2E2E] text-[#F2EFEA] hover:bg-[#242424] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+            className="w-full py-3 rounded-none border border-[#4A4A51] text-[#F2EFEA] hover:bg-[#424249] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
           >
             <LogOut className="w-4 h-4" />
             <span>Esci e prova con un altro account</span>
@@ -250,7 +250,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Top Admin Header Bar */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#151515] p-6 rounded-none border border-[#2E2E2E]">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#2D2D32] p-6 rounded-none border border-[#4A4A51]">
         <div className="flex items-center space-x-4">
           <BrandLogo size="md" />
           <div>
@@ -279,7 +279,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
 
           <button
             onClick={() => setIsClosureModalOpen(true)}
-            className="px-3.5 py-2.5 rounded-none bg-[#151515] hover:bg-rose-950/40 text-rose-400 border border-rose-800 text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5"
+            className="px-3.5 py-2.5 rounded-none bg-[#2D2D32] hover:bg-rose-950/40 text-rose-400 border border-rose-800 text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5"
           >
             <Ban className="w-3.5 h-3.5 text-rose-400" />
             <span>Blocca Slot / Ferie</span>
@@ -287,7 +287,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
 
           <button
             onClick={handleLogout}
-            className="p-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white border border-[#2E2E2E]"
+            className="p-2.5 rounded-none bg-[#C8102E] hover:bg-[#E3162F] text-white border border-[#4A4A51]"
             title="Esci dall'area admin"
           >
             <LogOut className="w-4 h-4" />
@@ -296,13 +296,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex space-x-2 border-b border-[#2E2E2E] pb-3 overflow-x-auto">
+      <div className="flex space-x-2 border-b border-[#4A4A51] pb-3 overflow-x-auto">
         <button
           onClick={() => setActiveTab('agenda')}
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'agenda'
               ? 'bg-[#C8102E] text-white border-[#C8102E]'
-              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
+              : 'bg-[#2D2D32] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#4A4A51]'
           }`}
         >
           <Calendar className="w-3.5 h-3.5" />
@@ -314,7 +314,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'appointments'
               ? 'bg-[#C8102E] text-white border-[#C8102E]'
-              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
+              : 'bg-[#2D2D32] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#4A4A51]'
           }`}
         >
           <Clock className="w-3.5 h-3.5" />
@@ -326,7 +326,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'services'
               ? 'bg-[#C8102E] text-white border-[#C8102E]'
-              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
+              : 'bg-[#2D2D32] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#4A4A51]'
           }`}
         >
           <Scissors className="w-3.5 h-3.5" />
@@ -338,7 +338,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'operators'
               ? 'bg-[#C8102E] text-white border-[#C8102E]'
-              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
+              : 'bg-[#2D2D32] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#4A4A51]'
           }`}
         >
           <User className="w-3.5 h-3.5" />
@@ -350,7 +350,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           className={`px-4 py-2.5 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all flex items-center space-x-1.5 border ${
             activeTab === 'hours'
               ? 'bg-[#C8102E] text-white border-[#C8102E]'
-              : 'bg-[#151515] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#2E2E2E]'
+              : 'bg-[#2D2D32] text-[#9A9A9A] hover:text-[#F2EFEA] border-[#4A4A51]'
           }`}
         >
           <Sliders className="w-3.5 h-3.5" />
@@ -366,7 +366,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           {/* Controls & Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
             {/* Date selector */}
-            <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E]">
+            <div className="bg-[#2D2D32] p-4 rounded-none border border-[#4A4A51]">
               <label className="block text-[10px] font-bold uppercase tracking-widest text-[#9A9A9A] mb-1">
                 Data Selezionata
               </label>
@@ -382,20 +382,20 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             <div className="flex space-x-2">
               <button
                 onClick={() => setSelectedDate(getFormattedDate(0))}
-                className="flex-1 py-3 px-3 rounded-none bg-[#151515] border border-[#2E2E2E] text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#242424]"
+                className="flex-1 py-3 px-3 rounded-none bg-[#2D2D32] border border-[#4A4A51] text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#424249]"
               >
                 Oggi
               </button>
               <button
                 onClick={() => setSelectedDate(getFormattedDate(1))}
-                className="flex-1 py-3 px-3 rounded-none bg-[#151515] border border-[#2E2E2E] text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#242424]"
+                className="flex-1 py-3 px-3 rounded-none bg-[#2D2D32] border border-[#4A4A51] text-xs font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#424249]"
               >
                 Domani
               </button>
             </div>
 
             {/* Stat: Appuntamenti */}
-            <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E]">
+            <div className="bg-[#2D2D32] p-4 rounded-none border border-[#4A4A51]">
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#9A9A9A] block">
                 Appuntamenti Giornata
               </span>
@@ -405,7 +405,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Stat: Incasso Stimato */}
-            <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E]">
+            <div className="bg-[#2D2D32] p-4 rounded-none border border-[#4A4A51]">
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#9A9A9A] block">
                 Incasso Stimato
               </span>
@@ -416,17 +416,17 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Agenda Grid: Columns for each operator */}
-          <div className="bg-[#151515] rounded-none border border-[#2E2E2E] overflow-x-auto">
+          <div className="bg-[#2D2D32] rounded-none border border-[#4A4A51] overflow-x-auto">
             <div className="min-w-[768px]">
               {/* Header Columns */}
-              <div className="grid grid-cols-12 border-b border-[#2E2E2E] bg-[#1C1C1C] p-3 text-xs font-bold uppercase tracking-wider text-[#F2EFEA]">
+              <div className="grid grid-cols-12 border-b border-[#4A4A51] bg-[#38383E] p-3 text-xs font-bold uppercase tracking-wider text-[#F2EFEA]">
                 <div className="col-span-2 text-center text-[#9A9A9A]">Orario</div>
                 {operators.map((op) => (
                   <div key={op.id} className="col-span-3 text-center flex items-center justify-center space-x-2">
                     <img
                       src={op.photo_url}
                       alt={op.name}
-                      className="w-5 h-5 rounded-full object-cover border border-[#2E2E2E]"
+                      className="w-5 h-5 rounded-full object-cover border border-[#4A4A51]"
                     />
                     <span className="font-display uppercase tracking-wide capitalize text-sm">{op.name}</span>
                   </div>
@@ -435,12 +435,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               </div>
 
               {/* Time slot rows */}
-              <div className="divide-y divide-[#2E2E2E]/15 text-xs">
+              <div className="divide-y divide-[#4A4A51]/15 text-xs">
                 {timeGridRows.map((timeStr) => {
                   return (
-                    <div key={timeStr} className="grid grid-cols-12 min-h-[58px] items-stretch hover:bg-[#0B0B0B] transition-colors">
+                    <div key={timeStr} className="grid grid-cols-12 min-h-[58px] items-stretch hover:bg-[#222226] transition-colors">
                       {/* Time label */}
-                      <div className="col-span-2 flex items-center justify-center font-mono font-bold text-[#9A9A9A] bg-[#1C1C1C]/40 border-r border-[#F2EFEA]/20">
+                      <div className="col-span-2 flex items-center justify-center font-mono font-bold text-[#9A9A9A] bg-[#38383E]/40 border-r border-[#F2EFEA]/20">
                         {timeStr}
                       </div>
 
@@ -467,12 +467,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                 className={`p-2.5 rounded-none border text-[11px] relative group ${
                                   apt.status === 'completed'
                                     ? 'bg-gray-100 border-gray-400 text-gray-800'
-                                    : 'bg-[#0B0B0B] border-[#2E2E2E] text-[#F2EFEA]'
+                                    : 'bg-[#222226] border-[#4A4A51] text-[#F2EFEA]'
                                 }`}
                               >
                                 <div className="flex justify-between items-start font-bold">
                                   <span className="font-display uppercase tracking-wide text-xs">{apt.customer_name}</span>
-                                  <span className="font-mono text-[9px] bg-[#151515] px-1 border border-[#2E2E2E]">
+                                  <span className="font-mono text-[9px] bg-[#2D2D32] px-1 border border-[#4A4A51]">
                                     {apt.booking_code}
                                   </span>
                                 </div>
@@ -524,7 +524,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                                   setManualDate(selectedDate);
                                   setIsManualBookingOpen(true);
                                 }}
-                                className="w-full h-full min-h-[36px] rounded-none border border-dashed border-[#F2EFEA]/30 hover:border-[#C8102E] hover:bg-[#242424] text-[#9A9A9A] hover:text-[#F2EFEA] flex items-center justify-center text-[10px] font-bold uppercase tracking-wider transition-colors"
+                                className="w-full h-full min-h-[36px] rounded-none border border-dashed border-[#F2EFEA]/30 hover:border-[#C8102E] hover:bg-[#424249] text-[#9A9A9A] hover:text-[#F2EFEA] flex items-center justify-center text-[10px] font-bold uppercase tracking-wider transition-colors"
                               >
                                 + Libero
                               </button>
@@ -551,14 +551,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {activeTab === 'appointments' && (
         <div className="space-y-6">
-          <div className="bg-[#151515] p-4 rounded-none border border-[#2E2E2E] flex flex-wrap gap-4 items-center justify-between">
+          <div className="bg-[#2D2D32] p-4 rounded-none border border-[#4A4A51] flex flex-wrap gap-4 items-center justify-between">
             <div className="flex flex-wrap gap-3 items-center">
               <span className="text-[10px] uppercase font-bold tracking-wider text-[#F2EFEA]">Filtra per:</span>
 
               <select
                 value={filterOperator}
                 onChange={(e) => setFilterOperator(e.target.value)}
-                className="text-xs px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                className="text-xs px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
               >
                 <option value="all">Tutti i parrucchieri</option>
                 {operators.map(o => (
@@ -569,7 +569,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="text-xs px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                className="text-xs px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
               >
                 <option value="all">Tutti gli stati</option>
                 <option value="confirmed">Confermati</option>
@@ -583,10 +583,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             </span>
           </div>
 
-          <div className="bg-[#151515] rounded-none border border-[#2E2E2E] overflow-hidden">
+          <div className="bg-[#2D2D32] rounded-none border border-[#4A4A51] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#1C1C1C] text-[#F2EFEA] font-bold uppercase tracking-wider text-[10px] border-b border-[#2E2E2E]">
+                <thead className="bg-[#38383E] text-[#F2EFEA] font-bold uppercase tracking-wider text-[10px] border-b border-[#4A4A51]">
                   <tr>
                     <th className="p-3.5">Codice</th>
                     <th className="p-3.5">Cliente & Telefono</th>
@@ -597,14 +597,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     <th className="p-3.5 text-right">Azioni</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#2E2E2E]/15">
+                <tbody className="divide-y divide-[#4A4A51]/15">
                   {allAppointments
                     .filter(a => (filterOperator === 'all' || a.operator_id === filterOperator) && (filterStatus === 'all' || a.status === filterStatus))
                     .map((apt) => {
                       const srv = StorageService.getServiceById(apt.service_id);
                       const op = StorageService.getOperatorById(apt.operator_id);
                       return (
-                        <tr key={apt.id} className="hover:bg-[#0B0B0B] transition-colors">
+                        <tr key={apt.id} className="hover:bg-[#222226] transition-colors">
                           <td className="p-3.5 font-mono font-bold text-[#F2EFEA]">
                             {apt.booking_code}
                           </td>
@@ -697,11 +697,11 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             {services.map((service) => (
               <div
                 key={service.id}
-                className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4"
+                className="bg-[#2D2D32] rounded-none p-6 border border-[#4A4A51] space-y-4"
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA] bg-[#1C1C1C] px-2 py-0.5 border border-[#2E2E2E]">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA] bg-[#38383E] px-2 py-0.5 border border-[#4A4A51]">
                       {service.category}
                     </span>
                     <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA] mt-2">
@@ -726,7 +726,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     {service.duration_minutes} min
                   </span>
 
-                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border ${service.active ? 'bg-emerald-900/40 text-emerald-400 border-emerald-700' : 'bg-rose-900/40 text-rose-900 border-rose-800'}`}>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 border ${service.active ? 'bg-emerald-900/40 text-emerald-400 border-emerald-700' : 'bg-rose-900/40 text-rose-300 border-rose-800'}`}>
                     {service.active ? 'Attivo' : 'Disattivato'}
                   </span>
                 </div>
@@ -734,7 +734,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <div className="flex space-x-2 pt-2">
                   <button
                     onClick={() => setEditingService(service)}
-                    className="flex-1 py-2 rounded-none border border-[#2E2E2E] hover:bg-[#242424] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] flex items-center justify-center space-x-1"
+                    className="flex-1 py-2 rounded-none border border-[#4A4A51] hover:bg-[#424249] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] flex items-center justify-center space-x-1"
                   >
                     <Edit3 className="w-3.5 h-3.5 text-[#F2EFEA]" />
                     <span>Modifica</span>
@@ -780,12 +780,12 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             {operators.map((op) => (
               <div
                 key={op.id}
-                className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4 text-center"
+                className="bg-[#2D2D32] rounded-none p-6 border border-[#4A4A51] space-y-4 text-center"
               >
                 <img
                   src={op.photo_url}
                   alt={op.name}
-                  className="w-20 h-20 rounded-full object-cover mx-auto border border-[#2E2E2E]"
+                  className="w-20 h-20 rounded-full object-cover mx-auto border border-[#4A4A51]"
                 />
 
                 <div>
@@ -810,7 +810,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                       .map(m => {
                         const s = StorageService.getServiceById(m.service_id);
                         return s ? (
-                          <span key={m.service_id} className="text-[10px] bg-[#1C1C1C] border border-[#2E2E2E] px-1.5 py-0.5 text-[#F2EFEA] font-medium">
+                          <span key={m.service_id} className="text-[10px] bg-[#38383E] border border-[#4A4A51] px-1.5 py-0.5 text-[#F2EFEA] font-medium">
                             {s.name}
                           </span>
                         ) : null;
@@ -820,7 +820,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
 
                 <button
                   onClick={() => setEditingOperator(op)}
-                  className="w-full py-2.5 rounded-none border border-[#2E2E2E] hover:bg-[#242424] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] flex items-center justify-center space-x-1 transition-colors"
+                  className="w-full py-2.5 rounded-none border border-[#4A4A51] hover:bg-[#424249] text-[10px] font-bold uppercase tracking-wider text-[#F2EFEA] flex items-center justify-center space-x-1 transition-colors"
                 >
                   <Edit3 className="w-3.5 h-3.5 text-[#F2EFEA]" />
                   <span>Modifica Ruolo & Bio</span>
@@ -837,8 +837,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {activeTab === 'hours' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Orari settimanali */}
-          <div className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4">
-            <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
+          <div className="bg-[#2D2D32] rounded-none p-6 border border-[#4A4A51] space-y-4">
+            <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA] border-b border-[#4A4A51] pb-3">
               Orari Settimanali Ufficiali
             </h3>
             <div className="space-y-3 text-xs">
@@ -870,8 +870,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Chiusure straordinarie / Ferie */}
-          <div className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4">
-            <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+          <div className="bg-[#2D2D32] rounded-none p-6 border border-[#4A4A51] space-y-4">
+            <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
               <h3 className="font-display uppercase tracking-wide font-light text-xl text-[#F2EFEA]">
                 Chiusure Straordinarie & Ferie
               </h3>
@@ -889,7 +889,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
             ) : (
               <div className="space-y-3 text-xs">
                 {closures.map((c) => (
-                  <div key={c.id} className="flex justify-between items-center p-3.5 rounded-none bg-[#0B0B0B] border border-[#2E2E2E]">
+                  <div key={c.id} className="flex justify-between items-center p-3.5 rounded-none bg-[#222226] border border-[#4A4A51]">
                     <div>
                       <span className="font-bold text-[#F2EFEA] block">{c.date}</span>
                       <span className="text-[#9A9A9A] text-[11px]">
@@ -901,7 +901,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                         StorageService.deleteClosure(c.id);
                         triggerRefresh();
                       }}
-                      className="text-rose-400 hover:text-rose-900 p-1"
+                      className="text-rose-400 hover:text-rose-300 p-1"
                       title="Elimina chiusura"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -919,14 +919,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {isManualBookingOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#151515] rounded-none max-w-lg w-full p-6 sm:p-8 space-y-4 border border-[#2E2E2E] max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+          <div className="bg-[#2D2D32] rounded-none max-w-lg w-full p-6 sm:p-8 space-y-4 border border-[#4A4A51] max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
               <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA]">
                 Nuovo Appuntamento Manuale
               </h3>
               <button
                 onClick={() => setIsManualBookingOpen(false)}
-                className="text-[#F2EFEA] hover:text-black font-bold text-lg"
+                className="text-[#F2EFEA] hover:text-white font-bold text-lg"
               >
                 ✕
               </button>
@@ -947,7 +947,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   value={manualClientName}
                   onChange={(e) => setManualClientName(e.target.value)}
                   placeholder="Nome del cliente..."
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -959,7 +959,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   value={manualClientPhone}
                   onChange={(e) => setManualClientPhone(e.target.value)}
                   placeholder="+39 ..."
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -970,7 +970,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     required
                     value={manualServiceId}
                     onChange={(e) => setManualServiceId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   >
                     <option value="">Seleziona...</option>
                     {services.map(s => (
@@ -985,7 +985,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     required
                     value={manualOperatorId}
                     onChange={(e) => setManualOperatorId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   >
                     <option value="">Seleziona...</option>
                     {operators.map(o => (
@@ -1003,7 +1003,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     required
                     value={manualDate}
                     onChange={(e) => setManualDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   />
                 </div>
 
@@ -1012,7 +1012,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   <select
                     value={manualTime}
                     onChange={(e) => setManualTime(e.target.value)}
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   >
                     {timeGridRows.map(t => (
                       <option key={t} value={t}>{t}</option>
@@ -1028,7 +1028,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   value={manualNotes}
                   onChange={(e) => setManualNotes(e.target.value)}
                   placeholder="Es. Prenotazione telefonica, cliente fisso..."
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1036,7 +1036,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setIsManualBookingOpen(false)}
-                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
+                  className="px-4 py-2.5 rounded-none border border-[#4A4A51] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#424249]"
                 >
                   Annulla
                 </button>
@@ -1057,8 +1057,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {isClosureModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
-            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
+          <div className="bg-[#2D2D32] rounded-none max-w-md w-full p-6 space-y-4 border border-[#4A4A51]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#4A4A51] pb-3">
               Aggiungi Chiusura Straordinaria / Ferie
             </h3>
 
@@ -1070,7 +1070,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   required
                   value={closureDate}
                   onChange={(e) => setClosureDate(e.target.value)}
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1079,7 +1079,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <select
                   value={closureOperatorId}
                   onChange={(e) => setClosureOperatorId(e.target.value)}
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 >
                   <option value="all">Tutto il Salone (Chiusura completa)</option>
                   {operators.map(o => (
@@ -1096,7 +1096,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   value={closureReason}
                   onChange={(e) => setClosureReason(e.target.value)}
                   placeholder="Es. Ferie estive, Corso di aggiornamento..."
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1104,7 +1104,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setIsClosureModalOpen(false)}
-                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
+                  className="px-4 py-2.5 rounded-none border border-[#4A4A51] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#424249]"
                 >
                   Annulla
                 </button>
@@ -1125,8 +1125,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {editingService && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
-            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
+          <div className="bg-[#2D2D32] rounded-none max-w-md w-full p-6 space-y-4 border border-[#4A4A51]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#4A4A51] pb-3">
               Modifica Servizio: {editingService.name}
             </h3>
 
@@ -1137,7 +1137,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   type="text"
                   value={editingService.name}
                   onChange={(e) => setEditingService({ ...editingService, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1148,7 +1148,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     type="number"
                     value={editingService.price}
                     onChange={(e) => setEditingService({ ...editingService, price: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   />
                 </div>
 
@@ -1157,7 +1157,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   <select
                     value={editingService.duration_minutes}
                     onChange={(e) => setEditingService({ ...editingService, duration_minutes: Number(e.target.value) })}
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   >
                     <option value={30}>30 minuti</option>
                     <option value={45}>45 minuti</option>
@@ -1174,7 +1174,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   rows={3}
                   value={editingService.description}
                   onChange={(e) => setEditingService({ ...editingService, description: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1182,7 +1182,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setEditingService(null)}
-                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
+                  className="px-4 py-2.5 rounded-none border border-[#4A4A51] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#424249]"
                 >
                   Annulla
                 </button>
@@ -1208,8 +1208,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {isNewServiceModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
-            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
+          <div className="bg-[#2D2D32] rounded-none max-w-md w-full p-6 space-y-4 border border-[#4A4A51]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#4A4A51] pb-3">
               Aggiungi Nuovo Trattamento
             </h3>
 
@@ -1244,7 +1244,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   type="text"
                   required
                   placeholder="Es. Trattamento Barba Luxury..."
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1256,7 +1256,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     type="number"
                     required
                     placeholder="15"
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   />
                 </div>
 
@@ -1265,7 +1265,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   <select
                     name="duration"
                     defaultValue={30}
-                    className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                    className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                   >
                     <option value={30}>30 minuti</option>
                     <option value={45}>45 minuti</option>
@@ -1280,7 +1280,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <select
                   name="category"
                   defaultValue="barba"
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 >
                   <option value="capelli">Capelli</option>
                   <option value="barba">Barba</option>
@@ -1296,7 +1296,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   required
                   rows={2}
                   placeholder="Descrivi il trattamento e i prodotti inclusi..."
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1304,7 +1304,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setIsNewServiceModalOpen(false)}
-                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
+                  className="px-4 py-2.5 rounded-none border border-[#4A4A51] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#424249]"
                 >
                   Annulla
                 </button>
@@ -1325,8 +1325,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* ========================================================================= */}
       {editingOperator && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#151515] rounded-none max-w-md w-full p-6 space-y-4 border border-[#2E2E2E]">
-            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#2E2E2E] pb-3">
+          <div className="bg-[#2D2D32] rounded-none max-w-md w-full p-6 space-y-4 border border-[#4A4A51]">
+            <h3 className="font-display uppercase tracking-wide font-light text-2xl text-[#F2EFEA] border-b border-[#4A4A51] pb-3">
               Modifica Profilo: {editingOperator.name}
             </h3>
 
@@ -1337,7 +1337,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   type="text"
                   value={editingOperator.name}
                   onChange={(e) => setEditingOperator({ ...editingOperator, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1347,7 +1347,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   type="text"
                   value={editingOperator.role}
                   onChange={(e) => setEditingOperator({ ...editingOperator, role: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1357,7 +1357,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                   rows={3}
                   value={editingOperator.bio || ''}
                   onChange={(e) => setEditingOperator({ ...editingOperator, bio: e.target.value })}
-                  className="w-full px-3 py-2 rounded-none border border-[#2E2E2E] bg-[#0B0B0B]"
+                  className="w-full px-3 py-2 rounded-none border border-[#4A4A51] bg-[#222226]"
                 />
               </div>
 
@@ -1365,7 +1365,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setEditingOperator(null)}
-                  className="px-4 py-2.5 rounded-none border border-[#2E2E2E] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#242424]"
+                  className="px-4 py-2.5 rounded-none border border-[#4A4A51] text-[#F2EFEA] text-[10px] font-bold uppercase tracking-wider hover:bg-[#424249]"
                 >
                   Annulla
                 </button>

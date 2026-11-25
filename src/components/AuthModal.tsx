@@ -60,17 +60,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-[#151515] border border-[#2E2E2E] max-w-md w-full p-6 space-y-5 my-auto max-h-[90vh] overflow-y-auto"
+        className="bg-[#2D2D32] border border-[#4A4A51] max-w-md w-full p-6 space-y-5 my-auto max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+        <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
           <div className="flex items-center space-x-2">
             {mode === 'login' ? <LogIn className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
             <h3 className="font-display uppercase tracking-wide text-lg font-light text-[#F2EFEA]">
               {mode === 'login' ? 'Accedi al tuo account' : 'Crea il tuo account'}
             </h3>
           </div>
-          <button onClick={onClose} className="p-1 hover:bg-[#242424]">
+          <button onClick={onClose} className="p-1 hover:bg-[#424249]">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -103,7 +103,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                    className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
                   />
                 </div>
                 <div>
@@ -115,7 +115,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                    className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
                   />
                 </div>
               </div>
@@ -131,7 +131,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                  className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
                 />
               </div>
             )}
@@ -145,7 +145,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
               />
             </div>
 
@@ -159,7 +159,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onClose }) => {
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-2.5 border border-[#2E2E2E] bg-[#0B0B0B] text-[#F2EFEA] focus:outline-none"
+                className="w-full p-2.5 border border-[#4A4A51] bg-[#222226] text-[#F2EFEA] focus:outline-none"
               />
             </div>
 

@@ -15,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const { isAdmin } = useAuth();
 
   return (
-    <footer className="bg-black text-white border-t border-[#2E2E2E]">
+    <footer className="bg-[#17171A] text-white border-t border-[#4A4A51]">
       {/* Top Footer Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -38,7 +38,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               {isAdmin && (
                 <button
                   onClick={() => onNavigate('admin')}
-                  className="inline-flex items-center px-3 py-2 bg-transparent text-white/70 hover:text-white text-[10px] font-semibold uppercase tracking-widest border border-white/20 hover:border-white transition-all rounded-none"
+                  className="hidden md:inline-flex items-center px-3 py-2 bg-transparent text-white/70 hover:text-white text-[10px] font-semibold uppercase tracking-widest border border-white/20 hover:border-white transition-all rounded-none"
                 >
                   <ShieldCheck className="w-3 h-3 mr-1" />
                   Admin

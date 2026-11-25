@@ -30,17 +30,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-20 pb-20">
       {/* HERO */}
-      <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-[#2E2E2E]">
+      <section className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-[#4A4A51]">
         <div className="absolute inset-0 pointer-events-none opacity-[0.07] bg-[radial-gradient(circle_at_80%_20%,#C8102E,transparent_55%)]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Testo */}
             <div className="lg:col-span-7 space-y-6 text-left">
-              <div className="inline-flex items-center space-x-2.5 px-3 py-1 border border-[#C8102E] text-[10px] uppercase tracking-[0.25em] font-bold text-white">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C8102E] animate-pulse" />
-                <span>Galermo · Catania</span>
-              </div>
-
               <div className="space-y-1">
                 <span className="font-script text-4xl sm:text-5xl text-[#E3162F] block leading-none">
                   Giuseppe Distefano
@@ -57,7 +52,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-1 text-xs">
-                <div className="flex items-center space-x-2 px-3 py-1.5 bg-[#151515] border border-[#2E2E2E]">
+                <div className="flex items-center space-x-2 px-3 py-1.5 bg-[#2D2D32] border border-[#4A4A51]">
                   <span
                     className={`w-2 h-2 rounded-full ${shopStatus.isOpen ? 'bg-emerald-500' : 'bg-amber-500'}`}
                   />
@@ -85,7 +80,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </a>
               </div>
 
-              <div className="pt-6 mt-2 border-t border-[#2E2E2E] grid grid-cols-3 gap-4">
+              <div className="pt-6 mt-2 border-t border-[#4A4A51] grid grid-cols-3 gap-4">
                 <div>
                   <div className="font-display text-3xl font-bold text-[#C8102E] leading-none">96%</div>
                   <div className="text-[11px] text-[#F2EFEA]/60 mt-1">dei clienti ci consiglia</div>
@@ -105,7 +100,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-md">
                 <div className="absolute -inset-3 border border-[#C8102E]/40 translate-x-3 translate-y-3" />
-                <div className="relative bg-[#020607] border border-[#2E2E2E] p-6 flex items-center justify-center">
+                <div className="relative bg-[#020607] border border-[#4A4A51] p-6 flex items-center justify-center">
                   <BrandLogo mode="emblem" className="h-72 sm:h-80 w-auto" />
                 </div>
               </div>
@@ -117,7 +112,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* I NOSTRI LAVORI */}
       {gallery.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#2E2E2E] pb-6 mb-8 gap-4">
+          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#4A4A51] pb-6 mb-8 gap-4">
             <div className="space-y-2">
               <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] font-bold text-[#C8102E]">
                 <ImageIcon className="w-3.5 h-3.5" />
@@ -141,7 +136,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <button
                 key={g.id}
                 onClick={() => onNavigate('gallery')}
-                className={`relative overflow-hidden bg-[#151515] border border-[#2E2E2E] group aspect-square ${
+                className={`relative overflow-hidden bg-[#2D2D32] border border-[#4A4A51] group aspect-square ${
                   i === 0 ? 'col-span-2 row-span-2' : ''
                 }`}
               >
@@ -160,7 +155,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
       {/* SERVIZI IN EVIDENZA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#2E2E2E] pb-6 mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#4A4A51] pb-6 mb-10 gap-4">
           <div className="space-y-2">
             <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] font-bold text-[#C8102E]">
               <Scissors className="w-3.5 h-3.5" />
@@ -183,10 +178,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           {popularServices.map((service) => (
             <div
               key={service.id}
-              className="bg-[#151515] border border-[#2E2E2E] hover:border-[#C8102E] p-7 transition-all flex flex-col justify-between group"
+              className="bg-[#2D2D32] border border-[#4A4A51] hover:border-[#C8102E] p-7 transition-all flex flex-col justify-between group"
             >
               <div>
-                <div className="flex justify-between items-start mb-4 pb-4 border-b border-[#2E2E2E]">
+                <div className="flex justify-between items-start mb-4 pb-4 border-b border-[#4A4A51]">
                   <h3 className="font-display uppercase font-semibold text-2xl text-[#F2EFEA]">{service.name}</h3>
                   <span className="font-display text-4xl font-bold text-[#C8102E] leading-none">
                     €{service.price}
@@ -212,11 +207,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       {/* GIUSEPPE + DOVE SIAMO */}
-      <section className="bg-[#111111] py-16 px-4 sm:px-6 lg:px-8 border-y border-[#2E2E2E]">
+      <section className="bg-[#28282D] py-16 px-4 sm:px-6 lg:px-8 border-y border-[#4A4A51]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {operator && (
             <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-              <div className="w-44 h-44 shrink-0 overflow-hidden border-2 border-[#C8102E] bg-black">
+              <div className="w-44 h-44 shrink-0 overflow-hidden border-2 border-[#C8102E] bg-[#17171A]">
                 <img src={operator.photo_url} alt={operator.name} className="w-full h-full object-cover" />
               </div>
               <div className="space-y-3 text-center sm:text-left">
@@ -246,7 +241,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
           )}
 
-          <div className="bg-[#151515] border border-[#2E2E2E] p-7 space-y-5">
+          <div className="bg-[#2D2D32] border border-[#4A4A51] p-7 space-y-5">
             <div className="flex items-start space-x-3">
               <MapPin className="w-5 h-5 text-[#C8102E] shrink-0 mt-0.5" />
               <div>
@@ -262,7 +257,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </a>
               </div>
             </div>
-            <div className="border-t border-[#2E2E2E] pt-4 space-y-1.5 text-xs">
+            <div className="border-t border-[#4A4A51] pt-4 space-y-1.5 text-xs">
               {hours.map((h) => (
                 <div key={h.id} className="flex justify-between text-[#F2EFEA]/70">
                   <span>{h.day_name}</span>

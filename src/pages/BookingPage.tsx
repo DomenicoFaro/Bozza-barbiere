@@ -243,7 +243,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* Wizard Header & Breadcrumbs (Only if not in step 5) */}
       {currentStep < 5 && (
         <div className="space-y-6">
-          <div className="text-center max-w-xl mx-auto space-y-2 border-b border-[#2E2E2E] pb-6">
+          <div className="text-center max-w-xl mx-auto space-y-2 border-b border-[#4A4A51] pb-6">
             <span className="text-[10px] font-bold text-[#F2EFEA]/60 uppercase tracking-[0.2em] block">
               Prenotazione Online · Da Giuseppe
             </span>
@@ -267,8 +267,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     isCurrent
                       ? 'bg-[#C8102E] text-white border-[#C8102E]'
                       : isPast
-                      ? 'bg-[#151515] border-[#2E2E2E] text-[#F2EFEA]'
-                      : 'bg-[#1C1C1C]/60 border-[#F2EFEA]/20 text-[#F2EFEA]/50'
+                      ? 'bg-[#2D2D32] border-[#4A4A51] text-[#F2EFEA]'
+                      : 'bg-[#38383E]/60 border-[#F2EFEA]/20 text-[#F2EFEA]/50'
                   }`}
                 >
                   <div className="flex items-center space-x-2 mb-1">
@@ -309,13 +309,13 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 1 && (
         <StepTransition dimmed={isAdvancing} className="space-y-6">
-          <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+          <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
             <div>
               <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Passo 1: Seleziona il Servizio
               </h2>
               <p className="text-xs text-[#F2EFEA]/70 mt-1">
-                Tutti i prezzi includono lavaggio specifico e styling finale con prodotti professionali. Seleziona una card per continuare automaticamente.
+                Tocca un servizio per continuare.
               </p>
             </div>
           </div>
@@ -337,7 +337,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
                       ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
-                      : 'bg-[#151515] border-[#2E2E2E] hover:bg-[#242424]/50'
+                      : 'bg-[#2D2D32] border-[#4A4A51] hover:bg-[#424249]/50'
                   }`}
                 >
                   <div>
@@ -365,7 +365,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       className={`font-bold px-2 py-0.5 text-[9px] uppercase tracking-widest border ${
                         isSelected
                           ? 'bg-[#C8102E] text-white border-[#C8102E]'
-                          : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
+                          : 'bg-[#222226] text-[#F2EFEA] border-[#4A4A51]'
                       }`}
                     >
                       {isSelected ? 'Selezionato' : 'Scegli'}
@@ -383,7 +383,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 2 && (
         <StepTransition dimmed={isAdvancing} className="space-y-6">
-          <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+          <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
             <div>
               <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Passo 2: Con chi?
@@ -411,12 +411,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                 selectedOperatorId === 'any'
                   ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
-                  : 'bg-[#151515] border-[#2E2E2E] hover:bg-[#242424]/50'
+                  : 'bg-[#2D2D32] border-[#4A4A51] hover:bg-[#424249]/50'
               }`}
             >
               <div className="text-center space-y-3">
                 <div className={`w-16 h-16 rounded-none mx-auto flex items-center justify-center border ${
-                  selectedOperatorId === 'any' ? 'bg-[#C8102E] text-white border-[#C8102E]' : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
+                  selectedOperatorId === 'any' ? 'bg-[#C8102E] text-white border-[#C8102E]' : 'bg-[#222226] text-[#F2EFEA] border-[#4A4A51]'
                 }`}>
                   <Sparkles className="w-7 h-7" />
                 </div>
@@ -440,7 +440,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   className={`inline-block w-full py-1.5 border text-[10px] font-bold uppercase tracking-widest ${
                     selectedOperatorId === 'any'
                       ? 'bg-[#C8102E] text-white border-[#C8102E]'
-                      : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
+                      : 'bg-[#222226] text-[#F2EFEA] border-[#4A4A51]'
                   }`}
                 >
                   {selectedOperatorId === 'any' ? 'Selezionato' : 'Scegli'}
@@ -461,7 +461,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   className={`p-5 border cursor-pointer transition-all flex flex-col justify-between rounded-none ${
                     isSelected
                       ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
-                      : 'bg-[#151515] border-[#2E2E2E] hover:bg-[#242424]/50'
+                      : 'bg-[#2D2D32] border-[#4A4A51] hover:bg-[#424249]/50'
                   }`}
                 >
                   <div className="text-center space-y-3">
@@ -490,7 +490,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       className={`inline-block w-full py-1.5 border text-[10px] font-bold uppercase tracking-widest ${
                         isSelected
                           ? 'bg-[#C8102E] text-white border-[#C8102E]'
-                          : 'bg-[#0B0B0B] text-[#F2EFEA] border-[#2E2E2E]'
+                          : 'bg-[#222226] text-[#F2EFEA] border-[#4A4A51]'
                       }`}
                     >
                       {isSelected ? 'Selezionato' : 'Scegli'}
@@ -504,7 +504,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="flex justify-start items-center pt-4">
             <button
               onClick={() => setCurrentStep(1)}
-              className="px-5 py-2.5 border border-[#2E2E2E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#151515] flex items-center space-x-1.5 rounded-none"
+              className="px-5 py-2.5 border border-[#4A4A51] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#2D2D32] flex items-center space-x-1.5 rounded-none"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro</span>
@@ -518,7 +518,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 3 && (
         <StepTransition dimmed={isAdvancing} className="space-y-8">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-[#2E2E2E] pb-3">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-[#4A4A51] pb-3">
             <div>
               <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Passo 3: Seleziona Giorno e Orario
@@ -557,8 +557,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       isSelected
                         ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-sm'
                         : d.isSelectable
-                        ? 'bg-[#151515] text-[#F2EFEA] border-[#2E2E2E] hover:border-[#C8102E]'
-                        : 'bg-[#1C1C1C]/40 text-[#F2EFEA]/30 border-[#F2EFEA]/10 cursor-not-allowed'
+                        ? 'bg-[#2D2D32] text-[#F2EFEA] border-[#4A4A51] hover:border-[#C8102E]'
+                        : 'bg-[#38383E]/40 text-[#F2EFEA]/30 border-[#F2EFEA]/10 cursor-not-allowed'
                     }`}
                   >
                     <span className="text-[9px] font-bold uppercase tracking-widest">
@@ -576,9 +576,9 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
             </div>
           </div>
 
-          {/* Griglia degli Slot Orari con LEGENDA OBBLIGATORIA (Verde = Disponibile, Rosso = Occupato) */}
-          <div className="bg-[#151515] border border-[#2E2E2E] p-6 space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#2E2E2E] pb-4">
+          {/* Griglia degli Slot Orari con LEGENDA OBBLIGATORIA (Disponibile, Occupato) */}
+          <div className="bg-[#2D2D32] border border-[#4A4A51] p-6 space-y-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#4A4A51] pb-4">
               <div>
                 <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#F2EFEA]">
                   2. Scegli l'Orario per {selectedDate}
@@ -589,17 +589,17 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               </div>
 
               {/* LEGENDA COLORI FISSA COME DA PRD */}
-              <div className="flex items-center space-x-4 text-xs font-medium bg-[#1C1C1C] px-3.5 py-1.5 border border-[#2E2E2E]">
+              <div className="flex items-center space-x-4 text-xs font-medium bg-[#38383E] px-3.5 py-1.5 border border-[#4A4A51]">
                 <span className="text-[#F2EFEA] text-[10px] uppercase tracking-wider font-bold">
                   Legenda:
                 </span>
                 <div className="flex items-center space-x-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 border border-emerald-700" />
-                  <span className="text-emerald-950 font-bold text-[11px]">Verde = Disponibile</span>
+                  <span className="text-emerald-400 font-bold text-[11px]">Disponibile</span>
                 </div>
                 <div className="flex items-center space-x-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500 border border-rose-600" />
-                  <span className="text-rose-950 font-bold text-[11px]">Rosso = Occupato</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/30 border border-white/20" />
+                  <span className="text-white/50 font-bold text-[11px]">Occupato</span>
                 </div>
               </div>
             </div>
@@ -619,7 +619,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2.5">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
                 {slots.map((slot) => {
                   const isSelected = selectedSlotTime === slot.time;
                   return (
@@ -631,12 +631,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                         setSelectedSlotTime(slot.time);
                         advanceToStep(4);
                       }}
-                      className={`py-3 px-2 rounded-none text-center font-mono text-xs font-bold transition-all relative border ${
+                      className={`py-3.5 px-2 rounded-none text-center font-mono text-sm font-bold transition-all relative border ${
                         isSelected
                           ? 'bg-[#C8102E] text-white border-[#C8102E] shadow-md'
                           : slot.available
-                          ? 'bg-emerald-950/40 text-emerald-950 border-emerald-400 hover:bg-emerald-900/40 cursor-pointer'
-                          : 'bg-rose-950/40 text-rose-400 border-rose-800 cursor-not-allowed line-through opacity-70'
+                          ? 'bg-[#38383E] text-white border-emerald-500 hover:bg-emerald-600 hover:border-emerald-600 cursor-pointer'
+                          : 'bg-transparent text-white/35 border-[#4A4A51] cursor-not-allowed line-through'
                       }`}
                       title={slot.available ? `Disponibile alle ${slot.time}` : `Orario ${slot.time} non disponibile (${slot.reason || 'occupato'})`}
                     >
@@ -644,10 +644,10 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                         <span
                           className={`w-2 h-2 rounded-full shrink-0 ${
                             isSelected
-                              ? 'bg-[#151515]'
+                              ? 'bg-white'
                               : slot.available
-                              ? 'bg-emerald-600'
-                              : 'bg-rose-500'
+                              ? 'bg-emerald-500'
+                              : 'bg-white/30'
                           }`}
                         />
                         <span>{slot.time}</span>
@@ -667,7 +667,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="flex justify-start items-center pt-4">
             <button
               onClick={() => setCurrentStep(2)}
-              className="px-5 py-2.5 border border-[#2E2E2E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#151515] flex items-center space-x-1.5 rounded-none"
+              className="px-5 py-2.5 border border-[#4A4A51] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#2D2D32] flex items-center space-x-1.5 rounded-none"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro</span>
@@ -681,7 +681,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* ========================================================================= */}
       {currentStep === 4 && (
         <div className="space-y-8">
-          <div className="flex justify-between items-center border-b border-[#2E2E2E] pb-3">
+          <div className="flex justify-between items-center border-b border-[#4A4A51] pb-3">
             <div>
               <h2 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                 Passo 4: Riepilogo & Dati Personali
@@ -701,8 +701,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Box Riepilogo Ordine */}
-            <div className="lg:col-span-5 bg-[#151515] p-6 border border-[#2E2E2E] space-y-4">
-              <h3 className="font-display uppercase tracking-wide text-lg font-normal text-[#F2EFEA] border-b border-[#2E2E2E] pb-2">
+            <div className="lg:col-span-5 bg-[#2D2D32] p-6 border border-[#4A4A51] space-y-4">
+              <h3 className="font-display uppercase tracking-wide text-lg font-normal text-[#F2EFEA] border-b border-[#4A4A51] pb-2">
                 Dettagli Prenotazione
               </h3>
 
@@ -739,7 +739,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   <span className="font-medium text-[#F2EFEA] text-right">Via Galermo 288/E, Catania</span>
                 </div>
 
-                <div className="flex justify-between items-center pt-3 border-t border-[#2E2E2E]">
+                <div className="flex justify-between items-center pt-3 border-t border-[#4A4A51]">
                   <span className="font-bold uppercase tracking-wider text-[11px] text-[#F2EFEA]">Prezzo totale al salone:</span>
                   <span className="font-display uppercase tracking-wide text-3xl font-light text-[#F2EFEA]">
                     €{selectedService?.price}
@@ -752,13 +752,13 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
             </div>
 
             {/* Form Dati Cliente */}
-            <div className="lg:col-span-7 bg-[#151515] p-6 sm:p-8 border border-[#2E2E2E] space-y-5">
-              <h3 className="font-display uppercase tracking-wide text-lg font-normal text-[#F2EFEA] border-b border-[#2E2E2E] pb-2">
+            <div className="lg:col-span-7 bg-[#2D2D32] p-6 sm:p-8 border border-[#4A4A51] space-y-5">
+              <h3 className="font-display uppercase tracking-wide text-lg font-normal text-[#F2EFEA] border-b border-[#4A4A51] pb-2">
                 I Tuoi Dati di Contatto
               </h3>
 
               {errorMsg && (
-                <div className="p-3 bg-rose-950/40 border border-rose-800 text-xs text-rose-900 flex items-center space-x-2">
+                <div className="p-3 bg-rose-950/40 border border-rose-800 text-xs text-rose-300 flex items-center space-x-2">
                   <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
                   <span>{errorMsg}</span>
                 </div>
@@ -776,7 +776,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       value={customerFirstName}
                       onChange={(e) => setCustomerFirstName(e.target.value)}
                       placeholder="Mario"
-                      className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                      className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs bg-[#222226] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                     />
                   </div>
 
@@ -790,7 +790,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                       value={customerLastName}
                       onChange={(e) => setCustomerLastName(e.target.value)}
                       placeholder="Rossi"
-                      className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                      className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs bg-[#222226] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                     />
                   </div>
                 </div>
@@ -805,7 +805,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                     placeholder="+39 340 1234567"
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs bg-[#222226] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   />
                   <p className="text-[10px] text-[#F2EFEA]/60 mt-1">
                     Ti consentirà anche di ritrovare e gestire la tua prenotazione nella sezione "I miei appuntamenti".
@@ -821,7 +821,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     value={customerEmail}
                     onChange={(e) => setCustomerEmail(e.target.value)}
                     placeholder="mario.rossi@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs bg-[#222226] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   />
                 </div>
 
@@ -834,7 +834,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                     value={customerNotes}
                     onChange={(e) => setCustomerNotes(e.target.value)}
                     placeholder="Es. Sfumatura a pelle, barba molto corta, pelle delicata..."
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs bg-[#0B0B0B] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs bg-[#222226] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
                   />
                 </div>
 
@@ -855,7 +855,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="flex justify-start">
             <button
               onClick={() => setCurrentStep(3)}
-              className="px-5 py-2.5 border border-[#2E2E2E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#151515] flex items-center space-x-1.5 rounded-none"
+              className="px-5 py-2.5 border border-[#4A4A51] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#2D2D32] flex items-center space-x-1.5 rounded-none"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Indietro al calendario</span>
@@ -868,12 +868,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
       {/* STEP 5: SCHERMATA DI SUCCESSO E DOWNLOAD .ICS (FASE 4) */}
       {/* ========================================================================= */}
       {currentStep === 5 && confirmedAppointment && (
-        <div className="max-w-2xl mx-auto bg-[#151515] p-8 sm:p-10 border border-[#2E2E2E] shadow-md text-center space-y-6 animate-in zoom-in-95">
+        <div className="max-w-2xl mx-auto bg-[#2D2D32] p-8 sm:p-10 border border-[#4A4A51] shadow-md text-center space-y-6 animate-in zoom-in-95">
           <div className="w-16 h-16 rounded-none bg-[#C8102E] text-white mx-auto flex items-center justify-center border border-[#C8102E]">
             <CheckCircle2 className="w-8 h-8" />
           </div>
 
-          <div className="space-y-2 border-b border-[#2E2E2E] pb-6">
+          <div className="space-y-2 border-b border-[#4A4A51] pb-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#F2EFEA]/60 block">
               Prenotazione Confermata
             </span>
@@ -886,7 +886,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           </div>
 
           {/* Booking Code Highlight Card */}
-          <div className="p-4 bg-[#1C1C1C] border border-[#2E2E2E] max-w-sm mx-auto">
+          <div className="p-4 bg-[#38383E] border border-[#4A4A51] max-w-sm mx-auto">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#F2EFEA]/70 block">
               Codice Prenotazione Univoco
             </span>
@@ -899,7 +899,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           </div>
 
           {/* Details recap table */}
-          <div className="bg-[#0B0B0B] p-4 text-xs text-left space-y-2 border border-[#2E2E2E]">
+          <div className="bg-[#222226] p-4 text-xs text-left space-y-2 border border-[#4A4A51]">
             <div className="flex justify-between border-b border-[#F2EFEA]/10 pb-1">
               <span className="text-[#F2EFEA]/60">Cliente:</span>
               <span className="font-bold text-[#F2EFEA]">{confirmedAppointment.customer_name}</span>
@@ -938,7 +938,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
             <button
               onClick={() => onNavigate('my-appointments')}
-              className="px-5 py-3 rounded-none border border-[#2E2E2E] bg-transparent hover:bg-[#242424] text-[#F2EFEA] font-bold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
+              className="px-5 py-3 rounded-none border border-[#4A4A51] bg-transparent hover:bg-[#424249] text-[#F2EFEA] font-bold text-[11px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
             >
               <BookmarkCheck className="w-4 h-4" />
               <span>Visualizza nei miei appuntamenti</span>

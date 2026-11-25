@@ -46,7 +46,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       {/* Header */}
-      <div className="max-w-3xl space-y-3 border-b border-[#2E2E2E] pb-6">
+      <div className="max-w-3xl space-y-3 border-b border-[#4A4A51] pb-6">
         <div className="inline-flex items-center space-x-2 text-[#F2EFEA]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
           <MapPin className="w-3.5 h-3.5" />
           <span>Galermo · Catania</span>
@@ -63,7 +63,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
         {/* Left Column: Info, Telephone, Hours */}
         <div className="lg:col-span-5 space-y-6">
           {/* Status banner */}
-          <div className="p-4 rounded-none bg-[#151515] border border-[#2E2E2E] flex items-center justify-between">
+          <div className="p-4 rounded-none bg-[#2D2D32] border border-[#4A4A51] flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <span
                 className={`w-2.5 h-2.5 rounded-full ${
@@ -88,14 +88,14 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Contact Details Card */}
-          <div className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-5">
+          <div className="bg-[#2D2D32] rounded-none p-6 border border-[#4A4A51] space-y-5">
             <h3 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA] border-b border-[#F2EFEA]/15 pb-3">
               Contatti
             </h3>
 
             <div className="space-y-4 text-xs">
               <div className="flex items-start space-x-3">
-                <div className="p-2 bg-[#1C1C1C] text-[#F2EFEA] border border-[#F2EFEA]/20 shrink-0">
+                <div className="p-2 bg-[#38383E] text-[#F2EFEA] border border-[#F2EFEA]/20 shrink-0">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
@@ -114,7 +114,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="p-2 bg-[#1C1C1C] text-[#F2EFEA] border border-[#F2EFEA]/20 shrink-0">
+                <div className="p-2 bg-[#38383E] text-[#F2EFEA] border border-[#F2EFEA]/20 shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
@@ -132,7 +132,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
               </div>
 
               <div className="flex items-start space-x-3">
-                <div className="p-2 bg-[#1C1C1C] text-[#F2EFEA] border border-[#F2EFEA]/20 shrink-0">
+                <div className="p-2 bg-[#38383E] text-[#F2EFEA] border border-[#F2EFEA]/20 shrink-0">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
@@ -144,7 +144,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Orari di Apertura Table */}
-          <div className="bg-[#151515] rounded-none p-6 border border-[#2E2E2E] space-y-4">
+          <div className="bg-[#2D2D32] rounded-none p-6 border border-[#4A4A51] space-y-4">
             <h3 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA] flex items-center gap-2 border-b border-[#F2EFEA]/15 pb-3">
               <Clock className="w-4 h-4 opacity-70" />
               Orari Settimanali
@@ -158,7 +158,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
                     key={h.id}
                     className={`flex justify-between items-center py-2 px-2.5 ${
                       isToday
-                        ? 'bg-[#1C1C1C] text-[#F2EFEA] font-bold border border-[#2E2E2E]'
+                        ? 'bg-[#38383E] text-[#F2EFEA] font-bold border border-[#4A4A51]'
                         : 'text-[#F2EFEA]/70 border-b border-[#F2EFEA]/10'
                     }`}
                   >
@@ -182,8 +182,8 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
         {/* Right Column: Google Maps Embed & Contact Form */}
         <div className="lg:col-span-7 space-y-6">
           {/* Interactive Google Maps Embed */}
-          <div className="bg-[#151515] rounded-none overflow-hidden border border-[#2E2E2E]">
-            <div className="p-4 border-b border-[#2E2E2E] flex justify-between items-center bg-[#1C1C1C]">
+          <div className="bg-[#2D2D32] rounded-none overflow-hidden border border-[#4A4A51]">
+            <div className="p-4 border-b border-[#4A4A51] flex justify-between items-center bg-[#38383E]">
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4 text-[#F2EFEA]" />
                 <span className="font-display uppercase tracking-wide text-base text-[#F2EFEA]">
@@ -214,7 +214,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-[#151515] rounded-none p-6 sm:p-8 border border-[#2E2E2E] space-y-6">
+          <div className="bg-[#2D2D32] rounded-none p-6 sm:p-8 border border-[#4A4A51] space-y-6">
             <div>
               <div className="flex items-center space-x-2 text-[#F2EFEA]/70 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">
                 <MessageSquare className="w-3.5 h-3.5" />
@@ -229,7 +229,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
             </div>
 
             {submitted ? (
-              <div className="p-8 bg-[#1C1C1C] border border-[#2E2E2E] text-center space-y-3">
+              <div className="p-8 bg-[#38383E] border border-[#4A4A51] text-center space-y-3">
                 <CheckCircle2 className="w-8 h-8 text-[#F2EFEA] mx-auto" />
                 <h4 className="font-display uppercase tracking-wide text-2xl font-light text-[#F2EFEA]">
                   Messaggio inviato con successo!
@@ -257,7 +257,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Mario Rossi"
-                      className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#0B0B0B]"
+                      className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#222226]"
                     />
                   </div>
 
@@ -270,7 +270,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+39 340 1234567"
-                      className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#0B0B0B]"
+                      className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#222226]"
                     />
                   </div>
                 </div>
@@ -285,7 +285,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="mario.rossi@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#0B0B0B]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#222226]"
                   />
                 </div>
 
@@ -299,7 +299,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Scrivi qui la tua richiesta o domanda..."
-                    className="w-full px-3.5 py-2.5 rounded-none border border-[#2E2E2E] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#0B0B0B]"
+                    className="w-full px-3.5 py-2.5 rounded-none border border-[#4A4A51] text-xs focus:outline-none focus:ring-1 focus:ring-[#C8102E] bg-[#222226]"
                   />
                 </div>
 

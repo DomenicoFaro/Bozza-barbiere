@@ -25,7 +25,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
       {/* Page Header */}
-      <div className="max-w-3xl space-y-3 border-b border-[#2E2E2E] pb-6">
+      <div className="max-w-3xl space-y-3 border-b border-[#4A4A51] pb-6">
         <div className="inline-flex items-center space-x-2 text-[#F2EFEA]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
           <Scissors className="w-3.5 h-3.5" />
           <span>Servizi</span>
@@ -48,7 +48,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
             className={`px-4 py-2 rounded-none text-[10px] font-bold uppercase tracking-wider whitespace-nowrap transition-all border ${
               selectedCategory === cat.id
                 ? 'bg-[#C8102E] text-white border-[#C8102E]'
-                : 'bg-[#151515] text-[#F2EFEA]/70 hover:text-[#F2EFEA] border-[#F2EFEA]/30 hover:border-[#C8102E]'
+                : 'bg-[#2D2D32] text-[#F2EFEA]/70 hover:text-[#F2EFEA] border-[#F2EFEA]/30 hover:border-[#C8102E]'
             }`}
           >
             {cat.label}
@@ -62,7 +62,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
           return (
             <div
               key={service.id}
-              className="bg-[#151515] rounded-none p-7 border border-[#2E2E2E] transition-all flex flex-col justify-between group hover:bg-[#242424]/30"
+              className="bg-[#2D2D32] rounded-none p-7 border border-[#4A4A51] transition-all flex flex-col justify-between group hover:bg-[#424249]/30"
             >
               <div className="space-y-4">
                 <div className="flex justify-between items-start">
@@ -117,7 +117,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Info note box */}
-      <div className="bg-[#1C1C1C] border border-[#2E2E2E] rounded-none p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-[#38383E] border border-[#4A4A51] rounded-none p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <h4 className="font-display uppercase tracking-wide text-xl font-light text-[#F2EFEA]">
             Vuoi qualcosa di diverso?
@@ -128,7 +128,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
         </div>
         <button
           onClick={() => onNavigate('contacts')}
-          className="px-6 py-3 rounded-none bg-[#151515] border border-[#C8102E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#C8102E] hover:text-white transition-all shrink-0"
+          className="px-6 py-3 rounded-none bg-[#2D2D32] border border-[#C8102E] text-[11px] font-bold uppercase tracking-wider text-[#F2EFEA] hover:bg-[#C8102E] hover:text-white transition-all shrink-0"
         >
           Contattaci
         </button>

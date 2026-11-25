@@ -50,9 +50,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0B0B0B]/95 backdrop-blur-md border-b border-[#2E2E2E] transition-all">
+    <header className="sticky top-0 z-50 bg-[#222226]/95 backdrop-blur-md border-b border-[#4A4A51] transition-all">
       {/* Top Banner: Status & Contact bar */}
-      <div className="hidden md:flex items-center justify-between px-8 py-2 bg-black text-white text-[10px] uppercase tracking-[0.2em]">
+      <div className="hidden md:flex items-center justify-between px-8 py-2 bg-[#17171A] text-white text-[10px] uppercase tracking-[0.2em]">
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-2">
             <span
@@ -122,13 +122,13 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo & Brand Name */}
           <div
             onClick={() => onNavigate('home')}
             className="flex items-center space-x-3.5 cursor-pointer group py-1"
           >
-            <BrandLogo mode="full" className="h-14" />
+            <BrandLogo mode="full" className="h-12 lg:h-14" />
           </div>
 
           {/* Desktop Nav Links */}
@@ -142,7 +142,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   className={`px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold transition-all rounded-none ${
                     isActive
                       ? 'border border-[#C8102E] bg-[#C8102E] text-white'
-                      : 'text-[#F2EFEA]/70 hover:text-[#F2EFEA] hover:bg-[#242424] border border-transparent'
+                      : 'text-[#F2EFEA]/70 hover:text-[#F2EFEA] hover:bg-[#424249] border border-transparent'
                   }`}
                 >
                   {item.label}
@@ -166,119 +166,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           <div className="flex items-center space-x-2 lg:hidden">
             <a
               href={`tel:${BUSINESS_INFO.phoneRaw}`}
-              className="p-2 border border-[#C8102E] text-[#F2EFEA] hover:bg-[#C8102E] hover:text-white transition-colors"
+              className="p-2.5 border border-[#C8102E] text-[#F2EFEA] hover:bg-[#C8102E] hover:text-white transition-colors"
               title="Chiama Giuseppe"
             >
               <Phone className="w-4 h-4" />
             </a>
-            <button
-              onClick={() => onNavigate('booking')}
-              className="px-3 py-1.5 border border-[#C8102E] bg-[#C8102E] text-white text-[10px] font-bold uppercase tracking-wider"
-            >
-              Prenota
-            </button>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 border border-[#2E2E2E] text-[#F2EFEA] hover:bg-[#242424] transition-colors"
-              aria-label="Menu"
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu Drawer */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden border-t border-[#2E2E2E] bg-[#0B0B0B] px-4 pt-3 pb-6 space-y-2 shadow-sm animate-in slide-in-from-top-2">
-          {/* Status badge in mobile */}
-          <div className="flex items-center justify-between px-3 py-2 bg-[#151515] border border-[#2E2E2E] text-xs mb-3">
-            <div className="flex items-center space-x-2">
-              <span
-                className={`w-2 h-2 rounded-full ${
-                  shopStatus.isOpen ? 'bg-emerald-600' : 'bg-amber-600'
-                }`}
-              />
-              <span className="font-semibold text-[#F2EFEA] text-[11px] uppercase tracking-wider">{shopStatus.text}</span>
-            </div>
-            <span className="text-[#F2EFEA]/60 text-[10px] uppercase tracking-wider">Via Galermo 288/E</span>
-          </div>
-
-          {navItems.map((item) => {
-            const isActive = currentPage === item.page;
-            return (
-              <button
-                key={item.page}
-                onClick={() => {
-                  onNavigate(item.page);
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`w-full flex items-center justify-between px-4 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
-                  isActive
-                    ? 'border-[#C8102E] bg-[#C8102E] text-white'
-                    : 'border-transparent text-[#F2EFEA]/80 hover:bg-[#242424]'
-                }`}
-              >
-                <span className="flex items-center space-x-3">
-                  {item.icon}
-                  <span>{item.label}</span>
-                </span>
-                <ChevronRight className="w-4 h-4 opacity-50" />
-              </button>
-            );
-          })}
-
-          <div className="pt-2 border-t border-[#F2EFEA]/20 space-y-2">
-            {user ? (
-              <button
-                onClick={() => {
-                  signOut();
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full flex items-center justify-between px-4 py-2.5 text-xs text-[#F2EFEA] border border-[#C8102E] hover:bg-[#C8102E] hover:text-white font-semibold uppercase tracking-wider transition-colors"
-              >
-                <span className="flex items-center space-x-2">
-                  <LogOut className="w-4 h-4" />
-                  <span>Esci ({profile?.first_name || 'Cliente'})</span>
-                </span>
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setShowAuthModal(true);
-                  setIsMobileMenuOpen(false);
-                }}
-                className="relative w-full flex items-center justify-between px-4 py-2.5 text-xs bg-[#C8102E] text-white font-bold uppercase tracking-wider transition-colors shadow-sm"
-              >
-                <span className="flex items-center space-x-2">
-                  <User className="w-4 h-4" />
-                  <span>Accedi o Registrati</span>
-                </span>
-                <span className="relative w-2 h-2">
-                  <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping" />
-                  <span className="absolute inset-0 rounded-full bg-emerald-500" />
-                </span>
-              </button>
-            )}
-
-            {isAdmin && (
-              <button
-                onClick={() => {
-                  onNavigate('admin');
-                  setIsMobileMenuOpen(false);
-                }}
-                className="w-full flex items-center justify-between px-4 py-2.5 text-xs text-[#F2EFEA] border border-[#C8102E] hover:bg-[#C8102E] hover:text-white font-semibold uppercase tracking-wider transition-colors"
-              >
-                <span className="flex items-center space-x-2">
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>Pannello Amministrazione</span>
-                </span>
-                <span className="text-[10px] bg-[#C8102E] text-white px-2 py-0.5">Titolare</span>
-              </button>
-            )}
-          </div>
-        </div>
-      )}
     </header>
   );
 };
