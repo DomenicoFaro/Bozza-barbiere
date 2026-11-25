@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageView, Appointment, Service, Operator, BusinessHours, Closure } from '../types';
 import { StorageService, getFormattedDate, timeToMinutes, minutesToTime } from '../services/storage';
-import { DRLogo } from '../components/DRLogo';
+import { BrandLogo } from '../components/BrandLogo';
 import { useAuth } from '../contexts/AuthContext';
 import { AuthModal } from '../components/AuthModal';
 import {
@@ -185,7 +185,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
     return (
       <div className="max-w-md mx-auto px-4 py-20">
         <div className="bg-white rounded-none p-8 border border-[#1A1A1A] shadow-none space-y-6 text-center">
-          <DRLogo size="lg" className="mx-auto" />
+          <BrandLogo size="lg" className="mx-auto" />
           <div className="space-y-2">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A] block">
               Area Riservata
@@ -252,7 +252,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
       {/* Top Admin Header Bar */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-none border border-[#1A1A1A]">
         <div className="flex items-center space-x-4">
-          <DRLogo size="md" />
+          <BrandLogo size="md" />
           <div>
             <div className="flex items-center space-x-2">
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A]">
@@ -560,7 +560,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 onChange={(e) => setFilterOperator(e.target.value)}
                 className="text-xs px-3 py-2 rounded-none border border-[#1A1A1A] bg-[#FDFCFB]"
               >
-                <option value="all">Tutti i barbieri</option>
+                <option value="all">Tutti i parrucchieri</option>
                 {operators.map(o => (
                   <option key={o.id} value={o.id}>{o.name}</option>
                 ))}
@@ -591,7 +591,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                     <th className="p-3.5">Codice</th>
                     <th className="p-3.5">Cliente & Telefono</th>
                     <th className="p-3.5">Servizio</th>
-                    <th className="p-3.5">Barbiere</th>
+                    <th className="p-3.5">Parrucchiere</th>
                     <th className="p-3.5">Data & Ora</th>
                     <th className="p-3.5">Stato</th>
                     <th className="p-3.5 text-right">Azioni</th>
@@ -771,7 +771,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 Team & Operatori Salone
               </h2>
               <p className="text-xs text-[#767676]">
-                Configura i barbieri abilitati e i servizi che ciascuno può eseguire.
+                Configura i parrucchieri abilitati e i servizi che ciascuno può eseguire.
               </p>
             </div>
           </div>
@@ -980,7 +980,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Barbiere *</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">Parrucchiere *</label>
                   <select
                     required
                     value={manualOperatorId}

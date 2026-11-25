@@ -59,8 +59,8 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
     setCancelSuccessMsg(null);
     setRescheduleSuccessMsg(null);
 
-    // Se è un codice prenotazione (es. "DR-1234")
-    if (query.toUpperCase().startsWith('DR-') || query.length === 4) {
+    // Se è un codice prenotazione (es. "GD-1234")
+    if (query.toUpperCase().startsWith('GD-') || query.length === 4) {
       const byCode = await StorageService.getAppointmentByCode(query);
       setResults(byCode ? [byCode] : []);
     } else {
@@ -113,7 +113,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
         <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">
           {user
             ? 'Ecco gli appuntamenti collegati al tuo account.'
-            : 'Accedi al tuo account per trovarli subito, oppure inserisci il numero di telefono o il codice prenotazione (es. DR-7319) ricevuto durante la conferma.'}
+            : 'Accedi al tuo account per trovarli subito, oppure inserisci il numero di telefono o il codice prenotazione (es. GD-7319) ricevuto durante la conferma.'}
         </p>
       </div>
 
@@ -183,7 +183,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Es. +39 340 1234567 oppure DR-7319"
+                  placeholder="Es. +39 340 1234567 oppure GD-7319"
                   className="w-full pl-10 pr-4 py-3 rounded-none border border-[#1A1A1A] text-xs focus:outline-none focus:ring-1 focus:ring-[#1A1A1A] bg-[#FDFCFB]"
                 />
               </div>
@@ -297,7 +297,7 @@ export const MyAppointmentsPage: React.FC<MyAppointmentsPageProps> = ({ onNaviga
                       </div>
                       <div className="flex items-center space-x-2 text-[#1A1A1A]">
                         <User className="w-3.5 h-3.5 opacity-70" />
-                        <span>Barbiere: <strong>{operator?.name || 'Master Barber'}</strong></span>
+                        <span>Parrucchiere: <strong>{operator?.name || 'Giuseppe'}</strong></span>
                       </div>
                     </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PageView } from '../types';
-import { DRLogo } from '../components/DRLogo';
+import { BrandLogo } from '../components/BrandLogo';
 import { BUSINESS_INFO, GALLERY_ITEMS } from '../data/initialData';
 import { StorageService } from '../services/storage';
 import { MediaStorageService } from '../services/mediaStorage';
@@ -41,20 +41,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="lg:col-span-7 space-y-6 text-left">
               <div className="inline-flex items-center space-x-2.5 px-3 py-1 border border-[#1A1A1A] bg-white text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                <span>Via Giacomo Leopardi 138 · Catania</span>
+                <span>Via Galermo 288/E · Catania</span>
               </div>
 
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 mb-2">
-                  <DRLogo size="md" mode="full" className="h-12 w-auto max-w-[200px]" />
+                  <BrandLogo size="md" mode="full" className="h-12 w-auto max-w-[200px]" />
                 </div>
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif italic font-light text-[#1A1A1A] tracking-tight leading-[1.12]">
-                  La cura sartoriale per i tuoi capelli e la tua barba.
+                  Il tuo parrucchiere di fiducia a Galermo.
                 </h1>
               </div>
 
               <p className="text-base text-[#1A1A1A]/70 max-w-2xl leading-relaxed">
-                Nel cuore di Catania, un ambiente raffinato dove la grande tradizione della barbieria all'italiana si fonde con tecniche di taglio all'avanguardia e trattamenti di puro benessere.
+                Tagli classici e moderni, cura della barba e un servizio attento e cordiale. Parrucchiere per uomo a Catania, in Via Galermo: il 96% dei clienti lo consiglia.
               </p>
 
               {/* Status pill & opening info */}
@@ -90,12 +90,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   <div className="text-[#1A1A1A]/60 text-[11px]">Slot riservati e puntuali</div>
                 </div>
                 <div className="space-y-1">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#1A1A1A]">Rituale Panno Caldo</div>
-                  <div className="text-[#1A1A1A]/60 text-[11px]">Relax all'italiana</div>
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#1A1A1A]">96% Consigliato</div>
+                  <div className="text-[#1A1A1A]/60 text-[11px]">Dalle recensioni dei clienti</div>
                 </div>
                 <div className="space-y-1">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#1A1A1A]">3 Specialisti</div>
-                  <div className="text-[#1A1A1A]/60 text-[11px]">Scegli il tuo barbiere</div>
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#1A1A1A]">Su Appuntamento</div>
+                  <div className="text-[#1A1A1A]/60 text-[11px]">Niente attese inutili</div>
                 </div>
               </div>
             </div>
@@ -126,8 +126,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <span className="text-[#1A1A1A]/70 text-[11px]">Taglio, Barba, Relax</span>
                   </div>
                   <div className="p-3 bg-[#FDFCFB] border border-[#1A1A1A]/30">
-                    <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A1A1A] block mb-0.5">2. Barbiere</span>
-                    <span className="text-[#1A1A1A]/70 text-[11px]">Dario, Marco o Luca</span>
+                    <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A1A1A] block mb-0.5">2. Parrucchiere</span>
+                    <span className="text-[#1A1A1A]/70 text-[11px]">Giuseppe</span>
                   </div>
                   <div className="p-3 bg-[#FDFCFB] border border-[#1A1A1A]/30">
                     <span className="font-bold text-[10px] uppercase tracking-wider text-[#1A1A1A] block mb-0.5">3. Orario</span>
@@ -162,20 +162,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center space-x-2 px-3 py-1 border border-white/20 bg-white/5 text-[10px] uppercase tracking-[0.2em] font-bold text-white">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                <span>Video Reel Live · Via Giacomo Leopardi 138</span>
+                <span>Video Reel Live · Via Galermo 288/E</span>
               </div>
 
               <div className="space-y-2">
                 <span className="text-xs uppercase font-mono tracking-widest text-white/50 block">
-                  @darioriolo_barber
+                  Da Giuseppe
                 </span>
                 <h2 className="text-3xl sm:text-5xl font-serif italic font-light leading-tight text-white">
-                  Guarda Dario Riolo all'opera.
+                  Il taglio che fa per te.
                 </h2>
               </div>
 
               <p className="text-sm text-white/70 leading-relaxed max-w-xl">
-                Nessun filtro o artificio: il video mostra la reale precisione a forbice su pettine, le sfumature millimetriche a lama e la modellatura della texture realizzate ogni giorno nel nostro salone a Catania.
+                Forbice, macchinetta e rasoio con la precisione di chi fa questo mestiere ogni giorno, nel nostro salone di Galermo a Catania.
               </p>
 
               {/* 3 Step Craft Details */}
@@ -183,33 +183,33 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div className="flex items-start space-x-4">
                   <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">01.</span>
                   <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Consulenza Morfologica & Studio del Profilo</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Analizziamo proporzioni, attaccature e direzioni naturali di crescita per esaltare i tuoi lineamenti.</p>
+                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Ascolto & Consiglio</h4>
+                    <p className="text-xs text-white/60 mt-0.5">Ti consigliamo il taglio più adatto al tuo viso e al tuo stile.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">02.</span>
                   <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Sfumatura Taper Fade & Rifinitura a Lama</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Passaggi graduali senza scalini, basette pulite e contorni a rasoio a mano libera con lama sterile.</p>
+                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Sfumature & Rifinitura</h4>
+                    <p className="text-xs text-white/60 mt-0.5">Passaggi graduali, basette pulite e contorni precisi.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <span className="font-mono text-xs text-white/40 pt-0.5 font-bold">03.</span>
                   <div>
-                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Texture Disconnessa & Styling Opaco</h4>
-                    <p className="text-xs text-white/60 mt-0.5">Lavoro di forbice per donare movimento, volume leggero e definizione flessibile per l'intera giornata.</p>
+                    <h4 className="text-xs font-bold tracking-wider text-white uppercase">Piega & Finitura</h4>
+                    <p className="text-xs text-white/60 mt-0.5">Un look curato che dura per tutta la giornata.</p>
                   </div>
                 </div>
               </div>
 
               <div className="pt-4 flex flex-col sm:flex-row gap-3">
                 <button
-                  onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-dario' })}
+                  onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-giuseppe' })}
                   className="px-7 py-3.5 bg-white hover:bg-neutral-200 text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
                 >
                   <Scissors className="w-4 h-4" />
-                  <span>Prenota questo taglio con Dario</span>
+                  <span>Prenota il tuo taglio da Giuseppe</span>
                 </button>
                 <button
                   onClick={() => onNavigate('gallery')}
@@ -238,7 +238,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="space-y-2">
             <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]/60">
               <Scissors className="w-3.5 h-3.5" />
-              <span>Listino Esclusivo</span>
+              <span>Listino Prezzi</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-serif italic font-light text-[#1A1A1A]">
               Servizi in Evidenza
@@ -297,20 +297,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="lg:col-span-5 space-y-6">
               <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]/60">
                 <Compass className="w-3.5 h-3.5" />
-                <span>Spazio & Design</span>
+                <span>Il Salone</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-serif italic font-light leading-tight text-[#1A1A1A]">
-                Non solo un taglio: un momento per te stesso.
+                Un salone dove sentirsi a casa.
               </h2>
               <p className="text-xs text-[#1A1A1A]/70 leading-relaxed">
-                Abbiamo progettato il salone di Via Giacomo Leopardi 138 per farti sentire a tuo agio dal primo istante. Pavimenti in legno caldo, poltrone ergonomiche in morbida pelle nera, luce naturale diffusa e un caffè espresso o amaro siciliano offerto al tuo arrivo.
+                Da Giuseppe, in Via Galermo 288/E, trovi un ambiente accogliente e un servizio cordiale: che tu voglia un taglio classico, una sistemata alla barba o un look più moderno, sarai ascoltato con attenzione.
               </p>
 
               <div className="space-y-3 pt-2">
                 <div className="flex items-start space-x-3">
                   <CheckCircle2 className="w-4 h-4 text-[#1A1A1A] shrink-0 mt-0.5" />
                   <p className="text-xs text-[#1A1A1A]/80">
-                    <strong className="text-[#1A1A1A]">Igiene e sicurezza assolute:</strong> Lame monouso e sanificazione degli strumenti dopo ogni singolo cliente.
+                    <strong className="text-[#1A1A1A]">Igiene e sicurezza assolute:</strong> Strumenti sempre puliti e sanificati dopo ogni cliente.
                   </p>
                 </div>
                 <div className="flex items-start space-x-3">
@@ -322,7 +322,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div className="flex items-start space-x-3">
                   <CheckCircle2 className="w-4 h-4 text-[#1A1A1A] shrink-0 mt-0.5" />
                   <p className="text-xs text-[#1A1A1A]/80">
-                    <strong className="text-[#1A1A1A]">Consulenza stilistica dedicata:</strong> Ascoltiamo le tue esigenze e valorizziamo i tuoi lineamenti.
+                    <strong className="text-[#1A1A1A]">Consigli su misura:</strong> Ascoltiamo le tue esigenze e valorizziamo i tuoi lineamenti.
                   </p>
                 </div>
               </div>
@@ -344,17 +344,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className="border border-[#1A1A1A] bg-white p-6 flex flex-col justify-between space-y-6 max-w-md">
                 <div className="space-y-4">
                   <div className="inline-flex items-center space-x-2 px-2.5 py-1 bg-[#1A1A1A] text-white text-[9px] font-bold uppercase tracking-widest">
-                    <span>Identità Ufficiale</span>
+                    <span>Il Salone</span>
                   </div>
                   <div className="py-4 flex items-center justify-center bg-[#EFEDE9] border border-[#1A1A1A]/20 p-4">
-                    <DRLogo size="lg" mode="full" className="max-h-24 w-auto object-contain" />
+                    <img src="/assets/giuseppe_logo.jpg" alt="Barber Giuseppe Distefano" className="max-h-40 w-auto object-contain" />
                   </div>
                   <div>
                     <h3 className="font-serif italic text-xl font-light text-[#1A1A1A]">
-                      Dario Riolo Barber Shop
+                      Parrucchiere Uomo da Giuseppe
                     </h3>
                     <p className="text-xs text-[#1A1A1A]/70 mt-1 leading-relaxed">
-                      Atelier sartoriale in Via Giacomo Leopardi 138 a Catania. Tutte le foto stock sono state rimosse per garantire esclusività e autenticità.
+                      Parrucchiere per uomo in Via Galermo 288/E, nel quartiere Galermo a Catania.
                     </p>
                   </div>
                 </div>
@@ -379,17 +379,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.2em] font-bold text-[#1A1A1A]/60">
             <Users className="w-3.5 h-3.5" />
-            <span>Maestria & Passione</span>
+            <span>Il Titolare</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif italic font-light text-[#1A1A1A]">
-            I Maestri Barbieri
+            Giuseppe Distefano
           </h2>
           <p className="text-xs text-[#1A1A1A]/70 leading-relaxed">
-            Ogni membro del nostro team condivide la dedizione per il dettaglio, l'ascolto del cliente e l'aggiornamento continuo sui trend internazionali.
+            Dedizione per il dettaglio e attenzione al cliente, ogni giorno.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 max-w-md mx-auto gap-8">
           {operators.map((op) => (
             <div 
               key={op.id}
@@ -434,7 +434,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center space-x-2 text-[10px] uppercase tracking-[0.25em] font-bold text-white/60">
             <Star className="w-3.5 h-3.5 fill-current" />
-            <span>Esperienza Sartoriale a Catania</span>
+            <span>Galermo · Catania</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-serif italic font-light tracking-tight text-white">
@@ -442,7 +442,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </h2>
 
           <p className="text-sm text-white/70 max-w-xl mx-auto leading-relaxed">
-            Seleziona il trattamento desiderato, scegli il tuo barbiere di fiducia e prenota il tuo appuntamento in meno di 2 minuti.
+            Seleziona il trattamento desiderato, prenota il tuo appuntamento in meno di 2 minuti.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row justify-center gap-4">

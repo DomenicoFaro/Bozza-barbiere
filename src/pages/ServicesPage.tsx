@@ -28,13 +28,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
       <div className="max-w-3xl space-y-3 border-b border-[#1A1A1A] pb-6">
         <div className="inline-flex items-center space-x-2 text-[#1A1A1A]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
           <Scissors className="w-3.5 h-3.5" />
-          <span>Listino Completo · Atelier</span>
+          <span>Listino Completo</span>
         </div>
         <h1 className="text-4xl sm:text-5xl font-serif italic font-light text-[#1A1A1A] tracking-tight">
           Servizi di Barbieria & Cura Maschile
         </h1>
         <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">
-          Scegli il trattamento desiderato: puoi prenotarlo direttamente online selezionando il barbiere e l'orario a te più congeniale.
+          Scegli il trattamento desiderato: puoi prenotarlo direttamente online selezionando il parrucchiere e l'orario a te più congeniale.
         </p>
       </div>
 

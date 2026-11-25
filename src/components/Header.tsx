@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PageView } from '../types';
-import { DRLogo } from './DRLogo';
+import { BrandLogo } from './BrandLogo';
 import { BUSINESS_INFO } from '../data/initialData';
 import { StorageService } from '../services/storage';
 import { useAuth } from '../contexts/AuthContext';
@@ -128,7 +128,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             onClick={() => onNavigate('home')}
             className="flex items-center space-x-3.5 cursor-pointer group py-1"
           >
-            <DRLogo size="sm" mode="full" className="h-12 w-auto max-w-[200px]" />
+            <BrandLogo size="sm" mode="full" className="h-12 w-auto max-w-[200px]" />
           </div>
 
           {/* Desktop Nav Links */}
@@ -201,7 +201,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               />
               <span className="font-semibold text-[#1A1A1A] text-[11px] uppercase tracking-wider">{shopStatus.text}</span>
             </div>
-            <span className="text-[#1A1A1A]/60 text-[10px] uppercase tracking-wider">Via G. Leopardi 138</span>
+            <span className="text-[#1A1A1A]/60 text-[10px] uppercase tracking-wider">Via Galermo 288/E</span>
           </div>
 
           {navItems.map((item) => {

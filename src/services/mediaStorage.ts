@@ -2,7 +2,7 @@
 // This ensures that when the user uploads their original video or photo,
 // it is persisted in the browser even across refreshes.
 
-const DB_NAME = 'DarioRioloAppMediaDB';
+const DB_NAME = 'DaGiuseppeAppMediaDB';
 const DB_VERSION = 1;
 const STORE_NAME = 'media_files';
 

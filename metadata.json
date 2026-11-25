@@ -1,6 +1,6 @@
 {
-  "name": "Remix Dario Riolo Barber Shop",
-  "description": "Sito ufficiale e sistema di prenotazione online per Dario Riolo Barber Shop a Catania.",
+  "name": "Parrucchiere Uomo da Giuseppe",
+  "description": "Sito ufficiale e prenotazione online di Parrucchiere Uomo da Giuseppe, Via Galermo 288/E, Catania.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

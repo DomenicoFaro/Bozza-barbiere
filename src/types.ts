@@ -47,7 +47,7 @@ export type AppointmentStatus = 'confirmed' | 'pending' | 'cancelled' | 'complet
 
 export interface Appointment {
   id: string;
-  booking_code: string; // es. "DR-7482"
+  booking_code: string; // es. "GD-7482"
   service_id: string;
   operator_id: string;
   customer_name: string;

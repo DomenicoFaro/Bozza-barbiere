@@ -49,13 +49,13 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
       <div className="max-w-3xl space-y-3 border-b border-[#1A1A1A] pb-6">
         <div className="inline-flex items-center space-x-2 text-[#1A1A1A]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
           <MapPin className="w-3.5 h-3.5" />
-          <span>Vieni a Trovarci · Atelier Catania</span>
+          <span>Vieni a Trovarci · Galermo, Catania</span>
         </div>
         <h1 className="text-4xl sm:text-5xl font-serif italic font-light text-[#1A1A1A] tracking-tight">
           Contatti & Posizione
         </h1>
         <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">
-          Siamo a Catania in Via Giacomo Leopardi 138, a pochi passi da Corso Italia e Viale Vittorio Veneto.
+          Siamo a Catania, nel quartiere Galermo, in Via Galermo 288/E.
         </p>
       </div>
 
@@ -118,7 +118,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-bold text-[#1A1A1A] block text-xs uppercase tracking-wider">Telefono & WhatsApp</span>
+                  <span className="font-bold text-[#1A1A1A] block text-xs uppercase tracking-wider">Telefono</span>
                   <a
                     href={`tel:${BUSINESS_INFO.phoneRaw}`}
                     className="text-lg font-serif italic text-[#1A1A1A] hover:underline block mt-0.5"
@@ -137,7 +137,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
                 </div>
                 <div>
                   <span className="font-bold text-[#1A1A1A] block text-xs uppercase tracking-wider">Email</span>
-                  <p className="text-[#1A1A1A]/70 mt-0.5">{BUSINESS_INFO.email}</p>
+                  <p className="text-[#1A1A1A]/70 mt-0.5">{BUSINESS_INFO.email || 'Contattaci telefonicamente o tramite il modulo qui sotto'}</p>
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
               <div className="flex items-center space-x-2">
                 <MapPin className="w-4 h-4 text-[#1A1A1A]" />
                 <span className="font-serif italic text-base text-[#1A1A1A]">
-                  Mappa Salone · Catania
+                  Mappa · Galermo, Catania
                 </span>
               </div>
               <a
@@ -201,7 +201,7 @@ export const ContactsPage: React.FC<ContactsPageProps> = ({ onNavigate }) => {
             </div>
             <div className="w-full h-72 sm:h-80 bg-gray-100">
               <iframe
-                title="Mappa Dario Riolo Barber Shop"
+                title="Mappa Parrucchiere Uomo da Giuseppe"
                 src={BUSINESS_INFO.googleMapsEmbed}
                 width="100%"
                 height="100%"

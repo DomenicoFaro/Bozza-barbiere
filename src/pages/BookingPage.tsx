@@ -232,7 +232,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
   const stepsHeader = [
     { num: 1, title: 'Servizio', desc: selectedService ? selectedService.name : 'Scegli' },
-    { num: 2, title: 'Barbiere', desc: selectedOperatorId === 'any' ? 'Primo disponibile' : (selectedOperator?.name || 'Scegli') },
+    { num: 2, title: 'Parrucchiere', desc: selectedOperatorId === 'any' ? 'Primo disponibile' : (selectedOperator?.name || 'Scegli') },
     { num: 3, title: 'Data & Ora', desc: selectedSlotTime ? `${selectedDate} alle ${selectedSlotTime}` : 'Scegli' },
     { num: 4, title: 'I tuoi Dati', desc: 'Riepilogo e conferma' },
   ];
@@ -245,7 +245,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
         <div className="space-y-6">
           <div className="text-center max-w-xl mx-auto space-y-2 border-b border-[#1A1A1A] pb-6">
             <span className="text-[10px] font-bold text-[#1A1A1A]/60 uppercase tracking-[0.2em] block">
-              Prenotazione Online · Dario Riolo
+              Prenotazione Online · Da Giuseppe
             </span>
             <h1 className="text-3xl sm:text-4xl font-serif italic font-light text-[#1A1A1A]">
               Prenota il tuo Appuntamento
@@ -386,7 +386,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
           <div className="flex justify-between items-center border-b border-[#1A1A1A] pb-3">
             <div>
               <h2 className="font-serif italic text-2xl font-light text-[#1A1A1A]">
-                Passo 2: Scegli il tuo Barbiere
+                Passo 2: Scegli il Parrucchiere
               </h2>
               <p className="text-xs text-[#1A1A1A]/70 mt-1">
                 Servizio selezionato: <strong className="text-[#1A1A1A]">{selectedService?.name}</strong> ({selectedService?.duration_minutes} min • €{selectedService?.price})
@@ -427,7 +427,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                   <p className={`text-[10px] font-bold uppercase tracking-wider mt-0.5 ${
                     selectedOperatorId === 'any' ? 'text-white/80' : 'text-[#1A1A1A]/70'
                   }`}>
-                    Primo barbiere disponibile
+                    Primo parrucchiere disponibile
                   </p>
                   <p className={`text-xs mt-2 ${selectedOperatorId === 'any' ? 'text-white/70' : 'text-[#1A1A1A]/60'}`}>
                     Massima flessibilità oraria: ti assegneremo il primo professionista libero.
@@ -524,7 +524,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                 Passo 3: Seleziona Giorno e Orario
               </h2>
               <p className="text-xs text-[#1A1A1A]/70 mt-1">
-                Barbiere: <strong className="text-[#1A1A1A]">{selectedOperatorId === 'any' ? 'Primo disponibile' : selectedOperator?.name}</strong> • Servizio: <strong className="text-[#1A1A1A]">{selectedService?.name}</strong> ({selectedService?.duration_minutes} min)
+                Parrucchiere: <strong className="text-[#1A1A1A]">{selectedOperatorId === 'any' ? 'Primo disponibile' : selectedOperator?.name}</strong> • Servizio: <strong className="text-[#1A1A1A]">{selectedService?.name}</strong> ({selectedService?.duration_minutes} min)
               </p>
             </div>
             <button
@@ -532,7 +532,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               className="text-[11px] uppercase tracking-wider font-bold text-[#1A1A1A]/70 hover:text-[#1A1A1A] flex items-center gap-1 self-start sm:self-auto"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              Cambia barbiere
+              Cambia parrucchiere
             </button>
           </div>
 
@@ -713,7 +713,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
                 </div>
 
                 <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
-                  <span className="text-[#1A1A1A]/60">Barbiere:</span>
+                  <span className="text-[#1A1A1A]/60">Parrucchiere:</span>
                   <span className="font-bold text-[#1A1A1A]">
                     {selectedOperatorId === 'any' ? 'Primo disponibile' : selectedOperator?.name}
                   </span>
@@ -736,7 +736,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
                 <div className="flex justify-between py-1 border-b border-[#1A1A1A]/10">
                   <span className="text-[#1A1A1A]/60">Luogo:</span>
-                  <span className="font-medium text-[#1A1A1A] text-right">Via Giacomo Leopardi 138, Catania</span>
+                  <span className="font-medium text-[#1A1A1A] text-right">Via Galermo 288/E, Catania</span>
                 </div>
 
                 <div className="flex justify-between items-center pt-3 border-t border-[#1A1A1A]">
@@ -827,7 +827,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
 
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-[#1A1A1A] mb-1">
-                    Note per il barbiere (facoltativo)
+                    Note per il parrucchiere (facoltativo)
                   </label>
                   <textarea
                     rows={2}
@@ -909,7 +909,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ initialServiceId, init
               <span className="font-bold text-[#1A1A1A]">{selectedService?.name}</span>
             </div>
             <div className="flex justify-between border-b border-[#1A1A1A]/10 pb-1">
-              <span className="text-[#1A1A1A]/60">Barbiere:</span>
+              <span className="text-[#1A1A1A]/60">Parrucchiere:</span>
               <span className="font-bold text-[#1A1A1A]">
                 {StorageService.getOperatorById(confirmedAppointment.operator_id)?.name}
               </span>

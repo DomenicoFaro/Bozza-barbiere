@@ -1,4 +1,4 @@
--- Dario Riolo Barber Shop: appuntamenti condivisi (Supabase)
+-- Parrucchiere Uomo da Giuseppe: appuntamenti condivisi (Supabase)
 -- Esegui questo script nel SQL Editor del tuo progetto Supabase
 -- (Dashboard -> SQL Editor -> New query -> incolla ed esegui)
 --
@@ -70,7 +70,7 @@ as $$
 $$;
 grant execute on function public.get_busy_slots(text, text) to anon, authenticated;
 
--- Ricerca guest per codice prenotazione (es. "DR-1234")
+-- Ricerca guest per codice prenotazione (es. "GD-1234")
 create or replace function public.lookup_appointment_by_code(p_code text)
 returns setof public.appointments
 language sql security definer set search_path = public

@@ -75,9 +75,9 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
     StorageService.addGalleryItem({
       title: newTitle.trim(),
       category: isVideoFile ? 'video' : newCategory,
-      description: newDescription.trim() || 'Creazione esclusiva realizzata presso Dario Riolo Barber Shop Catania.',
-      image: isVideoFile ? '/assets/dario_riolo_logo.png' : newMediaPreview,
-      tag: '@darioriolo_barber',
+      description: newDescription.trim() || 'Creazione esclusiva realizzata presso Parrucchiere Uomo da Giuseppe Catania.',
+      image: isVideoFile ? '/assets/giuseppe_logo.jpg' : newMediaPreview,
+      tag: 'Da Giuseppe',
       featured: true,
       isVideo: isVideoFile,
       videoUrl: isVideoFile ? newMediaPreview : undefined,
@@ -116,13 +116,13 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
         <div className="max-w-3xl space-y-3">
           <div className="inline-flex items-center space-x-2 text-[#1A1A1A]/70 font-bold text-[10px] uppercase tracking-[0.2em]">
             <ImageIcon className="w-3.5 h-3.5" />
-            <span>Atelier & Portfolio · Catania</span>
+            <span>Galleria · Galermo, Catania</span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-serif italic font-light text-[#1A1A1A] tracking-tight">
             Galleria Ufficiale
           </h1>
           <p className="text-sm text-[#1A1A1A]/70 leading-relaxed">
-            I tagli sartoriali, le sfumature millimetriche, i rituali per la barba e l'atmosfera autentica di Via Giacomo Leopardi 138.
+            I nostri tagli, le rifiniture e la cura della barba, direttamente dal salone di Via Galermo 288/E.
           </p>
         </div>
 
@@ -356,12 +356,12 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
                 <button
                   onClick={() => {
                     setLightboxItem(null);
-                    onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-dario' });
+                    onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-giuseppe' });
                   }}
                   className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-white hover:bg-neutral-200 text-[#1A1A1A] text-[11px] font-bold uppercase tracking-wider transition-all"
                 >
                   <Scissors className="w-3.5 h-3.5 mr-2" />
-                  <span>Prenota con Dario</span>
+                  <span>Prenota da Giuseppe</span>
                 </button>
               </div>
             </div>

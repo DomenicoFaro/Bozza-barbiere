@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageView } from '../types';
-import { DRLogo } from './DRLogo';
+import { BrandLogo } from './BrandLogo';
 import { BUSINESS_INFO } from '../data/initialData';
 import { StorageService } from '../services/storage';
 import { useAuth } from '../contexts/AuthContext';
@@ -22,10 +22,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 1: Brand & Philosophy */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3.5">
-              <DRLogo size="md" mode="full" className="h-14 w-auto max-w-[220px]" />
+              <BrandLogo size="md" mode="full" className="h-14 w-auto max-w-[220px]" />
             </div>
             <p className="text-xs text-white/70 leading-relaxed">
-              Un atelier contemporaneo dove l'antica maestria della barbieria all'italiana si fonde con tagli sartoriali e trattamenti esclusivi di benessere.
+              Il parrucchiere per uomo di Galermo, a Catania: tagli classici e moderni, cura della barba e tanta cordialità.
             </p>
             <div className="pt-2 flex items-center space-x-2">
               <button
@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <MapPin className="w-4 h-4 text-white/60 shrink-0 mt-0.5" />
                 <div>
                   <p className="font-semibold text-white">{BUSINESS_INFO.address}</p>
-                  <p className="text-white/60 text-[11px] mt-0.5">Zona Viale Vittorio Veneto / Corso Italia</p>
+                  <p className="text-white/60 text-[11px] mt-0.5">Quartiere Galermo, Catania</p>
                 </div>
               </div>
 
@@ -188,9 +188,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       {/* Bottom Bar */}
       <div className="border-t border-white/10 py-6 text-xs text-white/50">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>© {new Date().getFullYear()} Dario Riolo Barber Shop — Tutti i diritti riservati.</p>
+          <p>© {new Date().getFullYear()} Parrucchiere Uomo da Giuseppe — Tutti i diritti riservati.</p>
           <p className="flex items-center gap-1 uppercase tracking-widest text-[10px]">
-            <span>Passione e maestria artigianale a Catania</span>
+            <span>Parrucchiere per uomo a Catania</span>
             <Heart className="w-3 h-3 text-white/70 ml-1" />
           </p>
         </div>

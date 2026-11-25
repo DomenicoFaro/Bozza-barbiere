@@ -12,12 +12,12 @@ import {
 import { supabase } from './supabaseClient';
 
 const STORAGE_KEYS = {
-  SERVICES: 'dr_barber_services',
-  OPERATORS: 'dr_barber_operators',
-  OPERATOR_SERVICES: 'dr_barber_operator_services',
-  BUSINESS_HOURS: 'dr_barber_business_hours',
-  CLOSURES: 'dr_barber_closures',
-  GALLERY: 'dr_barber_gallery_clean_v1',
+  SERVICES: 'dg_barber_services',
+  OPERATORS: 'dg_barber_operators',
+  OPERATOR_SERVICES: 'dg_barber_operator_services',
+  BUSINESS_HOURS: 'dg_barber_business_hours',
+  CLOSURES: 'dg_barber_closures',
+  GALLERY: 'dg_barber_gallery_clean_v1',
 };
 
 type BusySlot = { operator_id: string; start_time: string; end_time: string };
@@ -268,7 +268,7 @@ export const StorageService = {
       };
     }
 
-    const bookingCode = `DR-${Math.floor(1000 + Math.random() * 9000)}`;
+    const bookingCode = `GD-${Math.floor(1000 + Math.random() * 9000)}`;
 
     // Passa dalla funzione RPC (non da un insert diretto sulla tabella): un
     // cliente guest non ha permesso di select sulla tabella, quindi un
@@ -405,7 +405,7 @@ export const StorageService = {
     const service = this.getServiceById(appointment.service_id);
     const operator = this.getOperatorById(appointment.operator_id);
     const serviceName = service?.name || 'Taglio & Cura Barba';
-    const operatorName = operator?.name || 'Dario Riolo Barber Shop';
+    const operatorName = operator?.name || 'Parrucchiere Uomo da Giuseppe';
 
     // Format YYYYMMDDTHHmmSS
     const dateFormatted = appointment.appointment_date.replace(/-/g, '');
@@ -419,15 +419,15 @@ export const StorageService = {
     const ics = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//Dario Riolo Barber Shop//IT',
+      'PRODID:-//Parrucchiere Uomo da Giuseppe//IT',
       'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH',
       'BEGIN:VEVENT',
-      `UID:${appointment.booking_code}-${Date.now()}@darioriolobarbershop.it`,
+      `UID:${appointment.booking_code}-${Date.now()}@parrucchiereuomodagiuseppe.it`,
       `DTSTAMP:${now}`,
       `DTSTART:${startDateTime}`,
       `DTEND:${endDateTime}`,
-      `SUMMARY:Appuntamento: ${serviceName} da Dario Riolo Barber Shop`,
+      `SUMMARY:Appuntamento: ${serviceName} da Parrucchiere Uomo da Giuseppe`,
       `DESCRIPTION:Appuntamento con ${operatorName}\\nCodice prenotazione: ${appointment.booking_code}\\nTelefono salone: ${BUSINESS_INFO.phone}`,
       `LOCATION:${BUSINESS_INFO.address}`,
       'STATUS:CONFIRMED',

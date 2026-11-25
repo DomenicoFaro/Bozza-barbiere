@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { PageView } from '../types';
 import { MediaStorageService } from '../services/mediaStorage';
-import { DRLogo } from './DRLogo';
+import { BrandLogo } from './BrandLogo';
 import { useAuth } from '../contexts/AuthContext';
 
 interface AtelierVideoPlayerProps {
@@ -23,7 +23,7 @@ interface AtelierVideoPlayerProps {
   showDetails?: boolean;
 }
 
-const STORAGE_VIDEO_KEY = 'dr_user_uploaded_video';
+const STORAGE_VIDEO_KEY = 'dg_user_uploaded_video';
 
 export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({ 
   onNavigate,
@@ -200,7 +200,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
             <div className="absolute top-3 inset-x-3 flex items-center justify-end z-20 pointer-events-none">
               <div className="flex items-center space-x-1.5 pointer-events-auto">
                 <div className="bg-black/75 backdrop-blur-md px-2.5 py-1 border border-white/20 text-[10px] font-mono text-white/90">
-                  @darioriolo_barber
+                  Da Giuseppe
                 </div>
                 {isAdmin && (
                   <button
@@ -280,7 +280,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
             </div>
 
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/60 mb-2">
-              Dario Riolo · Atelier Catania
+              Da Giuseppe · Galermo, Catania
             </span>
 
             <h3 className="font-serif italic text-2xl font-light text-white mb-2 leading-tight">
@@ -288,7 +288,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
             </h3>
 
             <p className="text-xs text-white/75 max-w-xs mb-6 leading-relaxed">
-              Trascina qui il file video (.mp4) di Dario Riolo oppure clicca il pulsante sotto per selezionarlo dal tuo dispositivo.
+              Trascina qui il file video (.mp4) di Giuseppe oppure clicca il pulsante sotto per selezionarlo dal tuo dispositivo.
             </p>
 
             <button
@@ -313,7 +313,7 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
               <Film className="w-8 h-8" />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/60">
-              Dario Riolo · Atelier Catania
+              Da Giuseppe · Galermo, Catania
             </span>
             <p className="text-xs text-white/60 max-w-xs mt-2">
               Video in arrivo a breve.
@@ -348,18 +348,18 @@ export const AtelierVideoPlayer: React.FC<AtelierVideoPlayerProps> = ({
           </div>
 
           <p className="text-xs text-white/75 leading-relaxed">
-            Ripresa diretta dalla poltrona di Dario Riolo: precisione geometrica millimetrica, contorni puliti a rasoio e cura sartoriale di ogni ciocca.
+            Taglio, rifinitura e cura dei dettagli: così lavoriamo ogni giorno da Giuseppe.
           </p>
 
           {/* Action buttons */}
           <div className="pt-1 flex flex-col sm:flex-row gap-2">
             {onNavigate && (
               <button
-                onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-dario' })}
+                onClick={() => onNavigate('booking', { serviceId: 'srv-taglio-uomo', operatorId: 'op-giuseppe' })}
                 className="flex-1 py-3 px-4 bg-white hover:bg-neutral-200 text-[#1A1A1A] font-bold text-[10px] uppercase tracking-wider transition-all flex items-center justify-center space-x-2"
               >
                 <Calendar className="w-3.5 h-3.5" />
-                <span>Prenota con Dario Riolo</span>
+                <span>Prenota da Giuseppe</span>
               </button>
             )}
 

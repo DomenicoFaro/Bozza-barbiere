@@ -1,4 +1,4 @@
--- Dario Riolo Barber Shop: schema per il login clienti
+-- Parrucchiere Uomo da Giuseppe: schema per il login clienti
 -- Esegui questo script nel SQL Editor del tuo progetto Supabase
 -- (Dashboard -> SQL Editor -> New query -> incolla ed esegui)
 
@@ -77,5 +77,5 @@ create trigger on_profiles_updated
 -- Promuove ad amministratore l'account con questa email.
 -- Va rieseguito (o eseguito la prima volta dopo la registrazione) perché
 -- funziona solo se esiste già un utente registrato con questa email.
-update public.profiles set is_admin = true where email = 'domenicof778@gmail.com';
-update public.profiles set is_admin = true where email = 'paolo09.mila@gmail.com';
+-- Sostituisci con l'email di Giuseppe (o di chi gestirà il pannello admin) DOPO che si è registrato sul sito:
+-- update public.profiles set is_admin = true where email = 'EMAIL_ADMIN@esempio.it';
